@@ -1,1 +1,2 @@
-# applied programming final project
+# Applied Programming Final Project
+# text \o/
