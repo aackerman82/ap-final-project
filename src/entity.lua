@@ -6,7 +6,7 @@ middleclass = require "lib/middleclass"
 Entity = middleclass.class('Entity')
 
 -- Entity Constructor
-function Entity:initialize(x, y, def)
+function Entity:initialize(def)
     self.x = x -- looks ambiguous, right? which 'x'? 
     self.y = y
     self.facing = 1
@@ -14,7 +14,7 @@ function Entity:initialize(x, y, def)
     self.y_vel = 0
     self.width = def.w
     self.height = def.h
-    self.image = love.graphics.newImage('assets/graphics/' .. def.img_file)
+    self.image = love.graphics.newImage('assets/graphics/' .. tostring(def.image))
     
     -- set up animations
     local hi_width, hi_height = self.image:getDimensions() -- Image object method
