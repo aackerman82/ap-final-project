@@ -30,15 +30,15 @@ function love.load()
 	love.graphics.setColor(1, 1, 1)
 
 	world = GameWorld:new()
-	world.map = sti("assets/levels/castle.lua")
+	--world.map = sti("assets/levels/castle.lua")
 	
 end
 
 
 function love.update(dt)
-	--for _, entity in ipairs(world.entities) do
-	--	entity:update(dt)
-	--end
+	for _, entity in ipairs(world.entities) do
+	    entity:update(dt)
+	end
 	local translationThisFrame = 4 * dt * 60 * DPI_SCALE
 	if love.keyboard.isDown("a", "left") then
 		world.cameraPos.x = world.cameraPos.x - translationThisFrame
@@ -50,9 +50,9 @@ function love.update(dt)
 end
 
 function love.draw()
-	--for _, entity in ipairs(world.entities) do
-	--	entity:draw()
-	-- end
+	for _, entity in ipairs(world.entities) do
+	    entity:draw()
+	end
 
 	world.map:draw(0 - world.cameraPos.x, 0 - world.cameraPos.y, DPI_SCALE, DPI_SCALE)
 end
