@@ -39,7 +39,26 @@ function GameWorld:initialize()
     self.map["layers"][2]["repeatx"] = true;
     self.map["layers"][3]["repeatx"] = true;
     self.map["layers"][4]["repeatx"] = true;
+    local layer = self.map:addCustomLayer("Sprites", 13)
+    layer["player"] = self.map["objects"][21]
     --print(dump(self.map["objects"][21], 0 , 2))
+    --print(dump(love.graphics.rectangle("fill", 0, 0, 100, 100), 0 , 4))
+    layer.draw = function(self)
+		love.graphics.draw(
+			love.graphics.newImage("assets/graphics/characters/Badarcher.png"),
+			math.floor(self.player.x),
+			math.floor(self.player.y),
+			0,
+			1,
+			1,
+			self.player.ox,
+			self.player.oy
+		)
+        -- Yes I know this code is awful it is just testing
+        layer.update = function(self)
+            layer["player"]["x"] = layer["player"]["x"] + 1
+        end
+            
     --for _, object in pairs(self.map.objects) do
     
         --if object.type == "Enemy" then
@@ -50,6 +69,7 @@ function GameWorld:initialize()
         --    table.insert(self.entities.collectables, collectable)
         --end
     --end
+end
 end
 
 function GameWorld:tostring()

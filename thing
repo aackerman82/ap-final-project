@@ -1,0 +1,11 @@
+nil
+Error: src/gameworld.lua:47: bad argument #1 to 'draw' (Drawable expected, got nil)
+stack traceback:
+	[string "boot.lua"]:777: in function <[string "boot.lua"]:773>
+	[C]: in function 'draw'
+	src/gameworld.lua:47: in function 'draw'
+	lib/sti/init.lua:961: in function 'drawLayer'
+	lib/sti/init.lua:919: in function 'draw'
+	main.lua:63: in function 'draw'
+	[string "boot.lua"]:618: in function <[string "boot.lua"]:594>
+	[C]: in function 'xpcall'

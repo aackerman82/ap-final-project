@@ -46,6 +46,13 @@ function love.update(dt)
 	if love.keyboard.isDown("d", "right") then
 		world.cameraPos.x = world.cameraPos.x + translationThisFrame
 	end
+	--for _, object in pairs(world.map.objects) do
+	--	object["x"] = object["x"] + dt * 10
+    --end
+	for _, layer in pairs(world.map["layers"]) do
+		layer:update()
+    end
+	
 	world.map:update(dt)
 end
 

@@ -225,7 +225,21 @@ return {
         },
         {
           id = 3,
-          type = "Collectable"
+          type = "Collectable",
+          animation = {
+            {
+              tileid = 3,
+              duration = 100
+            },
+            {
+              tileid = 4,
+              duration = 100
+            },
+            {
+              tileid = 5,
+              duration = 100
+            }
+          }
         }
       }
     },
@@ -256,7 +270,25 @@ return {
       tiles = {
         {
           id = 0,
-          type = "Collectable"
+          type = "Collectable",
+          animation = {
+            {
+              tileid = 0,
+              duration = 100
+            },
+            {
+              tileid = 1,
+              duration = 100
+            },
+            {
+              tileid = 2,
+              duration = 100
+            },
+            {
+              tileid = 3,
+              duration = 100
+            }
+          }
         }
       }
     },
@@ -287,7 +319,25 @@ return {
       tiles = {
         {
           id = 0,
-          type = "Collectable"
+          type = "Collectable",
+          animation = {
+            {
+              tileid = 0,
+              duration = 100
+            },
+            {
+              tileid = 1,
+              duration = 100
+            },
+            {
+              tileid = 2,
+              duration = 100
+            },
+            {
+              tileid = 3,
+              duration = 100
+            }
+          }
         }
       }
     },
@@ -318,7 +368,25 @@ return {
       tiles = {
         {
           id = 0,
-          type = "Collectable"
+          type = "Collectable",
+          animation = {
+            {
+              tileid = 0,
+              duration = 100
+            },
+            {
+              tileid = 1,
+              duration = 100
+            },
+            {
+              tileid = 2,
+              duration = 100
+            },
+            {
+              tileid = 3,
+              duration = 100
+            }
+          }
         }
       }
     }
