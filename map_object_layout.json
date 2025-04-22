@@ -1,0 +1,93 @@
+{
+    "width": 200,
+    "version": "1.1",
+    "tileheight": 16,
+    "tileInstances": {
+        "0": {}
+    },
+    "luaversion": "5.1",
+    "renderorder": "right-down",
+    "canvas": "Canvas: 0x5630dba5f770",
+    "tilewidth": 16,
+    "tiles": {
+        "0": {}
+    },
+    "nextlayerid": 24,
+    "nextobjectid": 69,
+    "class": null,
+    "freeBatchSprites": {},
+    "offsety": 0,
+    "offsetx": 0,
+    "layers": {
+        "0": {
+            "x": 0,
+            "id": 18,
+            "y": 0,
+            "properties": {},
+            "draw": "function: 0x41570638",
+            "image": "Image: 0x5590d6b113b0",
+            "offsetx": 0,
+            "parallaxx": 0,
+            "update": "function: 0x406094b0",
+            "visible": true,
+            "offsety": 0,
+            "height": 324,
+            "width": 576,
+            "opacity": 1,
+            "parallaxy": 1,
+            "class": null,
+            "type": "imagelayer",
+            "repeatx": true,
+            "name": "background.4_sky",
+            "repeaty": false
+        },
+        "folder.layer_name": {
+            "x": 0,
+            "encoding": "lua",
+            "id": 19,
+            "y": 0,
+            "properties": {},
+            "draw": "function: 0x410a5478",
+            "offsetx": 0,
+            "parallaxx": 0.9,
+            "update": "function: 0x40eddbe8",
+            "visible": true,
+            "class": null,
+            "batches": {},
+            "data": {},
+            "offsety": 0,
+            "parallaxy": 1,
+            "name": "castle.castle_background",
+            "type": "tilelayer",
+            "width": 200,
+            "height": 20,
+            "opacity": 1
+        }
+    },
+    "orientation": "orthogonal",
+    "tilesets": {
+        "0": {}
+    },
+    "properties": {},
+    "tiledversion": "1.11.2",
+    "height": 20,
+    "objects": {
+        "0": {
+            "layer": "[reference to the layer object]",
+            "x": 447.5,
+            "shape": "rectangle",
+            "id": 21,
+            "y": 195.75,
+            "properties": {
+                "pickup_type": "..."
+            },
+            "visible": true,
+            "gid": 6705,
+            "rotation": 0,
+            "type": null,
+            "name": null,
+            "height": 16,
+            "width": 16
+        }
+    }
+}

@@ -1,8 +1,7 @@
 return {
-  version = "1.10",
+  version = "1.5",
   luaversion = "5.1",
-  tiledversion = "1.11.2",
-  class = "",
+  tiledversion = "1.8.0",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 200,
@@ -16,7 +15,6 @@ return {
     {
       name = "sky",
       firstgid = 1,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -26,8 +24,6 @@ return {
       imagewidth = 576,
       imageheight = 324,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -45,7 +41,6 @@ return {
     {
       name = "clouds",
       firstgid = 721,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -55,8 +50,6 @@ return {
       imagewidth = 576,
       imageheight = 324,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -74,7 +67,6 @@ return {
     {
       name = "lightTree",
       firstgid = 1441,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -84,8 +76,6 @@ return {
       imagewidth = 576,
       imageheight = 324,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -103,7 +93,6 @@ return {
     {
       name = "darkTree",
       firstgid = 2161,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -113,8 +102,6 @@ return {
       imagewidth = 576,
       imageheight = 324,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -132,7 +119,6 @@ return {
     {
       name = "castle-tileset",
       firstgid = 2881,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -142,8 +128,6 @@ return {
       imagewidth = 128,
       imageheight = 256,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -161,7 +145,6 @@ return {
     {
       name = "Badarcher",
       firstgid = 3009,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -171,8 +154,6 @@ return {
       imagewidth = 176,
       imageheight = 2688,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -190,7 +171,6 @@ return {
     {
       name = "knight",
       firstgid = 4857,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -200,8 +180,6 @@ return {
       imagewidth = 176,
       imageheight = 2688,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -219,7 +197,6 @@ return {
     {
       name = "Arrows",
       firstgid = 6705,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -229,8 +206,6 @@ return {
       imagewidth = 48,
       imageheight = 48,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -257,7 +232,6 @@ return {
     {
       name = "coin",
       firstgid = 6714,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -267,8 +241,6 @@ return {
       imagewidth = 64,
       imageheight = 16,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -291,7 +263,6 @@ return {
     {
       name = "small_coin",
       firstgid = 6718,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -301,8 +272,6 @@ return {
       imagewidth = 64,
       imageheight = 16,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -325,7 +294,6 @@ return {
     {
       name = "heart",
       firstgid = 6722,
-      class = "",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -335,8 +303,6 @@ return {
       imagewidth = 64,
       imageheight = 16,
       objectalignment = "unspecified",
-      tilerendersize = "tile",
-      fillmode = "stretch",
       tileoffset = {
         x = 0,
         y = 0
@@ -362,7 +328,6 @@ return {
       type = "group",
       id = 2,
       name = "background",
-      class = "",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -376,14 +341,13 @@ return {
           image = "../forest_background/bg_sky.png",
           id = 18,
           name = "4_sky",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
           offsety = 0,
           parallaxx = 0,
           parallaxy = 1,
-          repeatx = true,
+          repeatx = false,
           repeaty = false,
           properties = {}
         },
@@ -392,14 +356,13 @@ return {
           image = "../forest_background/bg_trees_far.png",
           id = 15,
           name = "3_trees_far",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
           offsety = 0,
           parallaxx = 0.3,
           parallaxy = 1,
-          repeatx = true,
+          repeatx = false,
           repeaty = false,
           properties = {}
         },
@@ -408,14 +371,13 @@ return {
           image = "../forest_background/bg_cloud.png",
           id = 17,
           name = "2_clouds",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
           offsety = 0,
           parallaxx = 0.4,
           parallaxy = 1,
-          repeatx = true,
+          repeatx = false,
           repeaty = false,
           properties = {}
         },
@@ -424,14 +386,13 @@ return {
           image = "../forest_background/bg_trees_near.png",
           id = 16,
           name = "1_trees_near",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
           offsety = 0,
           parallaxx = 0.5,
           parallaxy = 1,
-          repeatx = true,
+          repeatx = false,
           repeaty = false,
           properties = {}
         }
@@ -441,7 +402,6 @@ return {
       type = "group",
       id = 6,
       name = "castle",
-      class = "",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -458,12 +418,11 @@ return {
           height = 20,
           id = 19,
           name = "castle_background",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
           offsety = 0,
-          parallaxx = 0.9,
+          parallaxx = 1,
           parallaxy = 1,
           properties = {},
           encoding = "lua",
@@ -498,7 +457,6 @@ return {
           height = 20,
           id = 7,
           name = "castle_frame",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
@@ -538,7 +496,6 @@ return {
           height = 20,
           id = 12,
           name = "doors",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
@@ -578,7 +535,6 @@ return {
           height = 20,
           id = 8,
           name = "interior",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
@@ -618,7 +574,6 @@ return {
           height = 20,
           id = 11,
           name = "decorations",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
@@ -656,7 +611,6 @@ return {
       type = "group",
       id = 13,
       name = "objects",
-      class = "",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -670,7 +624,6 @@ return {
           draworder = "topdown",
           id = 21,
           name = "evil_archer",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
@@ -771,7 +724,6 @@ return {
           draworder = "topdown",
           id = 20,
           name = "knight",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
@@ -786,7 +738,6 @@ return {
           draworder = "topdown",
           id = 23,
           name = "collectables",
-          class = "",
           visible = true,
           opacity = 1,
           offsetx = 0,
