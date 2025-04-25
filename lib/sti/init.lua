@@ -1092,8 +1092,8 @@ function Map:drawImageLayer(layer)
 			end
 		-- if we're repeating on X alone...
 		elseif layer.repeatx then
-			local x = imagewidth * -100
-			while x < self.width * self.tilewidth * 100 do 
+			local x = imagewidth
+			while x < self.width * self.tilewidth do 
 				lg.draw(layer.image, x, layer.y)
 				x = x + imagewidth
 			end

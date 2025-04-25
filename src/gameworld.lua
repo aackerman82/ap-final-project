@@ -41,14 +41,18 @@ function GameWorld:initialize()
     self.map["layers"][4]["repeatx"] = true;
     local layer = self.map:addCustomLayer("Sprites", 13)
     layer["entities"] = self.map["objects"]
-    print(dump(self.map["objects"], 0 , 3))
+    for _, entity in pairs(layer["entities"]) do
+        entity["foo"] = summonBubs(entity["x"], entity["y"])
+    end
+    --print(dump(self.map["objects"], 0 , 3))
     --print(dump(love.graphics.rectangle("fill", 0, 0, 100, 100), 0 , 4))
     layer.draw = function(self)
         for _, entity in pairs(layer["entities"]) do
+            entity["foo"]:draw()
             love.graphics.draw(
 			love.graphics.newImage("assets/graphics/effects/dress.png"),
 			math.floor(entity["x"]),
-			math.floor(entity["y"]),
+			math.floor(entity["y"]) - 16,
 			0,
 			1,
 			1,
@@ -60,7 +64,7 @@ function GameWorld:initialize()
         --===== Yes I know this code is awful it is just testing ====--
         layer.update = function(self)
             for _, entity in pairs(layer["entities"]) do
-                entity["x"] = entity["x"] + 1
+                entity["x"] = entity["x"] + 0
             end
             
         end
