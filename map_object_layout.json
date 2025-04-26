@@ -72,7 +72,7 @@
     "tiledversion": "1.11.2",
     "height": 20,
     "objects": {
-        "0": {
+        "1": {
             "layer": "[reference to the layer object]",
             "x": 447.5,
             "shape": "rectangle",

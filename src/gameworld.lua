@@ -1,9 +1,22 @@
 
--- A "God object" class that encapsulates all state.
 
 middleclass = require "lib/middleclass"
 
 GameWorld = middleclass.class("GameWorld")
+
+
+function updateCustomLayer(layer)
+    for _, entity in pairs(layer["entities"]) do
+        entity:update(.01)
+    end
+end
+
+function drawCustomLayer(layer)
+    for _, entity in pairs(layer["entities"]) do
+        entity:draw()
+    end
+end
+
 
 function dump(object, depth, maxDepth)
     if(depth == maxDepth) then
@@ -23,74 +36,43 @@ end
 function GameWorld:initialize()
     self.entities = {}
     self.coins = 0
-    self.lives = 5 -- Lives != health
+    self.lives = 5
     self.isPaused = false
-    --just for testing - this'll be changed so we can change maps
     self.map = sti("assets/levels/castle.lua")
     self.cameraPos = {
         x = 0,
         y = 0
     }
-    entities = {
-        enemies = {},
-        collectables = {}
-    }
-    self.map["layers"][1]["repeatx"] = true;
-    self.map["layers"][2]["repeatx"] = true;
-    self.map["layers"][3]["repeatx"] = true;
-    self.map["layers"][4]["repeatx"] = true;
-    local layer = self.map:addCustomLayer("Sprites", 13)
-    layer["entities"] = self.map["objects"]
-    for _, entity in pairs(layer["entities"]) do
-        entity["foo"] = summonBubs(entity["x"], entity["y"])
+
+    -- Force all image layers to repeat on x axis (they should be repeating anyways, STI bug?)
+    for _, layer in pairs(self.map["layers"]) do
+        if(layer["type"]) == "imagelayer" then
+            layer["repeatx"] = true
+        end
     end
-    --print(dump(self.map["objects"], 0 , 3))
-    --print(dump(love.graphics.rectangle("fill", 0, 0, 100, 100), 0 , 4))
-    layer.draw = function(self)
-        for _, entity in pairs(layer["entities"]) do
-            entity["foo"]:draw()
-            love.graphics.draw(
-			love.graphics.newImage("assets/graphics/effects/dress.png"),
-			math.floor(entity["x"]),
-			math.floor(entity["y"]) - 16,
-			0,
-			1,
-			1,
-			entity["ox"],
-			entity["oy"]
-		)
+
+    -- Create a custom layer for our entities to go into
+    local layer = self.map:addCustomLayer("entities", # self.map["layers"])
+    layer["entities"] = {}
+
+    -- Go through all of the objects in the map and create corrsponding entity objects in the custom layer
+    for _, object in pairs(self.map["objects"]) do
+        local x = math.floor(object["x"])
+        local y = math.floor(object["y"])
+        if object["type"] == "Enemy" then
+            entity = summonArcher(x, y)
+        elseif object["type"] == "coin" then
+            entity = summonCoin(x, y)
+        else
+            entity = summonCoin(x, y)
         end
-		
-        --===== Yes I know this code is awful it is just testing ====--
-        layer.update = function(self)
-            for _, entity in pairs(layer["entities"]) do
-                entity["x"] = entity["x"] + 0
-            end
-            
-        end
-        
-            
-    --for _, object in pairs(self["map"]["objects"]) do
+        table.insert(layer["entities"], entity)
+    end
     
-        --if object.type == "Enemy" then
-        --    local enemy = Enemy:new(object)
-        --    table.insert(self.entities.enemies, enemy)
-        --elseif object.type == "Collectable" then
-        --    local collectable = Collectable:new(object)
-        --    table.insert(self.entities.collectables, collectable)
-        --end
-    --end
-    end
+    layer.draw = drawCustomLayer
+    layer.update = updateCustomLayer
+  
     self.map["layers"]["objects.collectables"]["visible"] = false;
     self.map["layers"]["objects.knight"]["visible"] = false;
     self.map["layers"]["objects.evil_archer"]["visible"] = false;
-end
-
-function GameWorld:tostring()
-    local result = "Entity count: " .. # self.entities .. "\n" -- What a quaint length operator
-    result = result .. "Coins: " .. self.coins .. "\n"
-    result = result .. "Lives: " .. self.lives .. "\n"
-    result = result .. "Paused: " .. tostring(self.isPaused)
-
-    return result
 end
