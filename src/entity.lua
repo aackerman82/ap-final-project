@@ -49,7 +49,7 @@ function Entity:draw()
     if self.facing == -1 then
         offset = self.width
     end
-    self.animation:draw(self.image, self.x,self.y-16, 0, self.facing*1, 1, offset)
+    self.animation:draw(self.image, self.x,self.y, 0, self.facing*1, 1, offset)
 end
 
 function Entity:setPosition(x, y)

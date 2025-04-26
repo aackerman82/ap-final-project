@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="69">
+<map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="77">
  <editorsettings>
   <export target="castle.lua" format="lua"/>
  </editorsettings>
@@ -18,26 +18,93 @@
  <tileset firstgid="2881" name="castle-tileset" tilewidth="16" tileheight="16" tilecount="128" columns="8">
   <image source="../tilesets/tileset_castle.png" width="128" height="256"/>
  </tileset>
- <tileset firstgid="3009" name="Badarcher" tilewidth="16" tileheight="16" tilecount="1848" columns="11">
-  <image source="../graphics/characters/Badarcher.png" width="176" height="2688"/>
- </tileset>
- <tileset firstgid="4857" name="knight" tilewidth="16" tileheight="16" tilecount="1848" columns="11">
+ <tileset firstgid="3009" name="knight" tilewidth="16" tileheight="16" tilecount="1848" columns="11">
   <image source="../graphics/characters/knight.png" width="176" height="2688"/>
  </tileset>
- <tileset firstgid="6705" name="Arrows" tilewidth="16" tileheight="16" tilecount="9" columns="3">
+ <tileset firstgid="4857" name="Arrows" tilewidth="16" tileheight="16" tilecount="9" columns="3">
   <image source="../graphics/pickups/Arrows.png" width="48" height="48"/>
-  <tile id="0" type="Collectable"/>
-  <tile id="3" type="Collectable">
+  <tile id="0" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="false"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="1" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="false"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="2" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="false"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="3" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="true"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="3" width="16" height="8"/>
+   </objectgroup>
    <animation>
     <frame tileid="3" duration="100"/>
     <frame tileid="4" duration="100"/>
     <frame tileid="5" duration="100"/>
    </animation>
   </tile>
+  <tile id="4" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="true"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="5" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="true"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="6" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="false"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="7" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="false"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="8" type="arrow">
+   <properties>
+    <property name="is_flaming" type="bool" value="false"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0" y="4" width="16" height="7"/>
+    <object id="3" x="0" y="4" width="16" height="7"/>
+   </objectgroup>
+  </tile>
  </tileset>
- <tileset firstgid="6714" name="coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
+ <tileset firstgid="4866" name="coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
   <image source="../graphics/pickups/coin.png" width="64" height="16"/>
-  <tile id="0" type="Collectable">
+  <tile id="0" type="coin">
    <animation>
     <frame tileid="0" duration="100"/>
     <frame tileid="1" duration="100"/>
@@ -45,21 +112,43 @@
     <frame tileid="3" duration="100"/>
    </animation>
   </tile>
+  <tile id="1" type="coin"/>
+  <tile id="2" type="coin"/>
+  <tile id="3" type="coin"/>
  </tileset>
- <tileset firstgid="6718" name="small_coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
+ <tileset firstgid="4870" name="small_coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
   <image source="../graphics/pickups/small_coin.png" width="64" height="16"/>
-  <tile id="0" type="Collectable">
+  <tile id="0" type="small_coin">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="4" y="8" width="8" height="8"/>
+   </objectgroup>
    <animation>
     <frame tileid="0" duration="100"/>
     <frame tileid="1" duration="100"/>
     <frame tileid="2" duration="100"/>
     <frame tileid="3" duration="100"/>
    </animation>
+  </tile>
+  <tile id="1" type="small_coin">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5" y="8" width="6" height="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="2" type="small_coin">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="8" width="4" height="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="3" type="small_coin">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5" y="8" width="6" height="8"/>
+    <object id="2" x="5" y="8" width="6" height="8"/>
+   </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="6722" name="heart" tilewidth="16" tileheight="16" tilecount="4" columns="4">
+ <tileset firstgid="4874" name="heart" tilewidth="16" tileheight="16" tilecount="4" columns="4">
   <image source="../graphics/pickups/heart.png" width="64" height="16"/>
-  <tile id="0" type="Collectable">
+  <tile id="0" type="heart">
    <animation>
     <frame tileid="0" duration="100"/>
     <frame tileid="1" duration="100"/>
@@ -67,6 +156,1249 @@
     <frame tileid="3" duration="100"/>
    </animation>
   </tile>
+  <tile id="1" type="heart"/>
+  <tile id="2" type="heart"/>
+  <tile id="3" type="heart"/>
+ </tileset>
+ <tileset firstgid="4878" name="enemy" tilewidth="16" tileheight="24" tilecount="1232" columns="11">
+  <image source="../graphics/characters/Badarcher.png" width="176" height="2688"/>
+  <tile id="0" type="enemy">
+   <animation>
+    <frame tileid="0" duration="300"/>
+    <frame tileid="1" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="1" type="enemy"/>
+  <tile id="2" type="enemy"/>
+  <tile id="3" type="enemy"/>
+  <tile id="4" type="enemy"/>
+  <tile id="5" type="enemy"/>
+  <tile id="6" type="enemy"/>
+  <tile id="7" type="enemy"/>
+  <tile id="8" type="enemy"/>
+  <tile id="9" type="enemy"/>
+  <tile id="10" type="enemy"/>
+  <tile id="11" type="enemy"/>
+  <tile id="12" type="enemy"/>
+  <tile id="13" type="enemy"/>
+  <tile id="14" type="enemy"/>
+  <tile id="15" type="enemy"/>
+  <tile id="16" type="enemy"/>
+  <tile id="17" type="enemy"/>
+  <tile id="18" type="enemy"/>
+  <tile id="19" type="enemy"/>
+  <tile id="20" type="enemy"/>
+  <tile id="21" type="enemy"/>
+  <tile id="22" type="enemy"/>
+  <tile id="23" type="enemy"/>
+  <tile id="24" type="enemy"/>
+  <tile id="25" type="enemy"/>
+  <tile id="26" type="enemy"/>
+  <tile id="27" type="enemy"/>
+  <tile id="28" type="enemy"/>
+  <tile id="29" type="enemy"/>
+  <tile id="30" type="enemy"/>
+  <tile id="31" type="enemy"/>
+  <tile id="32" type="enemy"/>
+  <tile id="33" type="enemy"/>
+  <tile id="34" type="enemy"/>
+  <tile id="35" type="enemy"/>
+  <tile id="36" type="enemy"/>
+  <tile id="37" type="enemy"/>
+  <tile id="38" type="enemy"/>
+  <tile id="39" type="enemy"/>
+  <tile id="40" type="enemy"/>
+  <tile id="41" type="enemy"/>
+  <tile id="42" type="enemy"/>
+  <tile id="43" type="enemy"/>
+  <tile id="44" type="enemy"/>
+  <tile id="45" type="enemy"/>
+  <tile id="46" type="enemy"/>
+  <tile id="47" type="enemy"/>
+  <tile id="48" type="enemy"/>
+  <tile id="49" type="enemy"/>
+  <tile id="50" type="enemy"/>
+  <tile id="51" type="enemy"/>
+  <tile id="52" type="enemy"/>
+  <tile id="53" type="enemy"/>
+  <tile id="54" type="enemy"/>
+  <tile id="55" type="enemy"/>
+  <tile id="56" type="enemy"/>
+  <tile id="57" type="enemy"/>
+  <tile id="58" type="enemy"/>
+  <tile id="59" type="enemy"/>
+  <tile id="60" type="enemy"/>
+  <tile id="61" type="enemy"/>
+  <tile id="62" type="enemy"/>
+  <tile id="63" type="enemy"/>
+  <tile id="64" type="enemy"/>
+  <tile id="65" type="enemy"/>
+  <tile id="66" type="enemy"/>
+  <tile id="67" type="enemy"/>
+  <tile id="68" type="enemy"/>
+  <tile id="69" type="enemy"/>
+  <tile id="70" type="enemy"/>
+  <tile id="71" type="enemy"/>
+  <tile id="72" type="enemy"/>
+  <tile id="73" type="enemy"/>
+  <tile id="74" type="enemy"/>
+  <tile id="75" type="enemy"/>
+  <tile id="76" type="enemy"/>
+  <tile id="77" type="enemy"/>
+  <tile id="78" type="enemy"/>
+  <tile id="79" type="enemy"/>
+  <tile id="80" type="enemy"/>
+  <tile id="81" type="enemy"/>
+  <tile id="82" type="enemy"/>
+  <tile id="83" type="enemy"/>
+  <tile id="84" type="enemy"/>
+  <tile id="85" type="enemy"/>
+  <tile id="86" type="enemy"/>
+  <tile id="87" type="enemy"/>
+  <tile id="88" type="enemy"/>
+  <tile id="89" type="enemy"/>
+  <tile id="90" type="enemy"/>
+  <tile id="91" type="enemy"/>
+  <tile id="92" type="enemy"/>
+  <tile id="93" type="enemy"/>
+  <tile id="94" type="enemy"/>
+  <tile id="95" type="enemy"/>
+  <tile id="96" type="enemy"/>
+  <tile id="97" type="enemy"/>
+  <tile id="98" type="enemy"/>
+  <tile id="99" type="enemy"/>
+  <tile id="100" type="enemy"/>
+  <tile id="101" type="enemy"/>
+  <tile id="102" type="enemy"/>
+  <tile id="103" type="enemy"/>
+  <tile id="104" type="enemy"/>
+  <tile id="105" type="enemy"/>
+  <tile id="106" type="enemy"/>
+  <tile id="107" type="enemy"/>
+  <tile id="108" type="enemy"/>
+  <tile id="109" type="enemy"/>
+  <tile id="110" type="enemy"/>
+  <tile id="111" type="enemy"/>
+  <tile id="112" type="enemy"/>
+  <tile id="113" type="enemy"/>
+  <tile id="114" type="enemy"/>
+  <tile id="115" type="enemy"/>
+  <tile id="116" type="enemy"/>
+  <tile id="117" type="enemy"/>
+  <tile id="118" type="enemy"/>
+  <tile id="119" type="enemy"/>
+  <tile id="120" type="enemy"/>
+  <tile id="121" type="enemy"/>
+  <tile id="122" type="enemy"/>
+  <tile id="123" type="enemy"/>
+  <tile id="124" type="enemy"/>
+  <tile id="125" type="enemy"/>
+  <tile id="126" type="enemy"/>
+  <tile id="127" type="enemy"/>
+  <tile id="128" type="enemy"/>
+  <tile id="129" type="enemy"/>
+  <tile id="130" type="enemy"/>
+  <tile id="131" type="enemy"/>
+  <tile id="132" type="enemy"/>
+  <tile id="133" type="enemy"/>
+  <tile id="134" type="enemy"/>
+  <tile id="135" type="enemy"/>
+  <tile id="136" type="enemy"/>
+  <tile id="137" type="enemy"/>
+  <tile id="138" type="enemy"/>
+  <tile id="139" type="enemy"/>
+  <tile id="140" type="enemy"/>
+  <tile id="141" type="enemy"/>
+  <tile id="142" type="enemy"/>
+  <tile id="143" type="enemy"/>
+  <tile id="144" type="enemy"/>
+  <tile id="145" type="enemy"/>
+  <tile id="146" type="enemy"/>
+  <tile id="147" type="enemy"/>
+  <tile id="148" type="enemy"/>
+  <tile id="149" type="enemy"/>
+  <tile id="150" type="enemy"/>
+  <tile id="151" type="enemy"/>
+  <tile id="152" type="enemy"/>
+  <tile id="153" type="enemy"/>
+  <tile id="154" type="enemy"/>
+  <tile id="155" type="enemy"/>
+  <tile id="156" type="enemy"/>
+  <tile id="157" type="enemy"/>
+  <tile id="158" type="enemy"/>
+  <tile id="159" type="enemy"/>
+  <tile id="160" type="enemy"/>
+  <tile id="161" type="enemy"/>
+  <tile id="162" type="enemy"/>
+  <tile id="163" type="enemy"/>
+  <tile id="164" type="enemy"/>
+  <tile id="165" type="enemy"/>
+  <tile id="166" type="enemy"/>
+  <tile id="167" type="enemy"/>
+  <tile id="168" type="enemy"/>
+  <tile id="169" type="enemy"/>
+  <tile id="170" type="enemy"/>
+  <tile id="171" type="enemy"/>
+  <tile id="172" type="enemy"/>
+  <tile id="173" type="enemy"/>
+  <tile id="174" type="enemy"/>
+  <tile id="175" type="enemy"/>
+  <tile id="176" type="enemy"/>
+  <tile id="177" type="enemy"/>
+  <tile id="178" type="enemy"/>
+  <tile id="179" type="enemy"/>
+  <tile id="180" type="enemy"/>
+  <tile id="181" type="enemy"/>
+  <tile id="182" type="enemy"/>
+  <tile id="183" type="enemy"/>
+  <tile id="184" type="enemy"/>
+  <tile id="185" type="enemy"/>
+  <tile id="186" type="enemy"/>
+  <tile id="187" type="enemy"/>
+  <tile id="188" type="enemy"/>
+  <tile id="189" type="enemy"/>
+  <tile id="190" type="enemy"/>
+  <tile id="191" type="enemy"/>
+  <tile id="192" type="enemy"/>
+  <tile id="193" type="enemy"/>
+  <tile id="194" type="enemy"/>
+  <tile id="195" type="enemy"/>
+  <tile id="196" type="enemy"/>
+  <tile id="197" type="enemy"/>
+  <tile id="198" type="enemy"/>
+  <tile id="199" type="enemy"/>
+  <tile id="200" type="enemy"/>
+  <tile id="201" type="enemy"/>
+  <tile id="202" type="enemy"/>
+  <tile id="203" type="enemy"/>
+  <tile id="204" type="enemy"/>
+  <tile id="205" type="enemy"/>
+  <tile id="206" type="enemy"/>
+  <tile id="207" type="enemy"/>
+  <tile id="208" type="enemy"/>
+  <tile id="209" type="enemy"/>
+  <tile id="210" type="enemy"/>
+  <tile id="211" type="enemy"/>
+  <tile id="212" type="enemy"/>
+  <tile id="213" type="enemy"/>
+  <tile id="214" type="enemy"/>
+  <tile id="215" type="enemy"/>
+  <tile id="216" type="enemy"/>
+  <tile id="217" type="enemy"/>
+  <tile id="218" type="enemy"/>
+  <tile id="219" type="enemy"/>
+  <tile id="220" type="enemy"/>
+  <tile id="221" type="enemy"/>
+  <tile id="222" type="enemy"/>
+  <tile id="223" type="enemy"/>
+  <tile id="224" type="enemy"/>
+  <tile id="225" type="enemy"/>
+  <tile id="226" type="enemy"/>
+  <tile id="227" type="enemy"/>
+  <tile id="228" type="enemy"/>
+  <tile id="229" type="enemy"/>
+  <tile id="230" type="enemy"/>
+  <tile id="231" type="enemy"/>
+  <tile id="232" type="enemy"/>
+  <tile id="233" type="enemy"/>
+  <tile id="234" type="enemy"/>
+  <tile id="235" type="enemy"/>
+  <tile id="236" type="enemy"/>
+  <tile id="237" type="enemy"/>
+  <tile id="238" type="enemy"/>
+  <tile id="239" type="enemy"/>
+  <tile id="240" type="enemy"/>
+  <tile id="241" type="enemy"/>
+  <tile id="242" type="enemy"/>
+  <tile id="243" type="enemy"/>
+  <tile id="244" type="enemy"/>
+  <tile id="245" type="enemy"/>
+  <tile id="246" type="enemy"/>
+  <tile id="247" type="enemy"/>
+  <tile id="248" type="enemy"/>
+  <tile id="249" type="enemy"/>
+  <tile id="250" type="enemy"/>
+  <tile id="251" type="enemy"/>
+  <tile id="252" type="enemy"/>
+  <tile id="253" type="enemy"/>
+  <tile id="254" type="enemy"/>
+  <tile id="255" type="enemy"/>
+  <tile id="256" type="enemy"/>
+  <tile id="257" type="enemy"/>
+  <tile id="258" type="enemy"/>
+  <tile id="259" type="enemy"/>
+  <tile id="260" type="enemy"/>
+  <tile id="261" type="enemy"/>
+  <tile id="262" type="enemy"/>
+  <tile id="263" type="enemy"/>
+  <tile id="264" type="enemy"/>
+  <tile id="265" type="enemy"/>
+  <tile id="266" type="enemy"/>
+  <tile id="267" type="enemy"/>
+  <tile id="268" type="enemy"/>
+  <tile id="269" type="enemy"/>
+  <tile id="270" type="enemy"/>
+  <tile id="271" type="enemy"/>
+  <tile id="272" type="enemy"/>
+  <tile id="273" type="enemy"/>
+  <tile id="274" type="enemy"/>
+  <tile id="275" type="enemy"/>
+  <tile id="276" type="enemy"/>
+  <tile id="277" type="enemy"/>
+  <tile id="278" type="enemy"/>
+  <tile id="279" type="enemy"/>
+  <tile id="280" type="enemy"/>
+  <tile id="281" type="enemy"/>
+  <tile id="282" type="enemy"/>
+  <tile id="283" type="enemy"/>
+  <tile id="284" type="enemy"/>
+  <tile id="285" type="enemy"/>
+  <tile id="286" type="enemy"/>
+  <tile id="287" type="enemy"/>
+  <tile id="288" type="enemy"/>
+  <tile id="289" type="enemy"/>
+  <tile id="290" type="enemy"/>
+  <tile id="291" type="enemy"/>
+  <tile id="292" type="enemy"/>
+  <tile id="293" type="enemy"/>
+  <tile id="294" type="enemy"/>
+  <tile id="295" type="enemy"/>
+  <tile id="296" type="enemy"/>
+  <tile id="297" type="enemy"/>
+  <tile id="298" type="enemy"/>
+  <tile id="299" type="enemy"/>
+  <tile id="300" type="enemy"/>
+  <tile id="301" type="enemy"/>
+  <tile id="302" type="enemy"/>
+  <tile id="303" type="enemy"/>
+  <tile id="304" type="enemy"/>
+  <tile id="305" type="enemy"/>
+  <tile id="306" type="enemy"/>
+  <tile id="307" type="enemy"/>
+  <tile id="308" type="enemy"/>
+  <tile id="309" type="enemy"/>
+  <tile id="310" type="enemy"/>
+  <tile id="311" type="enemy"/>
+  <tile id="312" type="enemy"/>
+  <tile id="313" type="enemy"/>
+  <tile id="314" type="enemy"/>
+  <tile id="315" type="enemy"/>
+  <tile id="316" type="enemy"/>
+  <tile id="317" type="enemy"/>
+  <tile id="318" type="enemy"/>
+  <tile id="319" type="enemy"/>
+  <tile id="320" type="enemy"/>
+  <tile id="321" type="enemy"/>
+  <tile id="322" type="enemy"/>
+  <tile id="323" type="enemy"/>
+  <tile id="324" type="enemy"/>
+  <tile id="325" type="enemy"/>
+  <tile id="326" type="enemy"/>
+  <tile id="327" type="enemy"/>
+  <tile id="328" type="enemy"/>
+  <tile id="329" type="enemy"/>
+  <tile id="330" type="enemy"/>
+  <tile id="331" type="enemy"/>
+  <tile id="332" type="enemy"/>
+  <tile id="333" type="enemy"/>
+  <tile id="334" type="enemy"/>
+  <tile id="335" type="enemy"/>
+  <tile id="336" type="enemy"/>
+  <tile id="337" type="enemy"/>
+  <tile id="338" type="enemy"/>
+  <tile id="339" type="enemy"/>
+  <tile id="340" type="enemy"/>
+  <tile id="341" type="enemy"/>
+  <tile id="342" type="enemy"/>
+  <tile id="343" type="enemy"/>
+  <tile id="344" type="enemy"/>
+  <tile id="345" type="enemy"/>
+  <tile id="346" type="enemy"/>
+  <tile id="347" type="enemy"/>
+  <tile id="348" type="enemy"/>
+  <tile id="349" type="enemy"/>
+  <tile id="350" type="enemy"/>
+  <tile id="351" type="enemy"/>
+  <tile id="352" type="enemy"/>
+  <tile id="353" type="enemy"/>
+  <tile id="354" type="enemy"/>
+  <tile id="355" type="enemy"/>
+  <tile id="356" type="enemy"/>
+  <tile id="357" type="enemy"/>
+  <tile id="358" type="enemy"/>
+  <tile id="359" type="enemy"/>
+  <tile id="360" type="enemy"/>
+  <tile id="361" type="enemy"/>
+  <tile id="362" type="enemy"/>
+  <tile id="363" type="enemy"/>
+  <tile id="364" type="enemy"/>
+  <tile id="365" type="enemy"/>
+  <tile id="366" type="enemy"/>
+  <tile id="367" type="enemy"/>
+  <tile id="368" type="enemy"/>
+  <tile id="369" type="enemy"/>
+  <tile id="370" type="enemy"/>
+  <tile id="371" type="enemy"/>
+  <tile id="372" type="enemy"/>
+  <tile id="373" type="enemy"/>
+  <tile id="374" type="enemy"/>
+  <tile id="375" type="enemy"/>
+  <tile id="376" type="enemy"/>
+  <tile id="377" type="enemy"/>
+  <tile id="378" type="enemy"/>
+  <tile id="379" type="enemy"/>
+  <tile id="380" type="enemy"/>
+  <tile id="381" type="enemy"/>
+  <tile id="382" type="enemy"/>
+  <tile id="383" type="enemy"/>
+  <tile id="384" type="enemy"/>
+  <tile id="385" type="enemy"/>
+  <tile id="386" type="enemy"/>
+  <tile id="387" type="enemy"/>
+  <tile id="388" type="enemy"/>
+  <tile id="389" type="enemy"/>
+  <tile id="390" type="enemy"/>
+  <tile id="391" type="enemy"/>
+  <tile id="392" type="enemy"/>
+  <tile id="393" type="enemy"/>
+  <tile id="394" type="enemy"/>
+  <tile id="395" type="enemy"/>
+  <tile id="396" type="enemy"/>
+  <tile id="397" type="enemy"/>
+  <tile id="398" type="enemy"/>
+  <tile id="399" type="enemy"/>
+  <tile id="400" type="enemy"/>
+  <tile id="401" type="enemy"/>
+  <tile id="402" type="enemy"/>
+  <tile id="403" type="enemy"/>
+  <tile id="404" type="enemy"/>
+  <tile id="405" type="enemy"/>
+  <tile id="406" type="enemy"/>
+  <tile id="407" type="enemy"/>
+  <tile id="408" type="enemy"/>
+  <tile id="409" type="enemy"/>
+  <tile id="410" type="enemy"/>
+  <tile id="411" type="enemy"/>
+  <tile id="412" type="enemy"/>
+  <tile id="413" type="enemy"/>
+  <tile id="414" type="enemy"/>
+  <tile id="415" type="enemy"/>
+  <tile id="416" type="enemy"/>
+  <tile id="417" type="enemy"/>
+  <tile id="418" type="enemy"/>
+  <tile id="419" type="enemy"/>
+  <tile id="420" type="enemy"/>
+  <tile id="421" type="enemy"/>
+  <tile id="422" type="enemy"/>
+  <tile id="423" type="enemy"/>
+  <tile id="424" type="enemy"/>
+  <tile id="425" type="enemy"/>
+  <tile id="426" type="enemy"/>
+  <tile id="427" type="enemy"/>
+  <tile id="428" type="enemy"/>
+  <tile id="429" type="enemy"/>
+  <tile id="430" type="enemy"/>
+  <tile id="431" type="enemy"/>
+  <tile id="432" type="enemy"/>
+  <tile id="433" type="enemy"/>
+  <tile id="434" type="enemy"/>
+  <tile id="435" type="enemy"/>
+  <tile id="436" type="enemy"/>
+  <tile id="437" type="enemy"/>
+  <tile id="438" type="enemy"/>
+  <tile id="439" type="enemy"/>
+  <tile id="440" type="enemy"/>
+  <tile id="441" type="enemy"/>
+  <tile id="442" type="enemy"/>
+  <tile id="443" type="enemy"/>
+  <tile id="444" type="enemy"/>
+  <tile id="445" type="enemy"/>
+  <tile id="446" type="enemy"/>
+  <tile id="447" type="enemy"/>
+  <tile id="448" type="enemy"/>
+  <tile id="449" type="enemy"/>
+  <tile id="450" type="enemy"/>
+  <tile id="451" type="enemy"/>
+  <tile id="452" type="enemy"/>
+  <tile id="453" type="enemy"/>
+  <tile id="454" type="enemy"/>
+  <tile id="455" type="enemy"/>
+  <tile id="456" type="enemy"/>
+  <tile id="457" type="enemy"/>
+  <tile id="458" type="enemy"/>
+  <tile id="459" type="enemy"/>
+  <tile id="460" type="enemy"/>
+  <tile id="461" type="enemy"/>
+  <tile id="462" type="enemy"/>
+  <tile id="463" type="enemy"/>
+  <tile id="464" type="enemy"/>
+  <tile id="465" type="enemy"/>
+  <tile id="466" type="enemy"/>
+  <tile id="467" type="enemy"/>
+  <tile id="468" type="enemy"/>
+  <tile id="469" type="enemy"/>
+  <tile id="470" type="enemy"/>
+  <tile id="471" type="enemy"/>
+  <tile id="472" type="enemy"/>
+  <tile id="473" type="enemy"/>
+  <tile id="474" type="enemy"/>
+  <tile id="475" type="enemy"/>
+  <tile id="476" type="enemy"/>
+  <tile id="477" type="enemy"/>
+  <tile id="478" type="enemy"/>
+  <tile id="479" type="enemy"/>
+  <tile id="480" type="enemy"/>
+  <tile id="481" type="enemy"/>
+  <tile id="482" type="enemy"/>
+  <tile id="483" type="enemy"/>
+  <tile id="484" type="enemy"/>
+  <tile id="485" type="enemy"/>
+  <tile id="486" type="enemy"/>
+  <tile id="487" type="enemy"/>
+  <tile id="488" type="enemy"/>
+  <tile id="489" type="enemy"/>
+  <tile id="490" type="enemy"/>
+  <tile id="491" type="enemy"/>
+  <tile id="492" type="enemy"/>
+  <tile id="493" type="enemy"/>
+  <tile id="494" type="enemy"/>
+  <tile id="495" type="enemy"/>
+  <tile id="496" type="enemy"/>
+  <tile id="497" type="enemy"/>
+  <tile id="498" type="enemy"/>
+  <tile id="499" type="enemy"/>
+  <tile id="500" type="enemy"/>
+  <tile id="501" type="enemy"/>
+  <tile id="502" type="enemy"/>
+  <tile id="503" type="enemy"/>
+  <tile id="504" type="enemy"/>
+  <tile id="505" type="enemy"/>
+  <tile id="506" type="enemy"/>
+  <tile id="507" type="enemy"/>
+  <tile id="508" type="enemy"/>
+  <tile id="509" type="enemy"/>
+  <tile id="510" type="enemy"/>
+  <tile id="511" type="enemy"/>
+  <tile id="512" type="enemy"/>
+  <tile id="513" type="enemy"/>
+  <tile id="514" type="enemy"/>
+  <tile id="515" type="enemy"/>
+  <tile id="516" type="enemy"/>
+  <tile id="517" type="enemy"/>
+  <tile id="518" type="enemy"/>
+  <tile id="519" type="enemy"/>
+  <tile id="520" type="enemy"/>
+  <tile id="521" type="enemy"/>
+  <tile id="522" type="enemy"/>
+  <tile id="523" type="enemy"/>
+  <tile id="524" type="enemy"/>
+  <tile id="525" type="enemy"/>
+  <tile id="526" type="enemy"/>
+  <tile id="527" type="enemy"/>
+  <tile id="528" type="enemy"/>
+  <tile id="529" type="enemy"/>
+  <tile id="530" type="enemy"/>
+  <tile id="531" type="enemy"/>
+  <tile id="532" type="enemy"/>
+  <tile id="533" type="enemy"/>
+  <tile id="534" type="enemy"/>
+  <tile id="535" type="enemy"/>
+  <tile id="536" type="enemy"/>
+  <tile id="537" type="enemy"/>
+  <tile id="538" type="enemy"/>
+  <tile id="539" type="enemy"/>
+  <tile id="540" type="enemy"/>
+  <tile id="541" type="enemy"/>
+  <tile id="542" type="enemy"/>
+  <tile id="543" type="enemy"/>
+  <tile id="544" type="enemy"/>
+  <tile id="545" type="enemy"/>
+  <tile id="546" type="enemy"/>
+  <tile id="547" type="enemy"/>
+  <tile id="548" type="enemy"/>
+  <tile id="549" type="enemy"/>
+  <tile id="550" type="enemy"/>
+  <tile id="551" type="enemy"/>
+  <tile id="552" type="enemy"/>
+  <tile id="553" type="enemy"/>
+  <tile id="554" type="enemy"/>
+  <tile id="555" type="enemy"/>
+  <tile id="556" type="enemy"/>
+  <tile id="557" type="enemy"/>
+  <tile id="558" type="enemy"/>
+  <tile id="559" type="enemy"/>
+  <tile id="560" type="enemy"/>
+  <tile id="561" type="enemy"/>
+  <tile id="562" type="enemy"/>
+  <tile id="563" type="enemy"/>
+  <tile id="564" type="enemy"/>
+  <tile id="565" type="enemy"/>
+  <tile id="566" type="enemy"/>
+  <tile id="567" type="enemy"/>
+  <tile id="568" type="enemy"/>
+  <tile id="569" type="enemy"/>
+  <tile id="570" type="enemy"/>
+  <tile id="571" type="enemy"/>
+  <tile id="572" type="enemy"/>
+  <tile id="573" type="enemy"/>
+  <tile id="574" type="enemy"/>
+  <tile id="575" type="enemy"/>
+  <tile id="576" type="enemy"/>
+  <tile id="577" type="enemy"/>
+  <tile id="578" type="enemy"/>
+  <tile id="579" type="enemy"/>
+  <tile id="580" type="enemy"/>
+  <tile id="581" type="enemy"/>
+  <tile id="582" type="enemy"/>
+  <tile id="583" type="enemy"/>
+  <tile id="584" type="enemy"/>
+  <tile id="585" type="enemy"/>
+  <tile id="586" type="enemy"/>
+  <tile id="587" type="enemy"/>
+  <tile id="588" type="enemy"/>
+  <tile id="589" type="enemy"/>
+  <tile id="590" type="enemy"/>
+  <tile id="591" type="enemy"/>
+  <tile id="592" type="enemy"/>
+  <tile id="593" type="enemy"/>
+  <tile id="594" type="enemy"/>
+  <tile id="595" type="enemy"/>
+  <tile id="596" type="enemy"/>
+  <tile id="597" type="enemy"/>
+  <tile id="598" type="enemy"/>
+  <tile id="599" type="enemy"/>
+  <tile id="600" type="enemy"/>
+  <tile id="601" type="enemy"/>
+  <tile id="602" type="enemy"/>
+  <tile id="603" type="enemy"/>
+  <tile id="604" type="enemy"/>
+  <tile id="605" type="enemy"/>
+  <tile id="606" type="enemy"/>
+  <tile id="607" type="enemy"/>
+  <tile id="608" type="enemy"/>
+  <tile id="609" type="enemy"/>
+  <tile id="610" type="enemy"/>
+  <tile id="611" type="enemy"/>
+  <tile id="612" type="enemy"/>
+  <tile id="613" type="enemy"/>
+  <tile id="614" type="enemy"/>
+  <tile id="615" type="enemy"/>
+  <tile id="616" type="enemy"/>
+  <tile id="617" type="enemy"/>
+  <tile id="618" type="enemy"/>
+  <tile id="619" type="enemy"/>
+  <tile id="620" type="enemy"/>
+  <tile id="621" type="enemy"/>
+  <tile id="622" type="enemy"/>
+  <tile id="623" type="enemy"/>
+  <tile id="624" type="enemy"/>
+  <tile id="625" type="enemy"/>
+  <tile id="626" type="enemy"/>
+  <tile id="627" type="enemy"/>
+  <tile id="628" type="enemy"/>
+  <tile id="629" type="enemy"/>
+  <tile id="630" type="enemy"/>
+  <tile id="631" type="enemy"/>
+  <tile id="632" type="enemy"/>
+  <tile id="633" type="enemy"/>
+  <tile id="634" type="enemy"/>
+  <tile id="635" type="enemy"/>
+  <tile id="636" type="enemy"/>
+  <tile id="637" type="enemy"/>
+  <tile id="638" type="enemy"/>
+  <tile id="639" type="enemy"/>
+  <tile id="640" type="enemy"/>
+  <tile id="641" type="enemy"/>
+  <tile id="642" type="enemy"/>
+  <tile id="643" type="enemy"/>
+  <tile id="644" type="enemy"/>
+  <tile id="645" type="enemy"/>
+  <tile id="646" type="enemy"/>
+  <tile id="647" type="enemy"/>
+  <tile id="648" type="enemy"/>
+  <tile id="649" type="enemy"/>
+  <tile id="650" type="enemy"/>
+  <tile id="651" type="enemy"/>
+  <tile id="652" type="enemy"/>
+  <tile id="653" type="enemy"/>
+  <tile id="654" type="enemy"/>
+  <tile id="655" type="enemy"/>
+  <tile id="656" type="enemy"/>
+  <tile id="657" type="enemy"/>
+  <tile id="658" type="enemy"/>
+  <tile id="659" type="enemy"/>
+  <tile id="660" type="enemy"/>
+  <tile id="661" type="enemy"/>
+  <tile id="662" type="enemy"/>
+  <tile id="663" type="enemy"/>
+  <tile id="664" type="enemy"/>
+  <tile id="665" type="enemy"/>
+  <tile id="666" type="enemy"/>
+  <tile id="667" type="enemy"/>
+  <tile id="668" type="enemy"/>
+  <tile id="669" type="enemy"/>
+  <tile id="670" type="enemy"/>
+  <tile id="671" type="enemy"/>
+  <tile id="672" type="enemy"/>
+  <tile id="673" type="enemy"/>
+  <tile id="674" type="enemy"/>
+  <tile id="675" type="enemy"/>
+  <tile id="676" type="enemy"/>
+  <tile id="677" type="enemy"/>
+  <tile id="678" type="enemy"/>
+  <tile id="679" type="enemy"/>
+  <tile id="680" type="enemy"/>
+  <tile id="681" type="enemy"/>
+  <tile id="682" type="enemy"/>
+  <tile id="683" type="enemy"/>
+  <tile id="684" type="enemy"/>
+  <tile id="685" type="enemy"/>
+  <tile id="686" type="enemy"/>
+  <tile id="687" type="enemy"/>
+  <tile id="688" type="enemy"/>
+  <tile id="689" type="enemy"/>
+  <tile id="690" type="enemy"/>
+  <tile id="691" type="enemy"/>
+  <tile id="692" type="enemy"/>
+  <tile id="693" type="enemy"/>
+  <tile id="694" type="enemy"/>
+  <tile id="695" type="enemy"/>
+  <tile id="696" type="enemy"/>
+  <tile id="697" type="enemy"/>
+  <tile id="698" type="enemy"/>
+  <tile id="699" type="enemy"/>
+  <tile id="700" type="enemy"/>
+  <tile id="701" type="enemy"/>
+  <tile id="702" type="enemy"/>
+  <tile id="703" type="enemy"/>
+  <tile id="704" type="enemy"/>
+  <tile id="705" type="enemy"/>
+  <tile id="706" type="enemy"/>
+  <tile id="707" type="enemy"/>
+  <tile id="708" type="enemy"/>
+  <tile id="709" type="enemy"/>
+  <tile id="710" type="enemy"/>
+  <tile id="711" type="enemy"/>
+  <tile id="712" type="enemy"/>
+  <tile id="713" type="enemy"/>
+  <tile id="714" type="enemy"/>
+  <tile id="715" type="enemy"/>
+  <tile id="716" type="enemy"/>
+  <tile id="717" type="enemy"/>
+  <tile id="718" type="enemy"/>
+  <tile id="719" type="enemy"/>
+  <tile id="720" type="enemy"/>
+  <tile id="721" type="enemy"/>
+  <tile id="722" type="enemy"/>
+  <tile id="723" type="enemy"/>
+  <tile id="724" type="enemy"/>
+  <tile id="725" type="enemy"/>
+  <tile id="726" type="enemy"/>
+  <tile id="727" type="enemy"/>
+  <tile id="728" type="enemy"/>
+  <tile id="729" type="enemy"/>
+  <tile id="730" type="enemy"/>
+  <tile id="731" type="enemy"/>
+  <tile id="732" type="enemy"/>
+  <tile id="733" type="enemy"/>
+  <tile id="734" type="enemy"/>
+  <tile id="735" type="enemy"/>
+  <tile id="736" type="enemy"/>
+  <tile id="737" type="enemy"/>
+  <tile id="738" type="enemy"/>
+  <tile id="739" type="enemy"/>
+  <tile id="740" type="enemy"/>
+  <tile id="741" type="enemy"/>
+  <tile id="742" type="enemy"/>
+  <tile id="743" type="enemy"/>
+  <tile id="744" type="enemy"/>
+  <tile id="745" type="enemy"/>
+  <tile id="746" type="enemy"/>
+  <tile id="747" type="enemy"/>
+  <tile id="748" type="enemy"/>
+  <tile id="749" type="enemy"/>
+  <tile id="750" type="enemy"/>
+  <tile id="751" type="enemy"/>
+  <tile id="752" type="enemy"/>
+  <tile id="753" type="enemy"/>
+  <tile id="754" type="enemy"/>
+  <tile id="755" type="enemy"/>
+  <tile id="756" type="enemy"/>
+  <tile id="757" type="enemy"/>
+  <tile id="758" type="enemy"/>
+  <tile id="759" type="enemy"/>
+  <tile id="760" type="enemy"/>
+  <tile id="761" type="enemy"/>
+  <tile id="762" type="enemy"/>
+  <tile id="763" type="enemy"/>
+  <tile id="764" type="enemy"/>
+  <tile id="765" type="enemy"/>
+  <tile id="766" type="enemy"/>
+  <tile id="767" type="enemy"/>
+  <tile id="768" type="enemy"/>
+  <tile id="769" type="enemy"/>
+  <tile id="770" type="enemy"/>
+  <tile id="771" type="enemy"/>
+  <tile id="772" type="enemy"/>
+  <tile id="773" type="enemy"/>
+  <tile id="774" type="enemy"/>
+  <tile id="775" type="enemy"/>
+  <tile id="776" type="enemy"/>
+  <tile id="777" type="enemy"/>
+  <tile id="778" type="enemy"/>
+  <tile id="779" type="enemy"/>
+  <tile id="780" type="enemy"/>
+  <tile id="781" type="enemy"/>
+  <tile id="782" type="enemy"/>
+  <tile id="783" type="enemy"/>
+  <tile id="784" type="enemy"/>
+  <tile id="785" type="enemy"/>
+  <tile id="786" type="enemy"/>
+  <tile id="787" type="enemy"/>
+  <tile id="788" type="enemy"/>
+  <tile id="789" type="enemy"/>
+  <tile id="790" type="enemy"/>
+  <tile id="791" type="enemy"/>
+  <tile id="792" type="enemy"/>
+  <tile id="793" type="enemy"/>
+  <tile id="794" type="enemy"/>
+  <tile id="795" type="enemy"/>
+  <tile id="796" type="enemy"/>
+  <tile id="797" type="enemy"/>
+  <tile id="798" type="enemy"/>
+  <tile id="799" type="enemy"/>
+  <tile id="800" type="enemy"/>
+  <tile id="801" type="enemy"/>
+  <tile id="802" type="enemy"/>
+  <tile id="803" type="enemy"/>
+  <tile id="804" type="enemy"/>
+  <tile id="805" type="enemy"/>
+  <tile id="806" type="enemy"/>
+  <tile id="807" type="enemy"/>
+  <tile id="808" type="enemy"/>
+  <tile id="809" type="enemy"/>
+  <tile id="810" type="enemy"/>
+  <tile id="811" type="enemy"/>
+  <tile id="812" type="enemy"/>
+  <tile id="813" type="enemy"/>
+  <tile id="814" type="enemy"/>
+  <tile id="815" type="enemy"/>
+  <tile id="816" type="enemy"/>
+  <tile id="817" type="enemy"/>
+  <tile id="818" type="enemy"/>
+  <tile id="819" type="enemy"/>
+  <tile id="820" type="enemy"/>
+  <tile id="821" type="enemy"/>
+  <tile id="822" type="enemy"/>
+  <tile id="823" type="enemy"/>
+  <tile id="824" type="enemy"/>
+  <tile id="825" type="enemy"/>
+  <tile id="826" type="enemy"/>
+  <tile id="827" type="enemy"/>
+  <tile id="828" type="enemy"/>
+  <tile id="829" type="enemy"/>
+  <tile id="830" type="enemy"/>
+  <tile id="831" type="enemy"/>
+  <tile id="832" type="enemy"/>
+  <tile id="833" type="enemy"/>
+  <tile id="834" type="enemy"/>
+  <tile id="835" type="enemy"/>
+  <tile id="836" type="enemy"/>
+  <tile id="837" type="enemy"/>
+  <tile id="838" type="enemy"/>
+  <tile id="839" type="enemy"/>
+  <tile id="840" type="enemy"/>
+  <tile id="841" type="enemy"/>
+  <tile id="842" type="enemy"/>
+  <tile id="843" type="enemy"/>
+  <tile id="844" type="enemy"/>
+  <tile id="845" type="enemy"/>
+  <tile id="846" type="enemy"/>
+  <tile id="847" type="enemy"/>
+  <tile id="848" type="enemy"/>
+  <tile id="849" type="enemy"/>
+  <tile id="850" type="enemy"/>
+  <tile id="851" type="enemy"/>
+  <tile id="852" type="enemy"/>
+  <tile id="853" type="enemy"/>
+  <tile id="854" type="enemy"/>
+  <tile id="855" type="enemy"/>
+  <tile id="856" type="enemy"/>
+  <tile id="857" type="enemy"/>
+  <tile id="858" type="enemy"/>
+  <tile id="859" type="enemy"/>
+  <tile id="860" type="enemy"/>
+  <tile id="861" type="enemy"/>
+  <tile id="862" type="enemy"/>
+  <tile id="863" type="enemy"/>
+  <tile id="864" type="enemy"/>
+  <tile id="865" type="enemy"/>
+  <tile id="866" type="enemy"/>
+  <tile id="867" type="enemy"/>
+  <tile id="868" type="enemy"/>
+  <tile id="869" type="enemy"/>
+  <tile id="870" type="enemy"/>
+  <tile id="871" type="enemy"/>
+  <tile id="872" type="enemy"/>
+  <tile id="873" type="enemy"/>
+  <tile id="874" type="enemy"/>
+  <tile id="875" type="enemy"/>
+  <tile id="876" type="enemy"/>
+  <tile id="877" type="enemy"/>
+  <tile id="878" type="enemy"/>
+  <tile id="879" type="enemy"/>
+  <tile id="880" type="enemy"/>
+  <tile id="881" type="enemy"/>
+  <tile id="882" type="enemy"/>
+  <tile id="883" type="enemy"/>
+  <tile id="884" type="enemy"/>
+  <tile id="885" type="enemy"/>
+  <tile id="886" type="enemy"/>
+  <tile id="887" type="enemy"/>
+  <tile id="888" type="enemy"/>
+  <tile id="889" type="enemy"/>
+  <tile id="890" type="enemy"/>
+  <tile id="891" type="enemy"/>
+  <tile id="892" type="enemy"/>
+  <tile id="893" type="enemy"/>
+  <tile id="894" type="enemy"/>
+  <tile id="895" type="enemy"/>
+  <tile id="896" type="enemy"/>
+  <tile id="897" type="enemy"/>
+  <tile id="898" type="enemy"/>
+  <tile id="899" type="enemy"/>
+  <tile id="900" type="enemy"/>
+  <tile id="901" type="enemy"/>
+  <tile id="902" type="enemy"/>
+  <tile id="903" type="enemy"/>
+  <tile id="904" type="enemy"/>
+  <tile id="905" type="enemy"/>
+  <tile id="906" type="enemy"/>
+  <tile id="907" type="enemy"/>
+  <tile id="908" type="enemy"/>
+  <tile id="909" type="enemy"/>
+  <tile id="910" type="enemy"/>
+  <tile id="911" type="enemy"/>
+  <tile id="912" type="enemy"/>
+  <tile id="913" type="enemy"/>
+  <tile id="914" type="enemy"/>
+  <tile id="915" type="enemy"/>
+  <tile id="916" type="enemy"/>
+  <tile id="917" type="enemy"/>
+  <tile id="918" type="enemy"/>
+  <tile id="919" type="enemy"/>
+  <tile id="920" type="enemy"/>
+  <tile id="921" type="enemy"/>
+  <tile id="922" type="enemy"/>
+  <tile id="923" type="enemy"/>
+  <tile id="924" type="enemy"/>
+  <tile id="925" type="enemy"/>
+  <tile id="926" type="enemy"/>
+  <tile id="927" type="enemy"/>
+  <tile id="928" type="enemy"/>
+  <tile id="929" type="enemy"/>
+  <tile id="930" type="enemy"/>
+  <tile id="931" type="enemy"/>
+  <tile id="932" type="enemy"/>
+  <tile id="933" type="enemy"/>
+  <tile id="934" type="enemy"/>
+  <tile id="935" type="enemy"/>
+  <tile id="936" type="enemy"/>
+  <tile id="937" type="enemy"/>
+  <tile id="938" type="enemy"/>
+  <tile id="939" type="enemy"/>
+  <tile id="940" type="enemy"/>
+  <tile id="941" type="enemy"/>
+  <tile id="942" type="enemy"/>
+  <tile id="943" type="enemy"/>
+  <tile id="944" type="enemy"/>
+  <tile id="945" type="enemy"/>
+  <tile id="946" type="enemy"/>
+  <tile id="947" type="enemy"/>
+  <tile id="948" type="enemy"/>
+  <tile id="949" type="enemy"/>
+  <tile id="950" type="enemy"/>
+  <tile id="951" type="enemy"/>
+  <tile id="952" type="enemy"/>
+  <tile id="953" type="enemy"/>
+  <tile id="954" type="enemy"/>
+  <tile id="955" type="enemy"/>
+  <tile id="956" type="enemy"/>
+  <tile id="957" type="enemy"/>
+  <tile id="958" type="enemy"/>
+  <tile id="959" type="enemy"/>
+  <tile id="960" type="enemy"/>
+  <tile id="961" type="enemy"/>
+  <tile id="962" type="enemy"/>
+  <tile id="963" type="enemy"/>
+  <tile id="964" type="enemy"/>
+  <tile id="965" type="enemy"/>
+  <tile id="966" type="enemy"/>
+  <tile id="967" type="enemy"/>
+  <tile id="968" type="enemy"/>
+  <tile id="969" type="enemy"/>
+  <tile id="970" type="enemy"/>
+  <tile id="971" type="enemy"/>
+  <tile id="972" type="enemy"/>
+  <tile id="973" type="enemy"/>
+  <tile id="974" type="enemy"/>
+  <tile id="975" type="enemy"/>
+  <tile id="976" type="enemy"/>
+  <tile id="977" type="enemy"/>
+  <tile id="978" type="enemy"/>
+  <tile id="979" type="enemy"/>
+  <tile id="980" type="enemy"/>
+  <tile id="981" type="enemy"/>
+  <tile id="982" type="enemy"/>
+  <tile id="983" type="enemy"/>
+  <tile id="984" type="enemy"/>
+  <tile id="985" type="enemy"/>
+  <tile id="986" type="enemy"/>
+  <tile id="987" type="enemy"/>
+  <tile id="988" type="enemy"/>
+  <tile id="989" type="enemy"/>
+  <tile id="990" type="enemy"/>
+  <tile id="991" type="enemy"/>
+  <tile id="992" type="enemy"/>
+  <tile id="993" type="enemy"/>
+  <tile id="994" type="enemy"/>
+  <tile id="995" type="enemy"/>
+  <tile id="996" type="enemy"/>
+  <tile id="997" type="enemy"/>
+  <tile id="998" type="enemy"/>
+  <tile id="999" type="enemy"/>
+  <tile id="1000" type="enemy"/>
+  <tile id="1001" type="enemy"/>
+  <tile id="1002" type="enemy"/>
+  <tile id="1003" type="enemy"/>
+  <tile id="1004" type="enemy"/>
+  <tile id="1005" type="enemy"/>
+  <tile id="1006" type="enemy"/>
+  <tile id="1007" type="enemy"/>
+  <tile id="1008" type="enemy"/>
+  <tile id="1009" type="enemy"/>
+  <tile id="1010" type="enemy"/>
+  <tile id="1011" type="enemy"/>
+  <tile id="1012" type="enemy"/>
+  <tile id="1013" type="enemy"/>
+  <tile id="1014" type="enemy"/>
+  <tile id="1015" type="enemy"/>
+  <tile id="1016" type="enemy"/>
+  <tile id="1017" type="enemy"/>
+  <tile id="1018" type="enemy"/>
+  <tile id="1019" type="enemy"/>
+  <tile id="1020" type="enemy"/>
+  <tile id="1021" type="enemy"/>
+  <tile id="1022" type="enemy"/>
+  <tile id="1023" type="enemy"/>
+  <tile id="1024" type="enemy"/>
+  <tile id="1025" type="enemy"/>
+  <tile id="1026" type="enemy"/>
+  <tile id="1027" type="enemy"/>
+  <tile id="1028" type="enemy"/>
+  <tile id="1029" type="enemy"/>
+  <tile id="1030" type="enemy"/>
+  <tile id="1031" type="enemy"/>
+  <tile id="1032" type="enemy"/>
+  <tile id="1033" type="enemy"/>
+  <tile id="1034" type="enemy"/>
+  <tile id="1035" type="enemy"/>
+  <tile id="1036" type="enemy"/>
+  <tile id="1037" type="enemy"/>
+  <tile id="1038" type="enemy"/>
+  <tile id="1039" type="enemy"/>
+  <tile id="1040" type="enemy"/>
+  <tile id="1041" type="enemy"/>
+  <tile id="1042" type="enemy"/>
+  <tile id="1043" type="enemy"/>
+  <tile id="1044" type="enemy"/>
+  <tile id="1045" type="enemy"/>
+  <tile id="1046" type="enemy"/>
+  <tile id="1047" type="enemy"/>
+  <tile id="1048" type="enemy"/>
+  <tile id="1049" type="enemy"/>
+  <tile id="1050" type="enemy"/>
+  <tile id="1051" type="enemy"/>
+  <tile id="1052" type="enemy"/>
+  <tile id="1053" type="enemy"/>
+  <tile id="1054" type="enemy"/>
+  <tile id="1055" type="enemy"/>
+  <tile id="1056" type="enemy"/>
+  <tile id="1057" type="enemy"/>
+  <tile id="1058" type="enemy"/>
+  <tile id="1059" type="enemy"/>
+  <tile id="1060" type="enemy"/>
+  <tile id="1061" type="enemy"/>
+  <tile id="1062" type="enemy"/>
+  <tile id="1063" type="enemy"/>
+  <tile id="1064" type="enemy"/>
+  <tile id="1065" type="enemy"/>
+  <tile id="1066" type="enemy"/>
+  <tile id="1067" type="enemy"/>
+  <tile id="1068" type="enemy"/>
+  <tile id="1069" type="enemy"/>
+  <tile id="1070" type="enemy"/>
+  <tile id="1071" type="enemy"/>
+  <tile id="1072" type="enemy"/>
+  <tile id="1073" type="enemy"/>
+  <tile id="1074" type="enemy"/>
+  <tile id="1075" type="enemy"/>
+  <tile id="1076" type="enemy"/>
+  <tile id="1077" type="enemy"/>
+  <tile id="1078" type="enemy"/>
+  <tile id="1079" type="enemy"/>
+  <tile id="1080" type="enemy"/>
+  <tile id="1081" type="enemy"/>
+  <tile id="1082" type="enemy"/>
+  <tile id="1083" type="enemy"/>
+  <tile id="1084" type="enemy"/>
+  <tile id="1085" type="enemy"/>
+  <tile id="1086" type="enemy"/>
+  <tile id="1087" type="enemy"/>
+  <tile id="1088" type="enemy"/>
+  <tile id="1089" type="enemy"/>
+  <tile id="1090" type="enemy"/>
+  <tile id="1091" type="enemy"/>
+  <tile id="1092" type="enemy"/>
+  <tile id="1093" type="enemy"/>
+  <tile id="1094" type="enemy"/>
+  <tile id="1095" type="enemy"/>
+  <tile id="1096" type="enemy"/>
+  <tile id="1097" type="enemy"/>
+  <tile id="1098" type="enemy"/>
+  <tile id="1099" type="enemy"/>
+  <tile id="1100" type="enemy"/>
+  <tile id="1101" type="enemy"/>
+  <tile id="1102" type="enemy"/>
+  <tile id="1103" type="enemy"/>
+  <tile id="1104" type="enemy"/>
+  <tile id="1105" type="enemy"/>
+  <tile id="1106" type="enemy"/>
+  <tile id="1107" type="enemy"/>
+  <tile id="1108" type="enemy"/>
+  <tile id="1109" type="enemy"/>
+  <tile id="1110" type="enemy"/>
+  <tile id="1111" type="enemy"/>
+  <tile id="1112" type="enemy"/>
+  <tile id="1113" type="enemy"/>
+  <tile id="1114" type="enemy"/>
+  <tile id="1115" type="enemy"/>
+  <tile id="1116" type="enemy"/>
+  <tile id="1117" type="enemy"/>
+  <tile id="1118" type="enemy"/>
+  <tile id="1119" type="enemy"/>
+  <tile id="1120" type="enemy"/>
+  <tile id="1121" type="enemy"/>
+  <tile id="1122" type="enemy"/>
+  <tile id="1123" type="enemy"/>
+  <tile id="1124" type="enemy"/>
+  <tile id="1125" type="enemy"/>
+  <tile id="1126" type="enemy"/>
+  <tile id="1127" type="enemy"/>
+  <tile id="1128" type="enemy"/>
+  <tile id="1129" type="enemy"/>
+  <tile id="1130" type="enemy"/>
+  <tile id="1131" type="enemy"/>
+  <tile id="1132" type="enemy"/>
+  <tile id="1133" type="enemy"/>
+  <tile id="1134" type="enemy"/>
+  <tile id="1135" type="enemy"/>
+  <tile id="1136" type="enemy"/>
+  <tile id="1137" type="enemy"/>
+  <tile id="1138" type="enemy"/>
+  <tile id="1139" type="enemy"/>
+  <tile id="1140" type="enemy"/>
+  <tile id="1141" type="enemy"/>
+  <tile id="1142" type="enemy"/>
+  <tile id="1143" type="enemy"/>
+  <tile id="1144" type="enemy"/>
+  <tile id="1145" type="enemy"/>
+  <tile id="1146" type="enemy"/>
+  <tile id="1147" type="enemy"/>
+  <tile id="1148" type="enemy"/>
+  <tile id="1149" type="enemy"/>
+  <tile id="1150" type="enemy"/>
+  <tile id="1151" type="enemy"/>
+  <tile id="1152" type="enemy"/>
+  <tile id="1153" type="enemy"/>
+  <tile id="1154" type="enemy"/>
+  <tile id="1155" type="enemy"/>
+  <tile id="1156" type="enemy"/>
+  <tile id="1157" type="enemy"/>
+  <tile id="1158" type="enemy"/>
+  <tile id="1159" type="enemy"/>
+  <tile id="1160" type="enemy"/>
+  <tile id="1161" type="enemy"/>
+  <tile id="1162" type="enemy"/>
+  <tile id="1163" type="enemy"/>
+  <tile id="1164" type="enemy"/>
+  <tile id="1165" type="enemy"/>
+  <tile id="1166" type="enemy"/>
+  <tile id="1167" type="enemy"/>
+  <tile id="1168" type="enemy"/>
+  <tile id="1169" type="enemy"/>
+  <tile id="1170" type="enemy"/>
+  <tile id="1171" type="enemy"/>
+  <tile id="1172" type="enemy"/>
+  <tile id="1173" type="enemy"/>
+  <tile id="1174" type="enemy"/>
+  <tile id="1175" type="enemy"/>
+  <tile id="1176" type="enemy"/>
+  <tile id="1177" type="enemy"/>
+  <tile id="1178" type="enemy"/>
+  <tile id="1179" type="enemy"/>
+  <tile id="1180" type="enemy"/>
+  <tile id="1181" type="enemy"/>
+  <tile id="1182" type="enemy"/>
+  <tile id="1183" type="enemy"/>
+  <tile id="1184" type="enemy"/>
+  <tile id="1185" type="enemy"/>
+  <tile id="1186" type="enemy"/>
+  <tile id="1187" type="enemy"/>
+  <tile id="1188" type="enemy"/>
+  <tile id="1189" type="enemy"/>
+  <tile id="1190" type="enemy"/>
+  <tile id="1191" type="enemy"/>
+  <tile id="1192" type="enemy"/>
+  <tile id="1193" type="enemy"/>
+  <tile id="1194" type="enemy"/>
+  <tile id="1195" type="enemy"/>
+  <tile id="1196" type="enemy"/>
+  <tile id="1197" type="enemy"/>
+  <tile id="1198" type="enemy"/>
+  <tile id="1199" type="enemy"/>
+  <tile id="1200" type="enemy"/>
+  <tile id="1201" type="enemy"/>
+  <tile id="1202" type="enemy"/>
+  <tile id="1203" type="enemy"/>
+  <tile id="1204" type="enemy"/>
+  <tile id="1205" type="enemy"/>
+  <tile id="1206" type="enemy"/>
+  <tile id="1207" type="enemy"/>
+  <tile id="1208" type="enemy"/>
+  <tile id="1209" type="enemy"/>
+  <tile id="1210" type="enemy"/>
+  <tile id="1211" type="enemy"/>
+  <tile id="1212" type="enemy"/>
+  <tile id="1213" type="enemy"/>
+  <tile id="1214" type="enemy"/>
+  <tile id="1215" type="enemy"/>
+  <tile id="1216" type="enemy"/>
+  <tile id="1217" type="enemy"/>
+  <tile id="1218" type="enemy"/>
+  <tile id="1219" type="enemy"/>
+  <tile id="1220" type="enemy"/>
+  <tile id="1221" type="enemy"/>
+  <tile id="1222" type="enemy"/>
+  <tile id="1223" type="enemy"/>
+  <tile id="1224" type="enemy"/>
+  <tile id="1225" type="enemy"/>
+  <tile id="1226" type="enemy"/>
+  <tile id="1227" type="enemy"/>
+  <tile id="1228" type="enemy"/>
+  <tile id="1229" type="enemy"/>
+  <tile id="1230" type="enemy"/>
+  <tile id="1231" type="enemy"/>
  </tileset>
  <group id="2" name="background">
   <imagelayer id="18" name="4_sky" locked="1" parallaxx="0" repeatx="1">
@@ -206,221 +1538,161 @@
  </group>
  <group id="13" name="objects">
   <objectgroup id="21" name="evil_archer">
-   <object id="64" type="enemy" gid="2147486713" x="688" y="272" width="16" height="16">
-    <properties>
-     <property name="attack_type" value="ranged"/>
-     <property name="enemy_type" value="archer"/>
-    </properties>
-   </object>
-   <object id="65" type="Enemy" gid="2147486713" x="960" y="224" width="16" height="16">
-    <properties>
-     <property name="attack_type" value="ranged"/>
-     <property name="enemy_type" value="archer"/>
-    </properties>
-   </object>
-   <object id="66" type="Enemy" gid="2147486713" x="1216" y="224" width="16" height="16">
-    <properties>
-     <property name="attack_type" value="ranged"/>
-     <property name="enemy_type" value="archer"/>
-    </properties>
-   </object>
-   <object id="67" type="Enemy" gid="2147486713" x="1600" y="240" width="16" height="16">
-    <properties>
-     <property name="attack_type" value="ranged"/>
-     <property name="enemy_type" value="archer"/>
-    </properties>
-   </object>
-   <object id="68" type="Enemy" gid="2147486713" x="2144" y="224" width="16" height="16">
-    <properties>
-     <property name="attack_type" value="ranged"/>
-     <property name="enemy_type" value="archer"/>
-    </properties>
-   </object>
+   <object id="69" type="enemy" gid="2147488526" x="752" y="224" width="16" height="24"/>
+   <object id="70" type="enemy" gid="2147488526" x="592" y="192" width="16" height="24"/>
+   <object id="71" type="enemy" gid="4878" x="1184" y="144" width="16" height="24"/>
+   <object id="72" type="enemy" gid="4878" x="1104" y="176" width="16" height="24"/>
+   <object id="73" type="enemy" gid="4878" x="1424" y="272" width="16" height="24"/>
+   <object id="74" type="enemy" gid="1073746702" x="1424" y="248" width="16" height="24" rotation="180"/>
   </objectgroup>
   <objectgroup id="20" name="knight"/>
   <objectgroup id="23" name="collectables">
-   <object id="19" gid="6718" x="400" y="240" width="16" height="16">
+   <object id="19" type="small_coin" gid="4870" x="400" y="240" width="16" height="16"/>
+   <object id="21" type="arrow" gid="4857" x="448" y="192" width="16" height="16"/>
+   <object id="22" type="arrow" gid="4860" x="800" y="256" width="16" height="16">
+    <properties>
+     <property name="is_flaming" type="bool" value="true"/>
+    </properties>
+   </object>
+   <object id="25" type="arrow" gid="4860" x="1680" y="144" width="16" height="16"/>
+   <object id="26" type="arrow" gid="4857" x="1728" y="256" width="16" height="16"/>
+   <object id="27" gid="4857" x="1088.5" y="261.5" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="reg_arrow"/>
+    </properties>
+   </object>
+   <object id="28" type="arrow" gid="4857" x="624" y="256" width="16" height="16"/>
+   <object id="29" type="arrow" gid="4860" x="2192.5" y="131.5" width="16" height="16"/>
+   <object id="30" type="coin" gid="4866" x="2480" y="128" width="16" height="16"/>
+   <object id="31" type="coin" gid="4866" x="1984" y="240" width="16" height="16"/>
+   <object id="32" type="coin" gid="4866" x="1872" y="112" width="16" height="16"/>
+   <object id="33" type="coin" gid="4866" x="1216" y="144" width="16" height="16"/>
+   <object id="34" type="coin" gid="4866" x="672" y="160" width="16" height="16"/>
+   <object id="35" type="small_coin" gid="4870" x="608" y="192" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="36" type="small_coin" gid="4870" x="624" y="192" width="16" height="16"/>
+   <object id="37" type="small_coin" gid="4870" x="560" y="256" width="16" height="16"/>
+   <object id="38" type="small_coin" gid="4870" x="784" y="224" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="39" type="small_coin" gid="4870" x="816" y="272" width="16" height="16"/>
+   <object id="40" type="small_coin" gid="4870" x="928" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="41" type="small_coin" gid="4870" x="992" y="256" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="42" type="small_coin" gid="4870" x="1056" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="43" type="small_coin" gid="4870" x="1200" y="224" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="44" type="small_coin" gid="4870" x="1088" y="176" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="45" type="small_coin" gid="4870" x="1198.5" y="143.5" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="46" type="small_coin" gid="4870" x="1328" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="47" type="small_coin" gid="4870" x="1584" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="48" type="small_coin" gid="4870" x="1711.5" y="192" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="49" type="small_coin" gid="4870" x="1727.5" y="176" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="50" type="small_coin" gid="4870" x="1744" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="51" type="small_coin" gid="4870" x="1856" y="112" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="52" type="small_coin" gid="4870" x="1888" y="96" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="53" type="small_coin" gid="4870" x="1968" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="54" type="small_coin" gid="4870" x="1952" y="256" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="55" type="small_coin" gid="4870" x="2080" y="192.5" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="56" type="small_coin" gid="4870" x="2320" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="57" type="small_coin" gid="4870" x="2336" y="240" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="58" type="small_coin" gid="4870" x="2288" y="128.5" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="59" type="small_coin" gid="4870" x="2496" y="112" width="16" height="16">
+    <properties>
+     <property name="pickup_type" value="small_coin"/>
+    </properties>
+   </object>
+   <object id="60" type="coin" gid="4866" x="2544" y="224" width="16" height="16"/>
+   <object id="61" type="heart" gid="4874" x="800" y="192" width="16" height="16">
     <properties>
      <property name="pickup_type" value="heart"/>
     </properties>
    </object>
-   <object id="21" gid="6705" x="448" y="192" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="reg_arrow"/>
-    </properties>
-   </object>
-   <object id="22" gid="6708" x="800" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="fire_arrow"/>
-    </properties>
-   </object>
-   <object id="25" gid="6708" x="1680" y="144" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="fire_arrow"/>
-    </properties>
-   </object>
-   <object id="26" gid="6705" x="1728" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="reg_arrow"/>
-    </properties>
-   </object>
-   <object id="27" gid="6705" x="1088.5" y="261.5" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="reg_arrow"/>
-    </properties>
-   </object>
-   <object id="28" gid="6705" x="624" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="reg_arrow"/>
-    </properties>
-   </object>
-   <object id="29" gid="6708" x="2192.5" y="131.5" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="fire_arrow"/>
-    </properties>
-   </object>
-   <object id="30" gid="6714" x="2480" y="128" width="16" height="16"/>
-   <object id="31" type="coin" gid="6714" x="1984" y="240" width="16" height="16"/>
-   <object id="32" gid="6714" x="1872" y="112" width="16" height="16"/>
-   <object id="33" type="Coin" gid="6714" x="1216" y="144" width="16" height="16"/>
-   <object id="34" type="coin" gid="6714" x="672" y="160" width="16" height="16"/>
-   <object id="35" type="small_coin" gid="6718" x="608" y="192" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="36" gid="6718" x="624" y="192" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="37" type="small_coin" gid="6718" x="560" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="38" gid="6718" x="784" y="224" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="39" gid="6718" x="816" y="272" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="40" gid="6718" x="928" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="41" gid="6718" x="992" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="42" gid="6718" x="1056" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="43" gid="6718" x="1200" y="224" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="44" gid="6718" x="1088" y="176" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="45" gid="6718" x="1198.5" y="143.5" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="46" gid="6718" x="1328" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="47" gid="6718" x="1584" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="48" gid="6718" x="1711.5" y="192" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="49" gid="6718" x="1727.5" y="176" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="50" gid="6718" x="1744" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="51" gid="6718" x="1856" y="112" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="52" gid="6718" x="1888" y="96" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="53" gid="6718" x="1968" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="54" gid="6718" x="1952" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="55" gid="6718" x="2080" y="192.5" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="56" gid="6718" x="2320" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="57" gid="6718" x="2336" y="240" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="58" gid="6718" x="2288" y="128.5" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="59" gid="6718" x="2496" y="112" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="small_coin"/>
-    </properties>
-   </object>
-   <object id="60" gid="6714" x="2544" y="224" width="16" height="16"/>
-   <object id="61" gid="6722" x="800" y="192" width="16" height="16">
+   <object id="62" type="heart" gid="4874" x="1376" y="256" width="16" height="16">
     <properties>
      <property name="pickup_type" value="heart"/>
     </properties>
    </object>
-   <object id="62" gid="6722" x="1376" y="256" width="16" height="16">
-    <properties>
-     <property name="pickup_type" value="heart"/>
-    </properties>
-   </object>
-   <object id="63" type="heart" gid="6722" x="2288" y="208" width="16" height="16">
+   <object id="63" type="heart" gid="4874" x="2288" y="208" width="16" height="16">
     <properties>
      <property name="pickup_type" value="heart"/>
     </properties>

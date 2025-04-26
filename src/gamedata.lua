@@ -17,7 +17,23 @@ function summonCoin(x, y)
 	return Collectable:new(x, y, def)
 end
 
-function summonArrow(x, y)
+function summonSmallCoin(x, y)
+    def = {
+		animations = {
+			spin = {
+				frames = {"1-4", 1},
+				duration = 0.15
+			}
+		},
+		img_file = "pickups/small_coin.png",
+		h = 16,
+		w = 16,
+		defaultAnimation = "spin"
+	}
+	return Collectable:new(x, y, def)
+end
+
+function summonArrow(x, y, isFlaming)
     def = {
 		animations = {
 			none = {
@@ -25,7 +41,7 @@ function summonArrow(x, y)
 				duration = 100
 			},
 			flaming = {
-				frames = {"1-3", 1},
+				frames = {"1-3", 2},
 				duration = 100
 			}
 		},
@@ -34,6 +50,9 @@ function summonArrow(x, y)
 		w = 16,
 		defaultAnimation = "none"
 	}
+	if isFlaming then
+		def.defaultAnimation = "flaming"
+	end
 	return Collectable:new(x, y, def)
 end
 
