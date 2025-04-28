@@ -5,11 +5,8 @@ middleclass = require "lib/middleclass"
 
 Character = middleclass.class("Character", Entity)
 
-function Character:initialize(x, y, def, health, damage, speed)
-    Entity.initialize(self, x, y, def)
-    self.health = health
-    self.damage = damage
-    self.speed = speed
+function Character:initialize(object)
+    Entity.initialize(self, object)
 end
 
 function Character:update(dt)

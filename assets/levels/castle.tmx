@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="77">
+<map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="80">
  <editorsettings>
   <export target="castle.lua" format="lua"/>
  </editorsettings>
@@ -18,10 +18,7 @@
  <tileset firstgid="2881" name="castle-tileset" tilewidth="16" tileheight="16" tilecount="128" columns="8">
   <image source="../tilesets/tileset_castle.png" width="128" height="256"/>
  </tileset>
- <tileset firstgid="3009" name="knight" tilewidth="16" tileheight="16" tilecount="1848" columns="11">
-  <image source="../graphics/characters/knight.png" width="176" height="2688"/>
- </tileset>
- <tileset firstgid="4857" name="Arrows" tilewidth="16" tileheight="16" tilecount="9" columns="3">
+ <tileset firstgid="3009" name="Arrows" tilewidth="16" tileheight="16" tilecount="9" columns="3">
   <image source="../graphics/pickups/Arrows.png" width="48" height="48"/>
   <tile id="0" type="arrow">
    <properties>
@@ -102,7 +99,7 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="4866" name="coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
+ <tileset firstgid="3018" name="coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
   <image source="../graphics/pickups/coin.png" width="64" height="16"/>
   <tile id="0" type="coin">
    <animation>
@@ -116,7 +113,7 @@
   <tile id="2" type="coin"/>
   <tile id="3" type="coin"/>
  </tileset>
- <tileset firstgid="4870" name="small_coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
+ <tileset firstgid="3022" name="small_coin" tilewidth="16" tileheight="16" tilecount="4" columns="4">
   <image source="../graphics/pickups/small_coin.png" width="64" height="16"/>
   <tile id="0" type="small_coin">
    <objectgroup draworder="index" id="2">
@@ -146,7 +143,7 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="4874" name="heart" tilewidth="16" tileheight="16" tilecount="4" columns="4">
+ <tileset firstgid="3026" name="heart" tilewidth="16" tileheight="16" tilecount="4" columns="4">
   <image source="../graphics/pickups/heart.png" width="64" height="16"/>
   <tile id="0" type="heart">
    <animation>
@@ -160,7 +157,7 @@
   <tile id="2" type="heart"/>
   <tile id="3" type="heart"/>
  </tileset>
- <tileset firstgid="4878" name="enemy" tilewidth="16" tileheight="24" tilecount="1232" columns="11">
+ <tileset firstgid="3030" name="enemy" tilewidth="16" tileheight="24" tilecount="1232" columns="11">
   <image source="../graphics/characters/Badarcher.png" width="176" height="2688"/>
   <tile id="0" type="enemy">
    <animation>
@@ -1400,6 +1397,15 @@
   <tile id="1230" type="enemy"/>
   <tile id="1231" type="enemy"/>
  </tileset>
+ <tileset firstgid="4262" name="knight" tilewidth="16" tileheight="24" tilecount="1232" columns="11">
+  <image source="../graphics/characters/knight.png" width="176" height="2688"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="300"/>
+    <frame tileid="1" duration="300"/>
+   </animation>
+  </tile>
+ </tileset>
  <group id="2" name="background">
   <imagelayer id="18" name="4_sky" locked="1" parallaxx="0" repeatx="1">
    <image source="../forest_background/bg_sky.png" width="576" height="324"/>
@@ -1538,161 +1544,162 @@
  </group>
  <group id="13" name="objects">
   <objectgroup id="21" name="evil_archer">
-   <object id="69" type="enemy" gid="2147488526" x="752" y="224" width="16" height="24"/>
-   <object id="70" type="enemy" gid="2147488526" x="592" y="192" width="16" height="24"/>
-   <object id="71" type="enemy" gid="4878" x="1184" y="144" width="16" height="24"/>
-   <object id="72" type="enemy" gid="4878" x="1104" y="176" width="16" height="24"/>
-   <object id="73" type="enemy" gid="4878" x="1424" y="272" width="16" height="24"/>
-   <object id="74" type="enemy" gid="1073746702" x="1424" y="248" width="16" height="24" rotation="180"/>
+   <object id="69" type="enemy" gid="2147486678" x="752" y="224" width="16" height="24"/>
+   <object id="70" type="enemy" gid="2147486678" x="592" y="192" width="16" height="24"/>
+   <object id="71" type="enemy" gid="3030" x="1184" y="144" width="16" height="24"/>
+   <object id="72" type="enemy" gid="3030" x="1104" y="176" width="16" height="24"/>
+   <object id="77" type="enemy" gid="3030" x="1424" y="272" width="16" height="24"/>
+   <object id="78" type="enemy" gid="3030" x="1440" y="272" width="16" height="24"/>
+   <object id="79" type="knight" gid="4262" x="352" y="272" width="16" height="24"/>
   </objectgroup>
   <objectgroup id="20" name="knight"/>
   <objectgroup id="23" name="collectables">
-   <object id="19" type="small_coin" gid="4870" x="400" y="240" width="16" height="16"/>
-   <object id="21" type="arrow" gid="4857" x="448" y="192" width="16" height="16"/>
-   <object id="22" type="arrow" gid="4860" x="800" y="256" width="16" height="16">
+   <object id="19" type="small_coin" gid="3022" x="400" y="240" width="16" height="16"/>
+   <object id="21" type="arrow" gid="3009" x="448" y="192" width="16" height="16"/>
+   <object id="22" type="arrow" gid="3012" x="800" y="256" width="16" height="16">
     <properties>
      <property name="is_flaming" type="bool" value="true"/>
     </properties>
    </object>
-   <object id="25" type="arrow" gid="4860" x="1680" y="144" width="16" height="16"/>
-   <object id="26" type="arrow" gid="4857" x="1728" y="256" width="16" height="16"/>
-   <object id="27" gid="4857" x="1088.5" y="261.5" width="16" height="16">
+   <object id="25" type="arrow" gid="3012" x="1680" y="144" width="16" height="16"/>
+   <object id="26" type="arrow" gid="3009" x="1728" y="256" width="16" height="16"/>
+   <object id="27" gid="3009" x="1088" y="256" width="16" height="16">
     <properties>
      <property name="pickup_type" value="reg_arrow"/>
     </properties>
    </object>
-   <object id="28" type="arrow" gid="4857" x="624" y="256" width="16" height="16"/>
-   <object id="29" type="arrow" gid="4860" x="2192.5" y="131.5" width="16" height="16"/>
-   <object id="30" type="coin" gid="4866" x="2480" y="128" width="16" height="16"/>
-   <object id="31" type="coin" gid="4866" x="1984" y="240" width="16" height="16"/>
-   <object id="32" type="coin" gid="4866" x="1872" y="112" width="16" height="16"/>
-   <object id="33" type="coin" gid="4866" x="1216" y="144" width="16" height="16"/>
-   <object id="34" type="coin" gid="4866" x="672" y="160" width="16" height="16"/>
-   <object id="35" type="small_coin" gid="4870" x="608" y="192" width="16" height="16">
+   <object id="28" type="arrow" gid="3009" x="624" y="256" width="16" height="16"/>
+   <object id="29" type="arrow" gid="3012" x="2192" y="128" width="16" height="16"/>
+   <object id="30" type="coin" gid="3018" x="2480" y="128" width="16" height="16"/>
+   <object id="31" type="coin" gid="3018" x="1984" y="240" width="16" height="16"/>
+   <object id="32" type="coin" gid="3018" x="1872" y="112" width="16" height="16"/>
+   <object id="33" type="coin" gid="3018" x="1216" y="144" width="16" height="16"/>
+   <object id="34" type="coin" gid="3018" x="672" y="160" width="16" height="16"/>
+   <object id="35" type="small_coin" gid="3022" x="608" y="192" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="36" type="small_coin" gid="4870" x="624" y="192" width="16" height="16"/>
-   <object id="37" type="small_coin" gid="4870" x="560" y="256" width="16" height="16"/>
-   <object id="38" type="small_coin" gid="4870" x="784" y="224" width="16" height="16">
+   <object id="36" type="small_coin" gid="3022" x="624" y="192" width="16" height="16"/>
+   <object id="37" type="small_coin" gid="3022" x="560" y="256" width="16" height="16"/>
+   <object id="38" type="small_coin" gid="3022" x="784" y="224" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="39" type="small_coin" gid="4870" x="816" y="272" width="16" height="16"/>
-   <object id="40" type="small_coin" gid="4870" x="928" y="240" width="16" height="16">
+   <object id="39" type="small_coin" gid="3022" x="816" y="272" width="16" height="16"/>
+   <object id="40" type="small_coin" gid="3022" x="928" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="41" type="small_coin" gid="4870" x="992" y="256" width="16" height="16">
+   <object id="41" type="small_coin" gid="3022" x="992" y="256" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="42" type="small_coin" gid="4870" x="1056" y="240" width="16" height="16">
+   <object id="42" type="small_coin" gid="3022" x="1056" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="43" type="small_coin" gid="4870" x="1200" y="224" width="16" height="16">
+   <object id="43" type="small_coin" gid="3022" x="1200" y="224" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="44" type="small_coin" gid="4870" x="1088" y="176" width="16" height="16">
+   <object id="44" type="small_coin" gid="3022" x="1088" y="176" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="45" type="small_coin" gid="4870" x="1198.5" y="143.5" width="16" height="16">
+   <object id="45" type="small_coin" gid="3022" x="1198.5" y="143.5" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="46" type="small_coin" gid="4870" x="1328" y="240" width="16" height="16">
+   <object id="46" type="small_coin" gid="3022" x="1328" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="47" type="small_coin" gid="4870" x="1584" y="240" width="16" height="16">
+   <object id="47" type="small_coin" gid="3022" x="1584" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="48" type="small_coin" gid="4870" x="1711.5" y="192" width="16" height="16">
+   <object id="48" type="small_coin" gid="3022" x="1711.5" y="192" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="49" type="small_coin" gid="4870" x="1727.5" y="176" width="16" height="16">
+   <object id="49" type="small_coin" gid="3022" x="1727.5" y="176" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="50" type="small_coin" gid="4870" x="1744" y="240" width="16" height="16">
+   <object id="50" type="small_coin" gid="3022" x="1744" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="51" type="small_coin" gid="4870" x="1856" y="112" width="16" height="16">
+   <object id="51" type="small_coin" gid="3022" x="1856" y="112" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="52" type="small_coin" gid="4870" x="1888" y="96" width="16" height="16">
+   <object id="52" type="small_coin" gid="3022" x="1888" y="96" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="53" type="small_coin" gid="4870" x="1968" y="240" width="16" height="16">
+   <object id="53" type="small_coin" gid="3022" x="1968" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="54" type="small_coin" gid="4870" x="1952" y="256" width="16" height="16">
+   <object id="54" type="small_coin" gid="3022" x="1952" y="256" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="55" type="small_coin" gid="4870" x="2080" y="192.5" width="16" height="16">
+   <object id="55" type="small_coin" gid="3022" x="2080" y="192.5" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="56" type="small_coin" gid="4870" x="2320" y="240" width="16" height="16">
+   <object id="56" type="small_coin" gid="3022" x="2320" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="57" type="small_coin" gid="4870" x="2336" y="240" width="16" height="16">
+   <object id="57" type="small_coin" gid="3022" x="2336" y="240" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="58" type="small_coin" gid="4870" x="2288" y="128.5" width="16" height="16">
+   <object id="58" type="small_coin" gid="3022" x="2288" y="128.5" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="59" type="small_coin" gid="4870" x="2496" y="112" width="16" height="16">
+   <object id="59" type="small_coin" gid="3022" x="2496" y="112" width="16" height="16">
     <properties>
      <property name="pickup_type" value="small_coin"/>
     </properties>
    </object>
-   <object id="60" type="coin" gid="4866" x="2544" y="224" width="16" height="16"/>
-   <object id="61" type="heart" gid="4874" x="800" y="192" width="16" height="16">
+   <object id="60" type="coin" gid="3018" x="2544" y="224" width="16" height="16"/>
+   <object id="61" type="heart" gid="3026" x="800" y="192" width="16" height="16">
     <properties>
      <property name="pickup_type" value="heart"/>
     </properties>
    </object>
-   <object id="62" type="heart" gid="4874" x="1376" y="256" width="16" height="16">
+   <object id="62" type="heart" gid="3026" x="1376" y="256" width="16" height="16">
     <properties>
      <property name="pickup_type" value="heart"/>
     </properties>
    </object>
-   <object id="63" type="heart" gid="4874" x="2288" y="208" width="16" height="16">
+   <object id="63" type="heart" gid="3026" x="2288" y="208" width="16" height="16">
     <properties>
      <property name="pickup_type" value="heart"/>
     </properties>

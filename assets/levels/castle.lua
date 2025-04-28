@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 24,
-  nextobjectid = 77,
+  nextobjectid = 80,
   properties = {},
   tilesets = {
     {
@@ -143,34 +143,8 @@ return {
       tiles = {}
     },
     {
-      name = "knight",
-      firstgid = 3009,
-      tilewidth = 16,
-      tileheight = 16,
-      spacing = 0,
-      margin = 0,
-      columns = 11,
-      image = "../graphics/characters/knight.png",
-      imagewidth = 176,
-      imageheight = 2688,
-      objectalignment = "unspecified",
-      tileoffset = {
-        x = 0,
-        y = 0
-      },
-      grid = {
-        orientation = "orthogonal",
-        width = 16,
-        height = 16
-      },
-      properties = {},
-      wangsets = {},
-      tilecount = 1848,
-      tiles = {}
-    },
-    {
       name = "Arrows",
-      firstgid = 4857,
+      firstgid = 3009,
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -539,7 +513,7 @@ return {
     },
     {
       name = "coin",
-      firstgid = 4866,
+      firstgid = 3018,
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -600,7 +574,7 @@ return {
     },
     {
       name = "small_coin",
-      firstgid = 4870,
+      firstgid = 3022,
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -786,7 +760,7 @@ return {
     },
     {
       name = "heart",
-      firstgid = 4874,
+      firstgid = 3026,
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -847,7 +821,7 @@ return {
     },
     {
       name = "enemy",
-      firstgid = 4878,
+      firstgid = 3030,
       tilewidth = 16,
       tileheight = 24,
       spacing = 0,
@@ -5809,6 +5783,46 @@ return {
           type = "enemy"
         }
       }
+    },
+    {
+      name = "knight",
+      firstgid = 4262,
+      tilewidth = 16,
+      tileheight = 24,
+      spacing = 0,
+      margin = 0,
+      columns = 11,
+      image = "../graphics/characters/knight.png",
+      imagewidth = 176,
+      imageheight = 2688,
+      objectalignment = "unspecified",
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 16,
+        height = 24
+      },
+      properties = {},
+      wangsets = {},
+      tilecount = 1232,
+      tiles = {
+        {
+          id = 0,
+          animation = {
+            {
+              tileid = 0,
+              duration = 300
+            },
+            {
+              tileid = 1,
+              duration = 300
+            }
+          }
+        }
+      }
     }
   },
   layers = {
@@ -6130,7 +6144,7 @@ return {
               width = 16,
               height = 24,
               rotation = 0,
-              gid = 2147488526,
+              gid = 2147486678,
               visible = true,
               properties = {}
             },
@@ -6144,7 +6158,7 @@ return {
               width = 16,
               height = 24,
               rotation = 0,
-              gid = 2147488526,
+              gid = 2147486678,
               visible = true,
               properties = {}
             },
@@ -6158,7 +6172,7 @@ return {
               width = 16,
               height = 24,
               rotation = 0,
-              gid = 4878,
+              gid = 3030,
               visible = true,
               properties = {}
             },
@@ -6172,12 +6186,12 @@ return {
               width = 16,
               height = 24,
               rotation = 0,
-              gid = 4878,
+              gid = 3030,
               visible = true,
               properties = {}
             },
             {
-              id = 73,
+              id = 77,
               name = "",
               type = "enemy",
               shape = "rectangle",
@@ -6186,21 +6200,35 @@ return {
               width = 16,
               height = 24,
               rotation = 0,
-              gid = 4878,
+              gid = 3030,
               visible = true,
               properties = {}
             },
             {
-              id = 74,
+              id = 78,
               name = "",
               type = "enemy",
               shape = "rectangle",
-              x = 1424,
-              y = 248,
+              x = 1440,
+              y = 272,
               width = 16,
               height = 24,
-              rotation = 180,
-              gid = 1073746702,
+              rotation = 0,
+              gid = 3030,
+              visible = true,
+              properties = {}
+            },
+            {
+              id = 79,
+              name = "",
+              type = "knight",
+              shape = "rectangle",
+              x = 352,
+              y = 272,
+              width = 16,
+              height = 24,
+              rotation = 0,
+              gid = 4262,
               visible = true,
               properties = {}
             }
@@ -6243,7 +6271,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {}
             },
@@ -6257,7 +6285,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4857,
+              gid = 3009,
               visible = true,
               properties = {}
             },
@@ -6271,7 +6299,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4860,
+              gid = 3012,
               visible = true,
               properties = {
                 ["is_flaming"] = true
@@ -6287,7 +6315,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4860,
+              gid = 3012,
               visible = true,
               properties = {}
             },
@@ -6301,7 +6329,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4857,
+              gid = 3009,
               visible = true,
               properties = {}
             },
@@ -6310,12 +6338,12 @@ return {
               name = "",
               type = "",
               shape = "rectangle",
-              x = 1088.5,
-              y = 261.5,
+              x = 1088,
+              y = 256,
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4857,
+              gid = 3009,
               visible = true,
               properties = {
                 ["pickup_type"] = "reg_arrow"
@@ -6331,7 +6359,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4857,
+              gid = 3009,
               visible = true,
               properties = {}
             },
@@ -6340,12 +6368,12 @@ return {
               name = "",
               type = "arrow",
               shape = "rectangle",
-              x = 2192.5,
-              y = 131.5,
+              x = 2192,
+              y = 128,
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4860,
+              gid = 3012,
               visible = true,
               properties = {}
             },
@@ -6359,7 +6387,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4866,
+              gid = 3018,
               visible = true,
               properties = {}
             },
@@ -6373,7 +6401,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4866,
+              gid = 3018,
               visible = true,
               properties = {}
             },
@@ -6387,7 +6415,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4866,
+              gid = 3018,
               visible = true,
               properties = {}
             },
@@ -6401,7 +6429,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4866,
+              gid = 3018,
               visible = true,
               properties = {}
             },
@@ -6415,7 +6443,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4866,
+              gid = 3018,
               visible = true,
               properties = {}
             },
@@ -6429,7 +6457,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6445,7 +6473,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {}
             },
@@ -6459,7 +6487,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {}
             },
@@ -6473,7 +6501,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6489,7 +6517,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {}
             },
@@ -6503,7 +6531,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6519,7 +6547,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6535,7 +6563,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6551,7 +6579,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6567,7 +6595,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6583,7 +6611,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6599,7 +6627,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6615,7 +6643,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6631,7 +6659,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6647,7 +6675,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6663,7 +6691,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6679,7 +6707,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6695,7 +6723,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6711,7 +6739,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6727,7 +6755,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6743,7 +6771,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6759,7 +6787,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6775,7 +6803,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6791,7 +6819,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6807,7 +6835,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4870,
+              gid = 3022,
               visible = true,
               properties = {
                 ["pickup_type"] = "small_coin"
@@ -6823,7 +6851,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4866,
+              gid = 3018,
               visible = true,
               properties = {}
             },
@@ -6837,7 +6865,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4874,
+              gid = 3026,
               visible = true,
               properties = {
                 ["pickup_type"] = "heart"
@@ -6853,7 +6881,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4874,
+              gid = 3026,
               visible = true,
               properties = {
                 ["pickup_type"] = "heart"
@@ -6869,7 +6897,7 @@ return {
               width = 16,
               height = 16,
               rotation = 0,
-              gid = 4874,
+              gid = 3026,
               visible = true,
               properties = {
                 ["pickup_type"] = "heart"

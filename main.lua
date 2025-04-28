@@ -3,7 +3,6 @@ middleclass = require "lib/middleclass"
 anim8 = require "lib/anim8"
 sti = require "lib/sti"
 
-block = require "src/block"
 character = require "src/character"
 collectable = require "src/collectable"
 enemy = require "src/enemy"

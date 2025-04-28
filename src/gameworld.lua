@@ -52,20 +52,19 @@ function GameWorld:initialize()
     -- Loading the entities from the map into the custom layer:
     -- Go through all of the objects in the map and create corrsponding entity objects in the custom layer
     for _, object in pairs(self.map["objects"]) do
-        local x = math.floor(object["x"])
-        local y = math.floor(object["y"]) - object["height"]
         if object["type"] == "enemy" then
-            entity = summonArcher(x, y)
+            entity = summonArcher(object)
         elseif object["type"] == "coin" then
-            entity = summonCoin(x, y)
+            entity = summonCoin(object)
         elseif object["type"] == "small_coin" then
-            entity = summonSmallCoin(x, y)
+            entity = summonSmallCoin(object)
         elseif object["type"] == "arrow" then
-            entity = summonArrow(x, y, object["properties"]["is_flaming"])
+            entity = summonArrow(object)
+        elseif object["type"] == "knight" then
+            entity = summonKnight(object)
         else
-            entity = summonCoin(x, y)
+            entity = summonCoin(object)
         end
-        print(dump(object["properties"],0,6))
         -- Put the entities into the custom layer
         table.insert(self.customLayer["entities"], entity)
     end

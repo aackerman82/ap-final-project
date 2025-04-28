@@ -6,27 +6,29 @@ middleclass = require "lib/middleclass"
 Entity = middleclass.class('Entity')
 
 -- Entity Constructor
-function Entity:initialize(x, y, def)
-    self.x = x -- looks ambiguous, right? which 'x'? 
-    self.y = y
+function Entity:initialize(object)
+    self.x = object["x"]
+    self.y = object["y"] - object["height"]
     self.facing = 1
     self.x_vel = 0
     self.y_vel = 0
-    self.width = def.w
-    self.height = def.h
-    self.image = love.graphics.newImage('assets/graphics/' .. tostring(def.img_file))
+    self.width = object["width"]
+    self.height = object["height"]
+    self.image = love.graphics.newImage('assets/graphics/' .. tostring(object["definition"].img_file))
+    self.object = object
     
     -- set up animations
     local hi_width, hi_height = self.image:getDimensions() -- Image object method
     -- returns a function (that we call 'g')
-    local g = anim8.newGrid(def.w,def.h, hi_width, hi_height)
+    print(dump(object["height"], 0, 7))
+    local g = anim8.newGrid(object["width"], object["height"], hi_width, hi_height)
     self.frames = {}
     -- loop through key/value pairs of def.animations
     -- for key, value in pairs(tablename) do
-    for animName, animData in pairs(def.animations) do 
+    for animName, animData in pairs(object["definition"].animations) do 
         self.frames[animName] = anim8.newAnimation(g(unpack(animData.frames)), animData.duration)
     end
-    self.animation = self.frames[def.defaultAnimation] -- set current animation to idle
+    self.animation = self.frames[object["definition"].defaultAnimation] -- set current animation to idle
 end
 
 function Entity:update(dt)

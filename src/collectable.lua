@@ -5,8 +5,8 @@ middleclass = require "lib/middleclass"
 
 Collectable = middleclass.class("Collectable", Entity)
 
-function Collectable:initialize(x, y, def)
-    Entity.initialize(self, x, y, def)
+function Collectable:initialize(object)
+    Entity.initialize(self, object)
 end
 
 function Collectable:update(dt)

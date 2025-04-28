@@ -3,14 +3,14 @@ middleclass = require "lib/middleclass"
 
 Player = middleclass.class("Player", Character)
 
-function Player:initialize(x, y, def, health, damage, speed)
-    Character.initialize(self, x, y, def, health, damage, speed)
+function Player:initialize(object)
+    Character.initialize(self, object)
 end
 
 function Player:update(dt)
     
     self.x_vel = 0
-    local translationThisFrame = self.speed * dt * 60 * DPI_SCALE
+    local translationThisFrame = 1 * dt * 60 * DPI_SCALE
 	if love.keyboard.isDown("a", "left") then
 		self.x_vel = -translationThisFrame
 	end
