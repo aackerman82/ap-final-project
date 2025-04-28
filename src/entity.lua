@@ -40,8 +40,8 @@ function Entity:update(dt)
     elseif self.x_vel > 0 then
         self.facing = 1
     end
-    self.x = self.x + self.x_vel
-    self.y = self.y + self.y_vel
+    self.x = self.x + self.x_vel * dt
+    self.y = self.y + self.y_vel * dt
 end
 
 
