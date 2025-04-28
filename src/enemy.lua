@@ -10,6 +10,9 @@ function Enemy:initialize(object)
 end
 
 function Enemy:update(dt)
+    if self.dead then
+        self.animation = self.frames["die"]
+    end
     Character.update(self, dt)
 end
 

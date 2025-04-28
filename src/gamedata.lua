@@ -78,6 +78,10 @@ function summonArcher(object)
 				frames = {"1-2", 1},
 				duration = 0.4
 			},
+			die = {
+				frames = {"1-4", 66},
+				duration = 0.1
+			},
 		},
 		img_file = "characters/Badarcher.png",
 		defaultAnimation = "idle"

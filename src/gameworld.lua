@@ -27,6 +27,24 @@ function updateMap(map, dt)
     end
 end
 
+function collisionFilter(entity, otherEntity)
+
+    if otherEntity.object == nil then
+        return "slide"
+    end
+    if entity.object["type"] == "enemy" and otherEntity.object["type"] == "projectile" then
+        entity.dead = true
+    end
+    local stuffThatGetsTouched = {"small_coin", "coin", "enemy", "arrow", "projectile"}
+    for _, b in pairs(stuffThatGetsTouched) do
+        if entity.object["type"] == b or otherEntity.object["type"] == b then
+            return "cross"
+        end
+    end
+        
+    
+    return "slide"
+end
 function GameWorld:initialize()
     self.map = sti("assets/levels/castle.lua", {"bump"})
     self.customLayer = nil -- This is where the entities live
@@ -72,9 +90,7 @@ function GameWorld:initialize()
         end
         -- Put the entities into the custom layer
         table.insert(self.customLayer["entities"], entity)
-        if entity.object["type"] == "knight" then
         self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
-        end
         
     end
     
@@ -103,9 +119,7 @@ function GameWorld:update(dt)
     
     self.map:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
-        if entity.object["type"] == "knight" then
-            entity.x, entity.y = self.collisionWorld:move(entity, entity.x, entity.y)
-        end
+        entity.x, entity.y = self.collisionWorld:move(entity, entity.x, entity.y, collisionFilter)
         --
     end
     last_arrow_timer = last_arrow_timer + dt
@@ -118,8 +132,8 @@ function GameWorld:update(dt)
     if (love.mouse.isDown(1) and last_arrow_timer > 0.3) or rambo then
         last_arrow_timer = 0
         local mouse_x, mouse_y = love.mouse.getPosition()
-        local entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16})
-        --self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
+        local entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16, type = "projectile"})
+        self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
         local arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
         if rambo then
             entity.animation = entity.frames["flaming"]
