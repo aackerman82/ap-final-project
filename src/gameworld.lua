@@ -105,7 +105,7 @@ function GameWorld:update(dt)
     if love.mouse.isDown(1) and last_arrow_timer > 0.1 then
         last_arrow_timer = 0
         mouse_x, mouse_y = love.mouse.getPosition()
-        entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = false}, height = 16, width = 16})
+        entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16})
         arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
         entity.x_vel = math.cos(arrow_dir) * 4
         entity.y_vel = math.sin(arrow_dir) * 4
@@ -113,7 +113,7 @@ function GameWorld:update(dt)
             entity.x_vel = -entity.x_vel
             entity.y_vel = -entity.y_vel
         end
-        entity.x_vel = entity.x_vel + self.player.x_vel
+        --entity.x_vel = entity.x_vel + self.player.x_vel
         table.insert(self.customLayer["entities"], entity)
     end
 end

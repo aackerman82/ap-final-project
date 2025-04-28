@@ -32,7 +32,6 @@ function Player:update(dt)
     if self.y < groundPos then  -- If in the air
         self.y_vel = self.y_vel + 0.2
     end
-        
 	
     if self.x_vel == 0 then
         self.animation = self.frames["idle"]
