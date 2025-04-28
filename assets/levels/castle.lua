@@ -140,7 +140,152 @@ return {
       properties = {},
       wangsets = {},
       tilecount = 128,
-      tiles = {}
+      tiles = {
+        {
+          id = 0,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 1,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 2,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 3,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 4,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 5,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 8,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 9,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 10,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 11,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 12,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 13,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 16,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 17,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 18,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 19,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 20,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 21,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 39,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 47,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 55,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 61,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 62,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 63,
+          properties = {
+            ["collidable"] = true
+          }
+        }
+      }
     },
     {
       name = "Arrows",

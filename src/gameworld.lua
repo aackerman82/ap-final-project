@@ -31,6 +31,8 @@ function GameWorld:initialize()
     self.map = sti("assets/levels/castle.lua", {"bump"})
     self.customLayer = nil -- This is where the entities live
     self.player = nil
+    self.collisionWorld = bump.newWorld()
+    self.map:bump_init(self.collisionWorld)
     self.cameraPos = {
         x = 0,
         y = 0
@@ -70,6 +72,10 @@ function GameWorld:initialize()
         end
         -- Put the entities into the custom layer
         table.insert(self.customLayer["entities"], entity)
+        if entity.object["type"] == "knight" then
+        self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
+        end
+        
     end
     
     -- Set the callback functions for the custom layer
@@ -96,8 +102,14 @@ function GameWorld:update(dt)
 	end]]
     
     self.map:update(dt)
+    for _, entity in pairs(self:getAllEntities()) do
+        if entity.object["type"] == "knight" then
+            entity.x, entity.y = self.collisionWorld:move(entity, entity.x, entity.y)
+        end
+        --
+    end
     last_arrow_timer = last_arrow_timer + dt
-    self.cameraPos["x"] = self.player.x - 200
+    self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self.map["width"] * 16)
     --self.cameraPos["y"] = self.player.y - 182
     self.cameraPos["y"] = 100
 
@@ -107,6 +119,7 @@ function GameWorld:update(dt)
         last_arrow_timer = 0
         local mouse_x, mouse_y = love.mouse.getPosition()
         local entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16})
+        --self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
         local arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
         if rambo then
             entity.animation = entity.frames["flaming"]
