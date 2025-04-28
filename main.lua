@@ -14,7 +14,7 @@ dumpy = require "src.dumpy"
 
 world = nil
 TILE_SIZE = 16                         -- Pixels, no scaling
-DPI_SCALE = 2                          -- Screen pixels per texture pixel
+DPI_SCALE = 3                          -- Screen pixels per texture pixel
 TILE_STRIDE =  TILE_SIZE * DPI_SCALE   -- Screen pixels per tile
 
 function love.load()

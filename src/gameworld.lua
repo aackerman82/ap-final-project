@@ -27,8 +27,9 @@ function updateMap(map, dt)
 end
 
 function GameWorld:initialize()
-    self.map = sti("assets/levels/castle.lua")
+    self.map = sti("assets/levels/castle.lua", {"bump"})
     self.customLayer = nil -- This is where the entities live
+    self.player = nil
     self.cameraPos = {
         x = 0,
         y = 0
@@ -62,6 +63,7 @@ function GameWorld:initialize()
             entity = summonArrow(object)
         elseif object["type"] == "knight" then
             entity = summonKnight(object)
+            self.player = entity
         else
             entity = summonCoin(object)
         end
@@ -77,6 +79,7 @@ end
 function GameWorld:update(dt)
 
     -- Update the camera position
+    --[[
 	local translationThisFrame = 4 * dt * 60 * DPI_SCALE
 	if love.keyboard.isDown("a", "left") then
 		self.cameraPos.x = self.cameraPos.x - translationThisFrame
@@ -89,8 +92,11 @@ function GameWorld:update(dt)
 	end
 	if self.cameraPos["x"] > self:getWidth() * TILE_SIZE then
 		self.cameraPos["x"] = self:getWidth() * TILE_SIZE
-	end
+	end]]
+    
     self.map:update(dt)
+    self.cameraPos["x"] = self.player.x - 400
+    self.cameraPos["y"] = self.player.y - 182
 end
 
 function GameWorld:draw()

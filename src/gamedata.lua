@@ -57,10 +57,6 @@ function summonArcher(object)
 				frames = {"1-2", 1},
 				duration = 0.4
 			},
-			walk = {
-				frames = {"1-2", 1},
-				duration = 0.4
-			},
 		},
 		img_file = "characters/Badarcher.png",
 		defaultAnimation = "idle"
@@ -74,6 +70,10 @@ function summonKnight(object)
 			idle = {
 				frames = {"1-2", 1},
 				duration = 0.4
+			},
+			walk = {
+				frames = {"1-4", 103},
+				duration = 0.1
 			},
 		},
 		img_file = "characters/knight.png",

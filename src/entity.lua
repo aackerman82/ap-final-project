@@ -12,8 +12,8 @@ function Entity:initialize(object)
     self.facing = 1
     self.x_vel = 0
     self.y_vel = 0
-    self.width = object["width"]
-    self.height = object["height"]
+    self.width = math.floor(object["width"])
+    self.height = math.floor(object["height"])
     self.image = love.graphics.newImage('assets/graphics/' .. tostring(object["definition"].img_file))
     self.object = object
     
@@ -51,7 +51,7 @@ function Entity:draw()
     if self.facing == -1 then
         offset = self.width
     end
-    self.animation:draw(self.image, self.x,self.y, 0, self.facing*1, 1, offset)
+    self.animation:draw(self.image, math.floor(self.x), math.floor(self.y), 0, self.facing*1, 1, offset)
 end
 
 function Entity:setPosition(x, y)
