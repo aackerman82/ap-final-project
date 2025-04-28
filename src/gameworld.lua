@@ -96,7 +96,8 @@ function GameWorld:update(dt)
     
     self.map:update(dt)
     self.cameraPos["x"] = self.player.x - 400
-    self.cameraPos["y"] = self.player.y - 182
+    --self.cameraPos["y"] = self.player.y - 182
+    self.cameraPos["y"] = 100
 end
 
 function GameWorld:draw()

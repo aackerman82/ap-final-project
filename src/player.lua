@@ -17,6 +17,22 @@ function Player:update(dt)
 	if love.keyboard.isDown("d", "right") then
 		self.x_vel = translationThisFrame
 	end
+    
+    
+    local groundPos = 272 - 24
+    if self.y > groundPos then -- If in the ground
+        self.y = groundPos
+        self.y_vel = 0
+    end
+    if self.y == groundPos then  -- If on the ground
+        if love.keyboard.isDown("space") then
+            self.y_vel = -5
+        end
+    end
+    if self.y < groundPos then  -- If in the air
+        self.y_vel = self.y_vel + 0.2
+    end
+        
 	
     if self.x_vel == 0 then
         self.animation = self.frames["idle"]
