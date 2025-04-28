@@ -50,6 +50,27 @@ function summonArrow(object)
 	return Collectable:new(object)
 end
 
+function summonProjectile(object)
+    object["definition"] = {
+		animations = {
+			none = {
+				frames = {"1-1", 1},
+				duration = 100
+			},
+			flaming = {
+				frames = {"1-3", 2},
+				duration = 0.15
+			}
+		},
+		img_file = "pickups/Arrows.png",
+		defaultAnimation = "none"
+	}
+	if object["properties"]["is_flaming"] then
+		object["definition"].defaultAnimation = "flaming"
+	end
+	return Projectile:new(object)
+end
+
 function summonArcher(object)
     object["definition"] = {
 		animations = {

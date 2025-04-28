@@ -4,6 +4,7 @@ middleclass = require "lib/middleclass"
 
 GameWorld = middleclass.class("GameWorld")
 
+last_arrow_timer = 0
 
 function updateCustomLayer(layer, dt)
     -- Every time the cusom layer is updated it updates its entities
@@ -95,9 +96,26 @@ function GameWorld:update(dt)
 	end]]
     
     self.map:update(dt)
-    self.cameraPos["x"] = self.player.x - 400
+    last_arrow_timer = last_arrow_timer + dt
+    self.cameraPos["x"] = self.player.x - 200
     --self.cameraPos["y"] = self.player.y - 182
     self.cameraPos["y"] = 100
+
+    -- Test code for arrows because why not
+    if love.mouse.isDown(1) and last_arrow_timer > 0.1 then
+        last_arrow_timer = 0
+        mouse_x, mouse_y = love.mouse.getPosition()
+        entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = false}, height = 16, width = 16})
+        arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
+        entity.x_vel = math.cos(arrow_dir) * 4
+        entity.y_vel = math.sin(arrow_dir) * 4
+        if ((mouse_x - 600)) < 0 then
+            entity.x_vel = -entity.x_vel
+            entity.y_vel = -entity.y_vel
+        end
+        entity.x_vel = entity.x_vel + self.player.x_vel
+        table.insert(self.customLayer["entities"], entity)
+    end
 end
 
 function GameWorld:draw()

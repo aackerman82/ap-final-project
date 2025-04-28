@@ -12,6 +12,7 @@ function Entity:initialize(object)
     self.facing = 1
     self.x_vel = 0
     self.y_vel = 0
+    self.rotation = 0
     self.width = math.floor(object["width"])
     self.height = math.floor(object["height"])
     self.image = love.graphics.newImage('assets/graphics/' .. tostring(object["definition"].img_file))
@@ -20,7 +21,6 @@ function Entity:initialize(object)
     -- set up animations
     local hi_width, hi_height = self.image:getDimensions() -- Image object method
     -- returns a function (that we call 'g')
-    print(dump(object["height"], 0, 7))
     local g = anim8.newGrid(object["width"], object["height"], hi_width, hi_height)
     self.frames = {}
     -- loop through key/value pairs of def.animations
@@ -51,7 +51,7 @@ function Entity:draw()
     if self.facing == -1 then
         offset = self.width
     end
-    self.animation:draw(self.image, math.floor(self.x), math.floor(self.y), 0, self.facing*1, 1, offset)
+    self.animation:draw(self.image, math.floor(self.x), math.floor(self.y), self.rotation, self.facing*1, 1, offset, 0)
 end
 
 function Entity:setPosition(x, y)
