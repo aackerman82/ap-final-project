@@ -11,7 +11,7 @@ end
 
 function Enemy:update(dt)
     if self.dead then
-        self.animation = self.frames["die"]
+        Entity.setAnimation(self, "die")
     end
     Character.update(self, dt)
 end

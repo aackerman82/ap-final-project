@@ -44,7 +44,6 @@ function Entity:update(dt)
     self.y = self.y + self.y_vel * dt
 end
 
-
 function Entity:draw()
 
     local offset = 0
@@ -58,4 +57,32 @@ function Entity:setPosition(x, y)
     
     self.x = x 
     self.y = y 
+end
+
+function Entity:setAnimation(animationName)
+
+    local animation = self.frames[animationName]
+    if animation then
+        self.animation = self.frames[animationName]
+    else
+        -- teim for string interpolation
+        print("Attempt to set a non-existent animation:")
+        -- I forgor 💀
+        print(animationName)
+    end    
+end
+
+function Entity:getType()
+    if self.object == nil then
+        return nil
+    end
+    return self.object["type"]
+end
+
+function Entity:isSolid()
+
+    if self.object == nil then
+        return true
+    end
+    return self.object["properties"]["collidable"]
 end

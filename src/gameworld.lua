@@ -4,8 +4,6 @@ middleclass = require "lib/middleclass"
 
 GameWorld = middleclass.class("GameWorld")
 
-last_arrow_timer = 0
-
 function updateCustomLayer(layer, dt)
     -- Every time the cusom layer is updated it updates its entities
     for _, entity in pairs(layer["entities"]) do
@@ -27,23 +25,22 @@ function updateMap(map, dt)
     end
 end
 
+
+--[[
+    This function gets called when something touches something else.
+    When it returns "cross", the entities pass through each other.
+    When it returns "slide", they collide.
+]]
 function collisionFilter(entity, otherEntity)
 
-    if otherEntity.object == nil then
+    if Entity.isSolid(entity) or Entity.isSolid(otherEntity) then
         return "slide"
     end
-    if entity.object["type"] == "enemy" and otherEntity.object["type"] == "projectile" then
-        entity.dead = true
+    if Entity.getType(entity) == "enemy" and Entity.getType(otherEntity) == "projectile" then
+        entity.isAlive = false
     end
-    local stuffThatGetsTouched = {"small_coin", "coin", "enemy", "arrow", "projectile"}
-    for _, b in pairs(stuffThatGetsTouched) do
-        if entity.object["type"] == b or otherEntity.object["type"] == b then
-            return "cross"
-        end
-    end
-        
     
-    return "slide"
+    return "cross"
 end
 function GameWorld:initialize()
     self.map = sti("assets/levels/castle.lua", {"bump"})
@@ -88,9 +85,7 @@ function GameWorld:initialize()
         else
             entity = summonCoin(object)
         end
-        -- Put the entities into the custom layer
-        table.insert(self.customLayer["entities"], entity)
-        self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
+        self:addEntity(entity)
         
     end
     
@@ -100,57 +95,36 @@ function GameWorld:initialize()
 end
 
 function GameWorld:update(dt)
-
-    -- Update the camera position
-    --[[
-	local translationThisFrame = 4 * dt * 60 * DPI_SCALE
-	if love.keyboard.isDown("a", "left") then
-		self.cameraPos.x = self.cameraPos.x - translationThisFrame
-	end
-	if love.keyboard.isDown("d", "right") then
-		self.cameraPos.x = self.cameraPos.x + translationThisFrame
-	end
-	if self.cameraPos["x"] < 0 then
-		self.cameraPos["x"] = 0
-	end
-	if self.cameraPos["x"] > self:getWidth() * TILE_SIZE then
-		self.cameraPos["x"] = self:getWidth() * TILE_SIZE
-	end]]
     
     self.map:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
         entity.x, entity.y = self.collisionWorld:move(entity, entity.x, entity.y, collisionFilter)
-        --
+        if entity.firingBow then
+            local mouse_x, mouse_y = love.mouse.getPosition()
+            local arrowEntity = summonProjectile({x = entity.x, y = entity.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16, type = "projectile"})
+            local arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
+            if entity.isRambo then
+                arrowEntity:setAnimation("flaming")
+                arrow_dir = arrow_dir + math.random() - .5
+            end
+            arrowEntity.x_vel = math.cos(arrow_dir) * 300
+            arrowEntity.y_vel = math.sin(arrow_dir) * 300
+            if ((mouse_x - 600)) < 0 then
+                arrowEntity.x_vel = -arrowEntity.x_vel
+                arrowEntity.y_vel = -arrowEntity.y_vel
+            end
+            local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
+            sound:setPitch(1 + math.random() / 6)
+            love.audio.play(sound)
+            self:addEntity(arrowEntity)
+            entity.firingBow = false
+        end
     end
-    last_arrow_timer = last_arrow_timer + dt
-    self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self.map["width"] * 16)
+    self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self:getWidth() * 16)
     --self.cameraPos["y"] = self.player.y - 182
     self.cameraPos["y"] = 100
-
-    local rambo = love.mouse.isDown(2)
-    -- Test code for arrows because why not
-    if (love.mouse.isDown(1) and last_arrow_timer > 0.3) or rambo then
-        last_arrow_timer = 0
-        local mouse_x, mouse_y = love.mouse.getPosition()
-        local entity = summonProjectile({x = self.player.x, y = self.player.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16, type = "projectile"})
-        self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
-        local arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
-        if rambo then
-            entity.animation = entity.frames["flaming"]
-            arrow_dir = arrow_dir + math.random() - .5
-        end
-        entity.x_vel = math.cos(arrow_dir) * 300
-        entity.y_vel = math.sin(arrow_dir) * 300
-        if ((mouse_x - 600)) < 0 then
-            entity.x_vel = -entity.x_vel
-            entity.y_vel = -entity.y_vel
-        end
-        --entity.x_vel = entity.x_vel + self.player.x_vel
-        table.insert(self.customLayer["entities"], entity)
-        local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
-        sound:setPitch(1 + math.random() / 6)
-        love.audio.play(sound)
-    end
+    
+   
 end
 
 function GameWorld:draw()
@@ -167,4 +141,9 @@ end
 
 function GameWorld:getHeight()
     return self.map["height"]
+end
+
+function GameWorld:addEntity(entity)
+    table.insert(self.customLayer["entities"], entity)
+    self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
 end

@@ -35,12 +35,12 @@ function Player:update(dt)
     if self.y < groundPos then  -- If in the air
         self.y_vel = self.y_vel + 750 * dt
     end
-	
-    if self.x_vel == 0 then
-        self.animation = self.frames["idle"]
-    else
-        self.animation = self.frames["walk"]
+
+    self.isRambo = love.mouse.isDown(2)
+    if (love.mouse.isDown(1) and self.arrowCooldown <= 0) or self.isRambo then
+        self:fireArrow()
     end
+
     Character.update(self, dt)
 end
 
