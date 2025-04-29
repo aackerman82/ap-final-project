@@ -37,7 +37,9 @@ function collisionFilter(entity, otherEntity)
         return "slide"
     end
     if Entity.getType(entity) == "enemy" and Entity.getType(otherEntity) == "projectile" then
-        entity.isAlive = false
+        -- This no worky
+        --entity.isAlive = false
+        --return "slide"
     end
     
     return "cross"
@@ -99,25 +101,18 @@ function GameWorld:update(dt)
     self.map:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
         entity.x, entity.y = self.collisionWorld:move(entity, entity.x, entity.y, collisionFilter)
-        if entity.firingBow then
-            local mouse_x, mouse_y = love.mouse.getPosition()
-            local arrowEntity = summonProjectile({x = entity.x, y = entity.y + 24, properties = {is_flaming = math.random() < .2}, height = 16, width = 16, type = "projectile"})
-            local arrow_dir = math.atan((mouse_y - 500) / ((mouse_x - 600)))
-            if entity.isRambo then
-                arrowEntity:setAnimation("flaming")
-                arrow_dir = arrow_dir + math.random() - .5
+        if entity.bow then
+            if entity.bow.isFiring then
+                local mouse_x, mouse_y = self:getMousePosition()
+                local arrowSpread = 0
+                local isFlaming = math.random() < 0.2
+                if entity.isRambo then
+                    arrowSpread = 1
+                    isFlaming = true
+                end
+                self:SpawnArrow(entity.x, entity.y + entity.height, mouse_x, mouse_y, entity.bow.arrowSpeed, isFlaming, arrowSpread)
+                entity.bow.isFiring = false
             end
-            arrowEntity.x_vel = math.cos(arrow_dir) * 300
-            arrowEntity.y_vel = math.sin(arrow_dir) * 300
-            if ((mouse_x - 600)) < 0 then
-                arrowEntity.x_vel = -arrowEntity.x_vel
-                arrowEntity.y_vel = -arrowEntity.y_vel
-            end
-            local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
-            sound:setPitch(1 + math.random() / 6)
-            love.audio.play(sound)
-            self:addEntity(arrowEntity)
-            entity.firingBow = false
         end
     end
     self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self:getWidth() * 16)
@@ -145,5 +140,32 @@ end
 
 function GameWorld:addEntity(entity)
     table.insert(self.customLayer["entities"], entity)
-    self.collisionWorld:add(entity, entity.x, entity.y, 16, 16)
+    self.collisionWorld:add(entity, entity.x, entity.y, entity.width, entity.height)
+end
+
+function GameWorld:getMousePosition()
+
+    local mouse_screen_x, mouse_secreen_y = love.mouse.getPosition()
+
+    return self.cameraPos.x + mouse_screen_x / 3, self.cameraPos.y + mouse_secreen_y / 3
+end
+
+function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAngleRadians)
+    
+    local arrowEntity = summonProjectile({x = x, y = y, properties = {is_flaming = isFlaming}, height = 16, width = 16, type = "projectile"})
+    local arrowDirection = math.atan((targetY - y) / (targetX - x))
+    if isFlaming then
+        arrowEntity:setAnimation("flaming")
+    end
+    arrowDirection = arrowDirection + math.random() * spreadAngleRadians - .5 * spreadAngleRadians
+    arrowEntity.x_vel = math.cos(arrowDirection) * speed
+    arrowEntity.y_vel = math.sin(arrowDirection) * speed
+    if (targetX - x) < 0 then
+        arrowEntity.x_vel = -arrowEntity.x_vel
+        arrowEntity.y_vel = -arrowEntity.y_vel
+    end
+    local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
+    sound:setPitch(1 + math.random() / 6)
+    love.audio.play(sound)
+    self:addEntity(arrowEntity)
 end

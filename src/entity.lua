@@ -46,11 +46,14 @@ end
 
 function Entity:draw()
 
-    local offset = 0
+    local scaleX = 1
     if self.facing == -1 then
-        offset = self.width
+        scaleX = -1
     end
-    self.animation:draw(self.image, math.floor(self.x), math.floor(self.y), self.rotation, self.facing*1, 1, offset, 0)
+
+    self.animation:draw(self.image, math.floor(self.x) + 8, math.floor(self.y) + 8, self.rotation, scaleX, 1, 8, 8)
+   --love.graphics.circle("fill", self.x, self.y, 2)
+    --love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
 end
 
 function Entity:setPosition(x, y)

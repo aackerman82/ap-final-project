@@ -7,10 +7,14 @@ Character = middleclass.class("Character", Entity)
 
 function Character:initialize(object)
     Entity.initialize(self, object)
-    self.arrowCooldown = 0
-    self.firingBow = false
     self.isRambo = false
     self.isAlive = true
+    self.bow = {
+        isFiring = false,
+        arrowCooldown = 0,
+        attackSpeed = 3,
+        arrowSpeed = 300
+    }
 end
 
 function Character:update(dt)
@@ -24,7 +28,7 @@ function Character:update(dt)
         Entity.setAnimation(self, "die")
     end
 
-    self.arrowCooldown = self.arrowCooldown - dt
+    self.bow.arrowCooldown = self.bow.arrowCooldown - dt
 
     Entity.update(self, dt)
 end
@@ -34,6 +38,6 @@ function Character:draw()
 end
 
 function Character:fireArrow()
-    self.firingBow = true
-    self.arrowCooldown = .3
+    self.bow.isFiring = true
+    self.bow.arrowCooldown = 1 / self.bow.attackSpeed
 end

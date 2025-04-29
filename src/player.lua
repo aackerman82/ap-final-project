@@ -37,7 +37,7 @@ function Player:update(dt)
     end
 
     self.isRambo = love.mouse.isDown(2)
-    if (love.mouse.isDown(1) and self.arrowCooldown <= 0) or self.isRambo then
+    if (love.mouse.isDown(1) and self.bow.arrowCooldown <= 0) or self.isRambo then
         self:fireArrow()
     end
 
