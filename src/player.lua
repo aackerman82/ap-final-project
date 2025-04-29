@@ -26,7 +26,7 @@ function Player:update(dt)
     end
     if self.y == groundPos then  -- If on the ground
         if love.keyboard.isDown("space") then
-            sound = love.audio.newSource("assets/jump.wav", "static")
+            sound = love.audio.newSource("assets/sound/jump.wav", "static")
             sound:setPitch(1 + math.random() / 6)
             love.audio.play(sound)
             self.y_vel = -300

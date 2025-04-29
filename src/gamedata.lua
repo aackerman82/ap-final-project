@@ -41,7 +41,7 @@ function summonArrow(object)
 				duration = 0.15
 			}
 		},
-		img_file = "pickups/Arrows.png",
+		img_file = "pickups/arrow.png",
 		defaultAnimation = "none"
 	}
 	if object["properties"]["is_flaming"] then
@@ -62,7 +62,7 @@ function summonProjectile(object)
 				duration = 0.15
 			}
 		},
-		img_file = "pickups/Arrows.png",
+		img_file = "pickups/arrow.png",
 		defaultAnimation = "none"
 	}
 	if object["properties"]["is_flaming"] then
@@ -83,7 +83,7 @@ function summonArcher(object)
 				duration = 0.1
 			},
 		},
-		img_file = "characters/Badarcher.png",
+		img_file = "characters/badarcher.png",
 		defaultAnimation = "idle"
 	}
 	return Enemy:new(object)

@@ -4,19 +4,19 @@
   <export target="castle.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="sky" tilewidth="16" tileheight="16" tilecount="720" columns="36">
-  <image source="../forest_background/bg_sky.png" width="576" height="324"/>
+  <image source="../graphics/tilesets/forest_background/bg_sky.png" width="576" height="324"/>
  </tileset>
  <tileset firstgid="721" name="clouds" tilewidth="16" tileheight="16" tilecount="720" columns="36">
-  <image source="../forest_background/bg_cloud.png" width="576" height="324"/>
+  <image source="../graphics/tilesets/forest_background/bg_cloud.png" width="576" height="324"/>
  </tileset>
  <tileset firstgid="1441" name="lightTree" tilewidth="16" tileheight="16" tilecount="720" columns="36">
-  <image source="../forest_background/bg_trees_far.png" width="576" height="324"/>
+  <image source="../graphics/tilesets/forest_background/bg_trees_far.png" width="576" height="324"/>
  </tileset>
  <tileset firstgid="2161" name="darkTree" tilewidth="16" tileheight="16" tilecount="720" columns="36">
-  <image source="../forest_background/bg_trees_near.png" width="576" height="324"/>
+  <image source="../graphics/tilesets/forest_background/bg_trees_near.png" width="576" height="324"/>
  </tileset>
  <tileset firstgid="2881" name="castle-tileset" tilewidth="16" tileheight="16" tilecount="128" columns="8">
-  <image source="../tilesets/tileset_castle.png" width="128" height="256"/>
+  <image source="../graphics/tilesets/tileset_castle.png" width="128" height="256"/>
   <tile id="0">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -139,7 +139,7 @@
   </tile>
  </tileset>
  <tileset firstgid="3009" name="Arrows" tilewidth="16" tileheight="16" tilecount="9" columns="3">
-  <image source="../graphics/pickups/Arrows.png" width="48" height="48"/>
+  <image source="../graphics/pickups/arrow.png" width="48" height="48"/>
   <tile id="0" type="arrow">
    <properties>
     <property name="is_flaming" type="bool" value="false"/>
@@ -278,7 +278,7 @@
   <tile id="3" type="heart"/>
  </tileset>
  <tileset firstgid="3030" name="enemy" tilewidth="16" tileheight="24" tilecount="1232" columns="11">
-  <image source="../graphics/characters/Badarcher.png" width="176" height="2688"/>
+  <image source="../graphics/characters/badarcher.png" width="176" height="2688"/>
   <tile id="0" type="enemy">
    <animation>
     <frame tileid="0" duration="300"/>
@@ -1528,16 +1528,16 @@
  </tileset>
  <group id="2" name="background">
   <imagelayer id="18" name="4_sky" locked="1" parallaxx="0" repeatx="1">
-   <image source="../forest_background/bg_sky.png" width="576" height="324"/>
+   <image source="../graphics/tilesets/forest_background/bg_sky.png" width="576" height="324"/>
   </imagelayer>
   <imagelayer id="15" name="3_trees_far" locked="1" parallaxx="0.3" repeatx="1">
-   <image source="../forest_background/bg_trees_far.png" width="576" height="324"/>
+   <image source="../graphics/tilesets/forest_background/bg_trees_far.png" width="576" height="324"/>
   </imagelayer>
   <imagelayer id="17" name="2_clouds" locked="1" parallaxx="0.4" repeatx="1">
-   <image source="../forest_background/bg_cloud.png" width="576" height="324"/>
+   <image source="../graphics/tilesets/forest_background/bg_cloud.png" width="576" height="324"/>
   </imagelayer>
   <imagelayer id="16" name="1_trees_near" locked="1" parallaxx="0.5" repeatx="1">
-   <image source="../forest_background/bg_trees_near.png" width="576" height="324"/>
+   <image source="../graphics/tilesets/forest_background/bg_trees_near.png" width="576" height="324"/>
   </imagelayer>
  </group>
  <group id="6" name="castle">

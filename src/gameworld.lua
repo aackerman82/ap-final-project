@@ -147,7 +147,7 @@ function GameWorld:update(dt)
         end
         --entity.x_vel = entity.x_vel + self.player.x_vel
         table.insert(self.customLayer["entities"], entity)
-        local sound = love.audio.newSource("assets/bow_shot.wav", "static")
+        local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
         sound:setPitch(1 + math.random() / 6)
         love.audio.play(sound)
     end

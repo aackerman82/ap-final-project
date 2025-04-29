@@ -4,7 +4,7 @@
   <export target="Module10 Gamemap.lua" format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="Tileset Grass" tilewidth="32" tileheight="32" tilecount="96" columns="12">
-  <image source="../tilesets/tileset_cave.png" trans="ff00ff" width="384" height="256"/>
+  <image source="../graphics/tilesets/tileset_cave.png" trans="ff00ff" width="384" height="256"/>
  </tileset>
  <tileset firstgid="97" name="Foreground" tilewidth="16" tileheight="16" spacing="20" margin="20" tilecount="144" columns="16">
   <image source="../forest_background/bg_sky.png" trans="ff00ff" width="576" height="324"/>
