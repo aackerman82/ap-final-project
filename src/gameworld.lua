@@ -137,6 +137,12 @@ end
 
 function GameWorld:draw()
     self.map:draw(0 - self.cameraPos.x, 0 - self.cameraPos.y, DPI_SCALE, DPI_SCALE)
+    --[[
+    prints just for testing - trying to get pickups to work properly
+    adding these in case y'all wanna use em to test too
+    love.graphics.print(self.player["health"], 700, 500)
+    love.graphics.print(self.player["money"], 600, 500)
+    ]]
 end
 
 function GameWorld:getAllEntities()
@@ -181,6 +187,8 @@ function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAn
     end
     local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
     sound:setPitch(1 + math.random() / 6)
+    --adjust for your own ears
+    sound:setVolume(0.1)
     love.audio.play(sound)
     self:addEntity(arrowEntity)
 end
