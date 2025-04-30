@@ -84,6 +84,8 @@ function GameWorld:initialize()
         elseif object["type"] == "knight" then
             entity = summonKnight(object)
             self.player = entity
+	elseif object["type"] == "heart" then
+	    entity = summonHeart(object)
         else
             entity = summonCoin(object)
         end
