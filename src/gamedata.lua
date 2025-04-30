@@ -1,6 +1,20 @@
 
 -- Definitions for various entities.
 
+function summonHeart(object)
+    object["definition"] = {
+		animations = {
+			spin = {
+				frames = {"1-4", 1},
+				duration = 0.4
+			},
+		},
+		img_file = "pickups/heart.png",
+		defaultAnimation = "spin"
+	}
+	return Collectable:new(object)
+end
+
 function summonCoin(object)
     object["definition"] = {
 		animations = {
