@@ -100,7 +100,20 @@ function GameWorld:update(dt)
     
     self.map:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
-        entity.x, entity.y = self.collisionWorld:move(entity, entity.x, entity.y, collisionFilter)
+        local updatedX, updatedY = self.collisionWorld:check(entity, entity.x, entity.y, collisionFilter)
+        if updatedY ~= entity.y then
+            if entity.y_vel > 0 then
+                entity.grounded = true
+            end
+            entity.y_vel = 0
+         else
+            entity.grounded = false
+        end
+        if updatedX ~= entity.x then
+            entity.x_vel = entity.x_vel * -0.3
+        end
+        self.collisionWorld:update(entity, updatedX, updatedY)
+        entity.x, entity.y = updatedX, updatedY
         if entity.bow then
             if entity.bow.isFiring then
                 local mouse_x, mouse_y = self:getMousePosition()
@@ -153,6 +166,8 @@ end
 function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAngleRadians)
     
     local arrowEntity = summonProjectile({x = x, y = y, properties = {is_flaming = isFlaming}, height = 16, width = 16, type = "projectile"})
+    targetX = targetX - 8
+    targetY = targetY + 8
     local arrowDirection = math.atan((targetY - y) / (targetX - x))
     if isFlaming then
         arrowEntity:setAnimation("flaming")

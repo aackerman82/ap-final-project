@@ -17,6 +17,7 @@ function Entity:initialize(object)
     self.height = math.floor(object["height"])
     self.image = love.graphics.newImage('assets/graphics/' .. tostring(object["definition"].img_file))
     self.object = object
+    self.grounded = true
     
     -- set up animations
     local hi_width, hi_height = self.image:getDimensions() -- Image object method
@@ -52,7 +53,7 @@ function Entity:draw()
     end
 
     self.animation:draw(self.image, math.floor(self.x) + 8, math.floor(self.y) + 8, self.rotation, scaleX, 1, 8, 8)
-   --love.graphics.circle("fill", self.x, self.y, 2)
+    --love.graphics.circle("fill", self.x, self.y, 2)
     --love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
 end
 
