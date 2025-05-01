@@ -10,7 +10,13 @@ function summonHeart(object)
 			},
 		},
 		img_file = "pickups/heart.png",
-		defaultAnimation = "spin"
+		defaultAnimation = "spin",
+		hitbox = {
+			width = 7,
+			height = 7,
+			offsetX = 4,
+			offsetY = 9
+		}
 	}
 	return Collectable:new(object)
 end
@@ -24,7 +30,13 @@ function summonCoin(object)
 			},
 		},
 		img_file = "pickups/coin.png",
-		defaultAnimation = "spin"
+		defaultAnimation = "spin",
+		hitbox = {
+			width = 16,
+			height = 16,
+			offsetX = 0,
+			offsetY = 0
+		}
 	}
 	return Collectable:new(object)
 end
@@ -38,7 +50,13 @@ function summonSmallCoin(object)
 			}
 		},
 		img_file = "pickups/small_coin.png",
-		defaultAnimation = "spin"
+		defaultAnimation = "spin",
+		hitbox = {
+			width = 8,
+			height = 8,
+			offsetX = 4,
+			offsetY = 8
+		}
 	}
 	return Collectable:new(object)
 end
@@ -56,7 +74,13 @@ function summonArrow(object)
 			}
 		},
 		img_file = "pickups/arrow.png",
-		defaultAnimation = "none"
+		defaultAnimation = "none",
+		hitbox = {
+			width = 16,
+			height = 7,
+			offsetX = 0,
+			offsetY = 4
+		}
 	}
 	if object["properties"]["is_flaming"] then
 		object["definition"].defaultAnimation = "flaming"
@@ -77,7 +101,13 @@ function summonProjectile(object)
 			}
 		},
 		img_file = "pickups/arrow.png",
-		defaultAnimation = "none"
+		defaultAnimation = "none",
+		hitbox = {
+			width = 10,
+			height = 7,
+			offsetX = 3,
+			offsetY = 4
+		}
 	}
 	if object["properties"]["is_flaming"] then
 		object["definition"].defaultAnimation = "flaming"
@@ -98,7 +128,13 @@ function summonArcher(object)
 			},
 		},
 		img_file = "characters/badarcher.png",
-		defaultAnimation = "idle"
+		defaultAnimation = "idle",
+		hitbox = {
+			width = 12,
+			height = 17,
+			offsetX = 2,
+			offsetY = 7
+		}
 	}
 	return Enemy:new(object)
 end
@@ -116,7 +152,13 @@ function summonKnight(object)
 			},
 		},
 		img_file = "characters/knight.png",
-		defaultAnimation = "idle"
+		defaultAnimation = "idle",
+		hitbox = {
+			width = 10,
+			height = 17,
+			offsetX = 3,
+			offsetY = 7
+		}
 	}
 	return Player:new(object)
 end

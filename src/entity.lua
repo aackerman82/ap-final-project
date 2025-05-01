@@ -52,9 +52,16 @@ function Entity:draw()
         scaleX = -1
     end
 
+    love.graphics.setColor(1, 1, 1)
     self.animation:draw(self.image, math.floor(self.x) + 8, math.floor(self.y) + 8, self.rotation, scaleX, 1, 8, 8)
-    --love.graphics.circle("fill", self.x, self.y, 2)
-    --love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
+    local drawDebugHitboxes = false
+    if drawDebugHitboxes then
+        love.graphics.circle("fill", self.x, self.y, 2)
+        love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
+        love.graphics.setColor(1, 0, 1)
+        hitbox = Entity.getHitbox(self)
+        love.graphics.rectangle("line", hitbox.x, hitbox.y, hitbox.width, hitbox.height)
+    end
 end
 
 function Entity:setPosition(x, y)
@@ -89,4 +96,31 @@ function Entity:isSolid()
         return true
     end
     return self.object["properties"]["collidable"]
+end
+
+function Entity:getHitbox()
+
+    if self.object then
+        if self.object.definition then
+            if self.object.definition.hitbox then
+                return {
+                    x = self.x + self.object.definition.hitbox.offsetX,
+                    y = self.y + self.object.definition.hitbox.offsetY,
+                    width = self.object.definition.hitbox.width,
+                    height = self.object.definition.hitbox.height,
+                    offsetX = self.object.definition.hitbox.offsetX,
+                    offsetY = self.object.definition.hitbox.offsetY,
+                }
+            end
+        end
+    end
+    -- No hitbox found - just use the object's dimensions
+    return {
+        x = self.x,
+        y = self.y,
+        width = self.width,
+        height = self.height,
+        offsetX = 0,
+        offsetY = 0,
+    }
 end

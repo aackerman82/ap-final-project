@@ -102,20 +102,22 @@ function GameWorld:update(dt)
     
     self.map:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
-        local updatedX, updatedY = self.collisionWorld:check(entity, entity.x, entity.y, collisionFilter)
-        if updatedY ~= entity.y then
+        local hitbox = Entity.getHitbox(entity)
+        local newHitboxX, newHitboxY = self.collisionWorld:check(entity, hitbox.x, hitbox.y, collisionFilter)
+        if newHitboxY ~= Entity.getHitbox(entity).y then
             if entity.y_vel > 0 then
                 entity.grounded = true
+                entity.x_vel = entity.x_vel * (1 - dt * 3)
             end
             entity.y_vel = 0
          else
             entity.grounded = false
         end
-        if updatedX ~= entity.x then
+        if newHitboxX ~= Entity.getHitbox(entity).x then
             entity.x_vel = entity.x_vel * -0.3
         end
-        self.collisionWorld:update(entity, updatedX, updatedY)
-        entity.x, entity.y = updatedX, updatedY
+        self.collisionWorld:update(entity, newHitboxX, newHitboxY)
+        entity.x, entity.y = newHitboxX - hitbox.offsetX, newHitboxY - hitbox.offsetY
         if entity.bow then
             if entity.bow.isFiring then
                 local mouse_x, mouse_y = self:getMousePosition()
@@ -161,7 +163,8 @@ end
 
 function GameWorld:addEntity(entity)
     table.insert(self.customLayer["entities"], entity)
-    self.collisionWorld:add(entity, entity.x, entity.y, entity.width, entity.height)
+    hitbox = Entity.getHitbox(entity)
+    self.collisionWorld:add(entity, hitbox.x, hitbox.y, hitbox.width, hitbox.height)
 end
 
 function GameWorld:getMousePosition()
@@ -178,7 +181,7 @@ function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAn
     targetY = targetY + 8
     local arrowDirection = math.atan((targetY - y) / (targetX - x))
     if isFlaming then
-        arrowEntity:setAnimation("flaming")
+        arrowEntity.isFlaming = true
     end
     arrowDirection = arrowDirection + math.random() * spreadAngleRadians - .5 * spreadAngleRadians
     arrowEntity.x_vel = math.cos(arrowDirection) * speed

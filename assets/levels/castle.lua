@@ -794,67 +794,11 @@ return {
         },
         {
           id = 1,
-          type = "small_coin",
-          objectGroup = {
-            type = "objectgroup",
-            draworder = "index",
-            id = 2,
-            name = "",
-            visible = true,
-            opacity = 1,
-            offsetx = 0,
-            offsety = 0,
-            parallaxx = 1,
-            parallaxy = 1,
-            properties = {},
-            objects = {
-              {
-                id = 1,
-                name = "",
-                type = "",
-                shape = "rectangle",
-                x = 5,
-                y = 8,
-                width = 6,
-                height = 8,
-                rotation = 0,
-                visible = true,
-                properties = {}
-              }
-            }
-          }
+          type = "small_coin"
         },
         {
           id = 2,
-          type = "small_coin",
-          objectGroup = {
-            type = "objectgroup",
-            draworder = "index",
-            id = 2,
-            name = "",
-            visible = true,
-            opacity = 1,
-            offsetx = 0,
-            offsety = 0,
-            parallaxx = 1,
-            parallaxy = 1,
-            properties = {},
-            objects = {
-              {
-                id = 1,
-                name = "",
-                type = "",
-                shape = "rectangle",
-                x = 6,
-                y = 8,
-                width = 4,
-                height = 8,
-                rotation = 0,
-                visible = true,
-                properties = {}
-              }
-            }
-          }
+          type = "small_coin"
         },
         {
           id = 3,
@@ -874,19 +818,6 @@ return {
             objects = {
               {
                 id = 1,
-                name = "",
-                type = "",
-                shape = "rectangle",
-                x = 5,
-                y = 8,
-                width = 6,
-                height = 8,
-                rotation = 0,
-                visible = true,
-                properties = {}
-              },
-              {
-                id = 2,
                 name = "",
                 type = "",
                 shape = "rectangle",
@@ -931,6 +862,34 @@ return {
         {
           id = 0,
           type = "heart",
+          objectGroup = {
+            type = "objectgroup",
+            draworder = "index",
+            id = 2,
+            name = "",
+            visible = true,
+            opacity = 1,
+            offsetx = 0,
+            offsety = 0,
+            parallaxx = 1,
+            parallaxy = 1,
+            properties = {},
+            objects = {
+              {
+                id = 1,
+                name = "",
+                type = "",
+                shape = "rectangle",
+                x = 4,
+                y = 9,
+                width = 7,
+                height = 7,
+                rotation = 0,
+                visible = true,
+                properties = {}
+              }
+            }
+          },
           animation = {
             {
               tileid = 0,
