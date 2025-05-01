@@ -16,3 +16,9 @@ end
 function Collectable:draw()
     Entity.draw(self)
 end
+
+function Collectable:onCollide(otherEntity)
+    if Entity.getType(otherEntity) == "knight" and otherEntity.isAlive then
+        otherEntity.collectCoin()
+    end
+end

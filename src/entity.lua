@@ -18,6 +18,13 @@ function Entity:initialize(object)
     self.image = love.graphics.newImage('assets/graphics/' .. tostring(object["definition"].img_file))
     self.object = object
     self.grounded = true
+    self.gravityEffect = 0
+    self.age = 0
+    self.color = {
+        red = 1,
+        green = 1,
+        blue = 1
+    }
     
     -- set up animations
     local hi_width, hi_height = self.image:getDimensions() -- Image object method
@@ -34,6 +41,7 @@ end
 
 function Entity:update(dt)
 
+    self.age = self.age + dt
     self.animation:update(dt)
     if self.x_vel < 0 then
         self.facing = -1
@@ -41,6 +49,7 @@ function Entity:update(dt)
     elseif self.x_vel > 0 then
         self.facing = 1
     end
+    self.y_vel = self.y_vel + self.gravityEffect * dt
     self.x = self.x + self.x_vel * dt
     self.y = self.y + self.y_vel * dt
 end
@@ -52,13 +61,17 @@ function Entity:draw()
         scaleX = -1
     end
 
-    love.graphics.setColor(1, 1, 1)
-    self.animation:draw(self.image, math.floor(self.x) + 8, math.floor(self.y) + 8, self.rotation, scaleX, 1, 8, 8)
+    love.graphics.setColor(self.color.red, self.color.green, self.color.blue)
+    local rotationOrigin = {
+        x = self.width / 2,
+        y = self.height / 2
+    }
+    self.animation:draw(self.image, math.floor(self.x + rotationOrigin.x), math.floor(self.y + rotationOrigin.y), self.rotation, scaleX, 1, rotationOrigin.x, rotationOrigin.y)
     if showDebugHitboxes then
         love.graphics.circle("fill", self.x, self.y, 2)
         love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
         love.graphics.setColor(1, 0, 1)
-        hitbox = Entity.getHitbox(self)
+        local hitbox = Entity.getHitbox(self)
         love.graphics.rectangle("line", hitbox.x, hitbox.y, hitbox.width, hitbox.height)
     end
 end
@@ -99,27 +112,37 @@ end
 
 function Entity:getHitbox()
 
+    local x = self.x
+    local y = self.y
+    local width = self.width
+    local height = self.height
+    local offsetX = 0
+    local offsetY = 0
+
     if self.object then
         if self.object.definition then
             if self.object.definition.hitbox then
-                return {
-                    x = self.x + self.object.definition.hitbox.offsetX,
-                    y = self.y + self.object.definition.hitbox.offsetY,
-                    width = self.object.definition.hitbox.width,
-                    height = self.object.definition.hitbox.height,
-                    offsetX = self.object.definition.hitbox.offsetX,
-                    offsetY = self.object.definition.hitbox.offsetY,
-                }
+                x = self.x + self.object.definition.hitbox.offsetX
+                y = self.y + self.object.definition.hitbox.offsetY
+                width = self.object.definition.hitbox.width
+                height = self.object.definition.hitbox.height
+                offsetX = self.object.definition.hitbox.offsetX
+                offsetY = self.object.definition.hitbox.offsetY
             end
         end
     end
     -- No hitbox found - just use the object's dimensions
     return {
-        x = self.x,
-        y = self.y,
-        width = self.width,
-        height = self.height,
-        offsetX = 0,
-        offsetY = 0,
+        x = x,
+        y = y,
+        width = width,
+        height = height,
+        offsetX = offsetX,
+        offsetY = offsetY
     }
 end
+
+
+--function Entity:onCollide(otherEntity)
+--    
+--end

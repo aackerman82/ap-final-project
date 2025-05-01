@@ -99,42 +99,8 @@ function GameWorld:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
         local hitbox = Entity.getHitbox(entity)
         local newHitboxX, newHitboxY, collisions = self.collisionWorld:check(entity, hitbox.x, hitbox.y, collisionFilter)
-        if Entity.getType(entity) == "enemy" and entity.isAlive then
-            for _, collision in pairs(collisions) do
-                if Entity.getType(collision.other) == "projectile" then
-                    entity.isAlive = false
-                    sound = love.audio.newSource("assets/sound/arrow_hit.wav", "static")
-                    sound:setPitch(1 + math.random() / 6)
-                    --adjust for your own ears
-                    sound:setVolume(0.3)
-                    love.audio.play(sound)
-                end
-            end
-        end
-        if Entity.getType(entity) == "coin" or Entity.getType(entity) == "small_coin" then
-            for _, collision in pairs(collisions) do
-                if Entity.getType(collision.other) == "knight" then
-                    sound = love.audio.newSource("assets/sound/pickup_coin.wav", "static")
-                    sound:setPitch(1 + math.random() / 6)
-                    --adjust for your own ears
-                    sound:setVolume(0.1)
-                    love.audio.play(sound)
-                end
-            end
-        end
-        if Entity.getType(entity) == "knight" and entity.isAlive then
-            for _, collision in pairs(collisions) do
-                if Entity.getType(collision.other) == "enemy" and collision.other.isAlive then
-                    sound = love.audio.newSource("assets/sound/death.wav", "static")
-                    sound:setPitch(1 + math.random() / 6)
-                    --adjust for your own ears
-                    sound:setVolume(0.1)
-                    love.audio.play(sound)
-                    entity.isAlive = false
-                    love.timer.sleep(1)
-                    os.exit()
-                end
-            end
+        for _, collision in pairs(collisions) do
+            entity:onCollide(collision.other)
         end
         if newHitboxY ~= Entity.getHitbox(entity).y then
             if entity.y_vel > 0 then
@@ -151,13 +117,19 @@ function GameWorld:update(dt)
         self.collisionWorld:update(entity, newHitboxX, newHitboxY)
         entity.x, entity.y = newHitboxX - hitbox.offsetX, newHitboxY - hitbox.offsetY
         if entity.bow then
-            if entity.bow.isFiring then
+            if entity.bow.isFiring and (entity.bow.flamingArrowsRemaining + entity.bow.regularArrowsRemaining > 0) then
+                local isFlaming
+                if entity.bow.flamingArrowsRemaining > 0 then
+                    entity.bow.flamingArrowsRemaining = entity.bow.flamingArrowsRemaining - 1
+                    isFlaming = true
+                elseif entity.bow.regularArrowsRemaining > 0 then
+                    entity.bow.regularArrowsRemaining = entity.bow.regularArrowsRemaining - 1
+                    isFlaming = false
+                end
                 local mouse_x, mouse_y = self:getMousePosition()
                 local arrowSpread = 0
-                local isFlaming = math.random() < 0.2
                 if entity.isRambo then
                     arrowSpread = 1
-                    isFlaming = true
                 end
                 self:SpawnArrow(entity.x, entity.y + entity.height, mouse_x, mouse_y, entity.bow.arrowSpeed, isFlaming, arrowSpread)
                 entity.bow.isFiring = false
