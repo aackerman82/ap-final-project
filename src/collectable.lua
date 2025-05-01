@@ -19,6 +19,6 @@ end
 
 function Collectable:onCollide(otherEntity)
     if Entity.getType(otherEntity) == "knight" and otherEntity.isAlive then
-        otherEntity.collectCoin()
+        otherEntity.collect()
     end
 end
