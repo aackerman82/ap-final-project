@@ -1,0 +1,181 @@
+{
+    "activeFile": "assets/levels/newCave.tmx",
+    "expandedProjectPaths": [
+        "assets/graphics/tilesets",
+        "assets",
+        "assets/graphics",
+        ".",
+        "assets/levels"
+    ],
+    "fileStates": {
+        "assets/graphics/tilesets/Arrows.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/Exotic Swords.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/badArcher.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/blocks.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/coin.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/heart.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/newCaveTileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/slime.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/graphics/tilesets/small_coin.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/levels/castle.tmx": {
+            "expandedGroupLayers": [
+                13,
+                6,
+                2
+            ],
+            "expandedObjectLayers": [
+                13,
+                23,
+                21
+            ],
+            "scale": 2,
+            "selectedLayer": 13,
+            "viewCenter": {
+                "x": 553.75,
+                "y": 200.75
+            }
+        },
+        "assets/levels/castle.tmx#Arrows": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#castle-tileset": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "assets/levels/castle.tmx#clouds": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#coin": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#darkTree": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#enemy": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#heart": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#knight": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#lightTree": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#sky": {
+            "scaleInDock": 1
+        },
+        "assets/levels/castle.tmx#small_coin": {
+            "scaleInDock": 1
+        },
+        "assets/levels/cave.tmx": {
+            "scale": 0.39454687499999996,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1255.8710546116988,
+                "y": 316.8191358758069
+            }
+        },
+        "assets/levels/cave.tmx#Foreground": {
+            "scaleInDock": 1
+        },
+        "assets/levels/cave.tmx#Tileset Grass": {
+            "scaleInDock": 1
+        },
+        "assets/levels/newCave.tmx": {
+            "expandedObjectLayers": [
+                4,
+                6
+            ],
+            "scale": 2,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 1759.25,
+                "y": 155.5
+            }
+        },
+        "assets/levels/newCave.tmx#knight": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/Arrows.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/Exotic Swords.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/badArcher.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/blocks.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/coin.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/heart.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/newCaveTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/slime.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/tilesets/small_coin.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/wyatt/Desktop/CurrentAppliedVersion/ap-final-project-main/assets/levels",
+    "last.externalTilesetPath": "C:/Users/wyatt/Desktop/CurrentAppliedVersion/ap-final-project-main/assets/graphics/tilesets",
+    "last.imagePath": "C:/Users/wyatt/Desktop/CurrentAppliedVersion/ap-final-project-main/assets/graphics/characters",
+    "map.lastUsedExportFilter": "Lua files (*.lua)",
+    "openFiles": [
+        "assets/levels/castle.tmx",
+        "assets/levels/newCave.tmx",
+        "assets/graphics/tilesets/newCaveTileset.tsx"
+    ],
+    "project": "untitled.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "assets/levels/castle.tmx",
+        "assets/graphics/tilesets/newCaveTileset.tsx",
+        "assets/levels/newCave.tmx",
+        "assets/levels/cave.tmx",
+        "assets/graphics/tilesets/slime.tsx",
+        "assets/graphics/tilesets/small_coin.tsx",
+        "assets/graphics/tilesets/heart.tsx",
+        "assets/graphics/tilesets/Exotic Swords.tsx",
+        "assets/graphics/tilesets/coin.tsx",
+        "assets/graphics/tilesets/blocks.tsx",
+        "assets/graphics/tilesets/Arrows.tsx",
+        "assets/graphics/tilesets/badArcher.tsx"
+    ]
+}
