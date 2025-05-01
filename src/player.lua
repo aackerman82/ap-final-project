@@ -49,15 +49,54 @@ function Player:onCollide(otherEntity)
     if Entity.getType(otherEntity) == "enemy" and otherEntity.isAlive then
         self:hurt(1)
     end
+    if Entity.getType(otherEntity) == "coin" or Entity.getType(otherEntity) == "small_coin" or Entity.getType(otherEntity) == "heart" or Entity.getType(otherEntity) == "arrow"  then
+        self:collect(Entity.getType(otherEntity), otherEntity)
+    end
 end
 
-function Player:collectCoin()
-    --self.money = self.money + 1
-    sound = love.audio.newSource("assets/sound/pickup_coin.wav", "static")
-    sound:setPitch(1 + math.random() / 6)
-    --adjust for your own ears
-    sound:setVolume(0.1)
-    love.audio.play(sound)
+function Player:collect(collectable, entity)
+    if collectable == "coin" or collectable == "small_coin" then
+        if collectable == "coin" then
+            self.money = self.money + 5
+            sound = love.audio.newSource("assets/sound/pickup_coin_alt.wav", "static")
+            sound:setPitch(1 + math.random() / 6)
+            --adjust for your own ears
+            sound:setVolume(0.1)
+            love.audio.play(sound)
+        else
+            self.money = self.money + 1
+            sound = love.audio.newSource("assets/sound/pickup_coin.wav", "static")
+            sound:setPitch(1 + math.random() / 6)
+            --adjust for your own ears
+            sound:setVolume(0.1)
+            love.audio.play(sound)
+        end
+    end
+    if collectable == "heart" then
+        sound = love.audio.newSource("assets/sound/heart.wav", "static")
+        sound:setPitch(1 + math.random() / 6)
+        --adjust for your own ears
+        sound:setVolume(0.1)
+        love.audio.play(sound)
+        if self.health ~= 3 then
+            self.health = self.health + 1
+        else
+            self.health = 3
+        end
+    end
+    if collectable == "arrow" then
+        sound = love.audio.newSource("assets/sound/arrow_hit.wav", "static")
+        sound:setPitch(1 + math.random() / 6)
+        --adjust for your own ears
+        sound:setVolume(0.1)
+        love.audio.play(sound)
+        local isFlaming = entity.object["properties"]["is_flaming"]
+        if isFlaming then
+            self.bow["flamingArrowsRemaining"] = self.bow["flamingArrowsRemaining"] + 1
+        else
+            self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 1
+        end
+    end
 end
 
 function Player:die()
