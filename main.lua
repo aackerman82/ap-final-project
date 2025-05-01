@@ -18,6 +18,7 @@ world = nil
 TILE_SIZE = 16                         -- Pixels, no scaling
 DPI_SCALE = 3                          -- Screen pixels per texture pixel
 TILE_STRIDE =  TILE_SIZE * DPI_SCALE   -- Screen pixels per tile
+showDebugHitboxes = false
 
 function love.load()
 	love.graphics.setDefaultFilter("nearest")
@@ -42,3 +43,9 @@ end
 function love.draw()
 	world:draw()
 end
+
+function love.keypressed(key, scancode, isrepeat)
+	if key == "h" then
+	   showDebugHitboxes = not showDebugHitboxes
+	end
+ end

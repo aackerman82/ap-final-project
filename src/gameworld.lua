@@ -36,11 +36,6 @@ function collisionFilter(entity, otherEntity)
     if Entity.isSolid(entity) or Entity.isSolid(otherEntity) then
         return "slide"
     end
-    if Entity.getType(entity) == "enemy" and Entity.getType(otherEntity) == "projectile" then
-        -- This no worky
-        --entity.isAlive = false
-        --return "slide"
-    end
     
     return "cross"
 end
@@ -103,7 +98,44 @@ function GameWorld:update(dt)
     self.map:update(dt)
     for _, entity in pairs(self:getAllEntities()) do
         local hitbox = Entity.getHitbox(entity)
-        local newHitboxX, newHitboxY = self.collisionWorld:check(entity, hitbox.x, hitbox.y, collisionFilter)
+        local newHitboxX, newHitboxY, collisions = self.collisionWorld:check(entity, hitbox.x, hitbox.y, collisionFilter)
+        if Entity.getType(entity) == "enemy" and entity.isAlive then
+            for _, collision in pairs(collisions) do
+                if Entity.getType(collision.other) == "projectile" then
+                    entity.isAlive = false
+                    sound = love.audio.newSource("assets/sound/arrow_hit.wav", "static")
+                    sound:setPitch(1 + math.random() / 6)
+                    --adjust for your own ears
+                    sound:setVolume(0.3)
+                    love.audio.play(sound)
+                end
+            end
+        end
+        if Entity.getType(entity) == "coin" or Entity.getType(entity) == "small_coin" then
+            for _, collision in pairs(collisions) do
+                if Entity.getType(collision.other) == "knight" then
+                    sound = love.audio.newSource("assets/sound/pickup_coin.wav", "static")
+                    sound:setPitch(1 + math.random() / 6)
+                    --adjust for your own ears
+                    sound:setVolume(0.1)
+                    love.audio.play(sound)
+                end
+            end
+        end
+        if Entity.getType(entity) == "knight" and entity.isAlive then
+            for _, collision in pairs(collisions) do
+                if Entity.getType(collision.other) == "enemy" and collision.other.isAlive then
+                    sound = love.audio.newSource("assets/sound/death.wav", "static")
+                    sound:setPitch(1 + math.random() / 6)
+                    --adjust for your own ears
+                    sound:setVolume(0.1)
+                    love.audio.play(sound)
+                    entity.isAlive = false
+                    love.timer.sleep(1)
+                    os.exit()
+                end
+            end
+        end
         if newHitboxY ~= Entity.getHitbox(entity).y then
             if entity.y_vel > 0 then
                 entity.grounded = true

@@ -54,8 +54,7 @@ function Entity:draw()
 
     love.graphics.setColor(1, 1, 1)
     self.animation:draw(self.image, math.floor(self.x) + 8, math.floor(self.y) + 8, self.rotation, scaleX, 1, 8, 8)
-    local drawDebugHitboxes = false
-    if drawDebugHitboxes then
+    if showDebugHitboxes then
         love.graphics.circle("fill", self.x, self.y, 2)
         love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
         love.graphics.setColor(1, 0, 1)
