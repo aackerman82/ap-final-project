@@ -134,6 +134,7 @@ function summonProjectile(object)
 	end
 	return Projectile:new(object)
 end
+
 function summonSlime(object)
 	object["definition"] = {
 		animations = {
@@ -162,7 +163,7 @@ function summonArcher(object)
 			},
 			die = {
 				frames = {"1-4", 66},
-				duration = 0.1
+				duration = 1
 			},
 		},
 		img_file = "characters/badarcher.png",

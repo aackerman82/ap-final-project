@@ -5,12 +5,17 @@ function Player:initialize(object)
     Character.initialize(self, object)
     self.health = 3
     self.money = 0
+    --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
+    --I doubt we need it for removing objects but it works so it stays for now
+    self.typeForRemoval = "knight"
+    self.gravityEffect = 750
+    self.deathSound = love.audio.newSource("assets/sound/death.wav", "static")
 end
 
 function Player:update(dt)
     
     self.x_vel = 0
-    local translationThisFrame = 60 * DPI_SCALE
+    local translationThisFrame = 180
 	if love.keyboard.isDown("a", "left") then
 		self.x_vel = -translationThisFrame
 	end
@@ -19,17 +24,11 @@ function Player:update(dt)
 	end
     
     if self.grounded then  -- If on the ground
-        if love.keyboard.isDown("space", "kp0") then --kp0 because I'm an arrow keys user -Angela
+        if love.keyboard.isDown("space", "kp0") then
             love.audio.play(jump)
-            --[[sound = love.audio.newSource("assets/sound/jump.wav", "static")
-            sound:setPitch(1 + math.random() / 6)
-            --adjust for your own ears
-            sound:setVolume(0.1)
-            love.audio.play(sound)]] --!Can delete. Audio is configured in audioConfig -Wyatt
             self.y_vel = -300
         end
     end
-    self.y_vel = self.y_vel + 750 * dt
 
     self.isRambo = love.mouse.isDown(2)
     if (love.mouse.isDown(1) and self.bow.arrowCooldown <= 0) or self.isRambo then
@@ -41,4 +40,50 @@ end
 
 function Player:draw()
     Entity.draw(self)
+end
+
+function Player:onCollide(otherEntity)
+    local otherEntityType = Entity.getType(otherEntity)
+    if otherEntityType == "enemy" and otherEntity.isAlive or otherEntityType == "slime" and otherEntity.isAlive then
+        self:hurt(1)
+    end
+    if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow"  then
+        --also sending the full otherEntity object to grab the arrow's is flaming property
+        self:collect(otherEntityType, otherEntity)
+    end
+end
+
+function Player:collect(collectable, entity)
+    if collectable == "coin" or collectable == "small_coin" then
+        if collectable == "coin" then
+            self.money = self.money + 5
+            love.audio.play(coinPickup)
+        else
+            self.money = self.money + 1
+            love.audio.play(coinPickup)
+        end
+    end
+    if collectable == "heart" then
+        love.audio.play(heartPickup)
+        if self.health ~= 3 then
+            self.health = self.health + 1
+        else
+            self.health = 3
+        end
+    end
+    if collectable == "arrow" then
+        love.audio.play(arrowPickup)
+        local isFlaming = entity.object["properties"]["is_flaming"]
+        if isFlaming then
+            self.bow["flamingArrowsRemaining"] = self.bow["flamingArrowsRemaining"] + 1
+        else
+            self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 1
+        end
+    end
+end
+
+function Player:die()
+    Character.die(self)
+    love.timer.sleep(1)
+    os.exit()
 end

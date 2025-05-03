@@ -11,14 +11,6 @@ function love.load()
 	love.graphics.setBackgroundColor(0.1, 0.1, 0.1)
 	love.graphics.setColor(1, 1, 1)
 	world = GameWorld:new()
-	--[[ --! Can delete but its not my code lol You can adjust the sound settings in audioConfig.lua
-	--song setup temporarily in main, will be moved when we go to implement the cave level
-	--yes it's a fishing song but it's hard to find good free castle music. I'll continue my search when there's a good time for it
-	song = love.audio.newSource("assets/sound/Fishing.wav", "stream")
-	song:setPitch(1 + math.random() / 6)
-	--adjust for your own ears
-	song:setVolume(0.1)
-	]]
 end
 
 
