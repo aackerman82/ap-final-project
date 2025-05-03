@@ -1,12 +1,13 @@
 
-middleclass = require "lib/middleclass"
-
-Player = middleclass.class("Player", Character)
+Player = class("Player", Character)
 
 function Player:initialize(object)
     Character.initialize(self, object)
     self.health = 3
     self.money = 0
+    --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
+    --I doubt we need it for removing objects but it works so it stays for now
+    self.typeForRemoval = "knight"
     self.gravityEffect = 750
     self.deathSound = love.audio.newSource("assets/sound/death.wav", "static")
 end
@@ -23,12 +24,8 @@ function Player:update(dt)
 	end
     
     if self.grounded then  -- If on the ground
-        if love.keyboard.isDown("space", "kp0") then --kp0 because I'm an arrow keys user -Angela
-            sound = love.audio.newSource("assets/sound/jump.wav", "static")
-            sound:setPitch(1 + math.random() / 6)
-            --adjust for your own ears
-            sound:setVolume(0.1)
-            love.audio.play(sound)
+        if love.keyboard.isDown("space", "kp0") then
+            playSound(jump)
             self.y_vel = -300
         end
     end
@@ -46,11 +43,13 @@ function Player:draw()
 end
 
 function Player:onCollide(otherEntity)
-    if Entity.getType(otherEntity) == "enemy" and otherEntity.isAlive then
+    local otherEntityType = Entity.getType(otherEntity)
+    if otherEntityType == "enemy" and otherEntity.isAlive or otherEntityType == "slime" and otherEntity.isAlive then
         self:hurt(1)
     end
-    if Entity.getType(otherEntity) == "coin" or Entity.getType(otherEntity) == "small_coin" or Entity.getType(otherEntity) == "heart" or Entity.getType(otherEntity) == "arrow"  then
-        self:collect(Entity.getType(otherEntity), otherEntity)
+    if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow" or otherEntityType == "theSword"  then
+        --also sending the full otherEntity object to grab the arrow's is flaming property
+        self:collect(otherEntityType, otherEntity)
     end
 end
 
@@ -58,26 +57,14 @@ function Player:collect(collectable, entity)
     if collectable == "coin" or collectable == "small_coin" then
         if collectable == "coin" then
             self.money = self.money + 5
-            sound = love.audio.newSource("assets/sound/pickup_coin_alt.wav", "static")
-            sound:setPitch(1 + math.random() / 6)
-            --adjust for your own ears
-            sound:setVolume(0.1)
-            love.audio.play(sound)
+            playSound(coinPickup)
         else
             self.money = self.money + 1
-            sound = love.audio.newSource("assets/sound/pickup_coin.wav", "static")
-            sound:setPitch(1 + math.random() / 6)
-            --adjust for your own ears
-            sound:setVolume(0.1)
-            love.audio.play(sound)
+            playSound(coinPickup)
         end
     end
     if collectable == "heart" then
-        sound = love.audio.newSource("assets/sound/heart.wav", "static")
-        sound:setPitch(1 + math.random() / 6)
-        --adjust for your own ears
-        sound:setVolume(0.1)
-        love.audio.play(sound)
+        playSound(heartPickup)
         if self.health ~= 3 then
             self.health = self.health + 1
         else
@@ -85,17 +72,17 @@ function Player:collect(collectable, entity)
         end
     end
     if collectable == "arrow" then
-        sound = love.audio.newSource("assets/sound/arrow_hit.wav", "static")
-        sound:setPitch(1 + math.random() / 6)
-        --adjust for your own ears
-        sound:setVolume(0.1)
-        love.audio.play(sound)
+        playSound(arrowPickup)
         local isFlaming = entity.object["properties"]["is_flaming"]
         if isFlaming then
             self.bow["flamingArrowsRemaining"] = self.bow["flamingArrowsRemaining"] + 1
         else
             self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 1
         end
+    end
+    if collectable == "theSword" then
+        love.timer.sleep(1)
+        os.exit()
     end
 end
 

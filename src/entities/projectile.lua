@@ -1,12 +1,14 @@
 
-middleclass = require "lib/middleclass"
-
-Projectile = middleclass.class("Projectile", Entity)
+Projectile = class("Projectile", Entity)
 
 function Projectile:initialize(object)
     Entity.initialize(self, object)
     self.rotation = math.atan(self.y_vel / self.x_vel)
     self.isFlaming = false
+
+    --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
+    --I doubt we need it for removing objects but it works so it stays for now
+    self.typeForRemoval = "projectile"
     self.gravityEffect = 250
 end
 
@@ -28,10 +30,7 @@ function Projectile:update(dt)
     end
     if self.isFlaming and self.age > 5 then
         self.isFlaming = false
-        local sound = love.audio.newSource("assets/sound/arrow_extinguish.wav", "static")
-        sound:setPitch(1 + math.random() / 6)
-        sound:setVolume(0.4)
-        love.audio.play(sound)
+        playSound(arrowEx)
     end
     Entity.update(self, dt)
 end

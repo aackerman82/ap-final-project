@@ -1,8 +1,5 @@
 
-
-middleclass = require "lib/middleclass"
-
-GameWorld = middleclass.class("GameWorld")
+GameWorld = class("GameWorld")
 
 function updateCustomLayer(layer, dt)
     -- Every time the cusom layer is updated it updates its entities
@@ -39,7 +36,11 @@ function collisionFilter(entity, otherEntity)
     
     return "cross"
 end
+
 function GameWorld:initialize()
+    --level file names for ez switching while testing
+    --1: castle
+    --2: Cave2-CaveHarder
     self.map = sti("assets/levels/castle.lua", {"bump"})
     self.customLayer = nil -- This is where the entities live
     self.player = nil
@@ -70,6 +71,10 @@ function GameWorld:initialize()
     for _, object in pairs(self.map["objects"]) do
         if object["type"] == "enemy" then
             entity = summonArcher(object)
+        elseif object["type"] == "slime" then
+            entity = summonSlime(object)
+        elseif object["type"] == "theSword" then
+            entity = summonSword(object)
         elseif object["type"] == "coin" then
             entity = summonCoin(object)
         elseif object["type"] == "small_coin" then
@@ -79,8 +84,8 @@ function GameWorld:initialize()
         elseif object["type"] == "knight" then
             entity = summonKnight(object)
             self.player = entity
-	elseif object["type"] == "heart" then
-	    entity = summonHeart(object)
+	    elseif object["type"] == "heart" then
+	        entity = summonHeart(object)
         else
             entity = summonCoin(object)
         end
@@ -101,6 +106,7 @@ function GameWorld:update(dt)
         local newHitboxX, newHitboxY, collisions = self.collisionWorld:check(entity, hitbox.x, hitbox.y, collisionFilter)
         for _, collision in pairs(collisions) do
             entity:onCollide(collision.other)
+            self:remove(entity, collision.other)
         end
         if newHitboxY ~= Entity.getHitbox(entity).y then
             if entity.y_vel > 0 then
@@ -139,22 +145,39 @@ function GameWorld:update(dt)
     self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self:getWidth() * 16)
     --self.cameraPos["y"] = self.player.y - 182
     self.cameraPos["y"] = 100
-    
-   
+
 end
 
 function GameWorld:draw()
     self.map:draw(0 - self.cameraPos.x, 0 - self.cameraPos.y, DPI_SCALE, DPI_SCALE)
-    --[[
-    prints just for testing - trying to get pickups to work properly
-    adding these in case y'all wanna use em to test too
-    love.graphics.print(self.player["health"], 700, 500)
-    love.graphics.print(self.player["money"], 600, 500)
-    ]]
+    --prints just for testing - trying to get pickups to work properly
+    --adding these in case y'all wanna use em to test too
+    --love.graphics.print(self.player["health"], 700, 500)
+    --love.graphics.print(self.player["money"], 600, 500)
 end
 
 function GameWorld:getAllEntities()
     return self.customLayer["entities"]
+end
+
+--loops through the custom layer objects
+--removes the according object depending on all those conditions
+function GameWorld:remove(entity, removedEntity)
+    for i, object in pairs(self:getAllEntities()) do
+        --entity types are for the objects NOT being removed. yes I know their type variable still being "for removal" makes so much sense
+        --otherwise arrows can remove objects
+        if object == removedEntity and object.typeForRemoval == "collectable" and entity.typeForRemoval == "knight" then
+            table.remove(self.customLayer["entities"], i)
+            self.collisionWorld:remove(object)
+        --soooo this makes it so the enemies death animations no longer work, I've been trying to fix it
+        --for now, death anim & sfx gone but not forgotten
+        elseif object == removedEntity and object.typeForRemoval == "enemy" and entity.typeForRemoval == "projectile" then
+            if object.isAlive == false then
+                table.remove(self.customLayer["entities"], i)
+                self.collisionWorld:remove(object)
+            end
+        end
+    end
 end
 
 function GameWorld:getWidth()
@@ -194,10 +217,6 @@ function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAn
         arrowEntity.x_vel = -arrowEntity.x_vel
         arrowEntity.y_vel = -arrowEntity.y_vel
     end
-    local sound = love.audio.newSource("assets/sound/bow_shot.wav", "static")
-    sound:setPitch(1 + math.random() / 6)
-    --adjust for your own ears
-    sound:setVolume(0.1)
-    love.audio.play(sound)
+    love.audio.play(arrowShot)
     self:addEntity(arrowEntity)
 end

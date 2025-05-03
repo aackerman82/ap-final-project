@@ -1,9 +1,7 @@
 
 -- Definition of the "Character" entity, subclasses include Player and Enemy.
 
-middleclass = require "lib/middleclass"
-
-Character = middleclass.class("Character", Entity)
+Character = class("Character", Entity)
 
 function Character:initialize(object)
     Entity.initialize(self, object)
@@ -61,8 +59,8 @@ function Character:hurt(damage)
     self.health = self.health - damage
     if self.deathSound then
         self.deathSound:setPitch(1 + math.random() / 6)
-        self.deathSound:setVolume(0.2)
-        love.audio.play(self.deathSound)
+        self.deathSound:setVolume(0.1)
+        playSound(self.deathSound)
     end
     if self.health <= 0 then
         self:die()
@@ -70,5 +68,5 @@ function Character:hurt(damage)
 end
 
 function Character:die()
-   self.isAlive = false
+    self.isAlive = false
 end

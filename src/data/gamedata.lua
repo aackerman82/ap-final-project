@@ -61,6 +61,26 @@ function summonSmallCoin(object)
 	return Collectable:new(object)
 end
 
+function summonSword(object)
+	object["definition"] = {
+		animations = {
+			idle = {
+				frames = {"2-2", 3},
+				duration = 0.15
+			}
+		},
+		img_file = "pickups/Exotic Swords.png",
+		defaultAnimation = "idle",
+		hitbox = {
+			width = 8,
+			height = 8,
+			offsetX = 4,
+			offsetY = 8
+		}
+	}
+	return Collectable:new(object)
+end
+
 function summonArrow(object)
     object["definition"] = {
 		animations = {
@@ -115,6 +135,25 @@ function summonProjectile(object)
 	return Projectile:new(object)
 end
 
+function summonSlime(object)
+	object["definition"] = {
+		animations = {
+			idle = {frames={'1-5',3}, duration = .15},
+			attack = {frames={'1-6',8}, duration = .15},
+			die = {frames={'1-10',6}, duration = .15}
+		},
+		img_file = "characters/slime.png",
+		defaultAnimation = "idle",
+		hitbox = {
+			width = 12, --I will check hitbox later
+			height = 8,
+			offsetX = 3,
+			offsetY = 5
+		}
+	}
+	return Enemy:new(object)
+end
+
 function summonArcher(object)
     object["definition"] = {
 		animations = {
@@ -124,7 +163,7 @@ function summonArcher(object)
 			},
 			die = {
 				frames = {"1-4", 66},
-				duration = 0.1
+				duration = 1
 			},
 		},
 		img_file = "characters/badarcher.png",

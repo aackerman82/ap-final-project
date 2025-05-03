@@ -1,9 +1,7 @@
 
 -- This module defines an "Entity" class, a generic game object.
 
-middleclass = require "lib/middleclass"
-
-Entity = middleclass.class('Entity')
+Entity = class('Entity')
 
 -- Entity Constructor
 function Entity:initialize(object)
@@ -62,10 +60,12 @@ function Entity:draw()
     end
 
     love.graphics.setColor(self.color.red, self.color.green, self.color.blue)
+
     local rotationOrigin = {
         x = self.width / 2,
         y = self.height / 2
     }
+
     self.animation:draw(self.image, math.floor(self.x + rotationOrigin.x), math.floor(self.y + rotationOrigin.y), self.rotation, scaleX, 1, rotationOrigin.x, rotationOrigin.y)
     if showDebugHitboxes then
         love.graphics.circle("fill", self.x, self.y, 2)
