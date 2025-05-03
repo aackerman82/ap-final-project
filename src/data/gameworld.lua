@@ -143,8 +143,27 @@ function GameWorld:update(dt)
         end
     end
     self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self:getWidth() * 16)
-    --self.cameraPos["y"] = self.player.y - 182
-    self.cameraPos["y"] = 100
+
+    -- FIXME: this code does not account for different zoom levels
+    -- Not as good as Doolin's cameras but it is ok I guess
+    local cameraYRangePixels = 50 -- Smaller values cause the camera to track more closely
+    local cameraYOffset = -70
+    highestPermittedCameraPosition = self.player.y - cameraYRangePixels + cameraYOffset
+    lowestPermittedCameraPosition = self.player.y + cameraYRangePixels + cameraYOffset
+    -- "high" and "low" refer to up/down, not positive/negative (because the the Y axis is positive facing down)
+    if self.cameraPos.y < highestPermittedCameraPosition then
+        self.cameraPos.y = highestPermittedCameraPosition
+    end
+    if self.cameraPos.y > lowestPermittedCameraPosition then
+        self.cameraPos.y = lowestPermittedCameraPosition
+    end
+    
+    if self.cameraPos["y"] < 0 then
+        self.cameraPos["y"] = 0
+    end
+    if self.cameraPos["y"] > 100 then
+        self.cameraPos["y"] = 100
+    end
 
 end
 
@@ -217,6 +236,6 @@ function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAn
         arrowEntity.x_vel = -arrowEntity.x_vel
         arrowEntity.y_vel = -arrowEntity.y_vel
     end
-    love.audio.play(arrowShot)
+    playSound(arrowShot)
     self:addEntity(arrowEntity)
 end

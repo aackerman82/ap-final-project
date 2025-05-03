@@ -31,12 +31,6 @@ function summonCoin(object)
 		},
 		img_file = "pickups/coin.png",
 		defaultAnimation = "spin",
-		hitbox = {
-			width = 16,
-			height = 16,
-			offsetX = 0,
-			offsetY = 0
-		}
 	}
 	return Collectable:new(object)
 end
@@ -71,12 +65,6 @@ function summonSword(object)
 		},
 		img_file = "pickups/Exotic Swords.png",
 		defaultAnimation = "idle",
-		hitbox = {
-			width = 8,
-			height = 8,
-			offsetX = 4,
-			offsetY = 8
-		}
 	}
 	return Collectable:new(object)
 end
@@ -124,9 +112,9 @@ function summonProjectile(object)
 		defaultAnimation = "none",
 		hitbox = {
 			width = 10,
-			height = 7,
+			height = 5,
 			offsetX = 3,
-			offsetY = 4
+			offsetY = 5
 		}
 	}
 	if object["properties"]["is_flaming"] then
@@ -145,9 +133,9 @@ function summonSlime(object)
 		img_file = "characters/slime.png",
 		defaultAnimation = "idle",
 		hitbox = {
-			width = 12, --I will check hitbox later
-			height = 8,
-			offsetX = 3,
+			width = 14,
+			height = 11,
+			offsetX = 1,
 			offsetY = 5
 		}
 	}

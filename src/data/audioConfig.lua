@@ -27,6 +27,7 @@ love.audio.play(bgm)
 
 -- Adds some variation to the sound
 function playSound(sound)
+    sound = sound:clone()
     sound:setPitch(1 + math.random() * soundVariation)
     love.audio.play(sound)
 end
