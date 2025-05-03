@@ -47,7 +47,7 @@ function Player:onCollide(otherEntity)
     if otherEntityType == "enemy" and otherEntity.isAlive or otherEntityType == "slime" and otherEntity.isAlive then
         self:hurt(1)
     end
-    if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow"  then
+    if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow" or otherEntityType == "theSword"  then
         --also sending the full otherEntity object to grab the arrow's is flaming property
         self:collect(otherEntityType, otherEntity)
     end
@@ -79,6 +79,10 @@ function Player:collect(collectable, entity)
         else
             self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 1
         end
+    end
+    if collectable == "theSword" then
+        love.timer.sleep(1)
+        os.exit()
     end
 end
 
