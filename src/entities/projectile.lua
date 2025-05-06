@@ -34,8 +34,17 @@ function Projectile:update(dt)
         self.isFlaming = false
         playSound(arrowEx)
     end
-    if self.age > 7 then
-        self.isReadyToDespawn = true
+    self.color = {
+        red = 1,
+        green = 1,
+        blue = 1,
+    }
+    if self:getDamageDealtToPlayers() > 0 then
+        self.color = {
+            red = 1,
+            green = 0.5,
+            blue = 0.5,
+        }
     end
     Entity.update(self, dt)
 end
@@ -50,4 +59,34 @@ end
 
 function Projectile:isEvil()
     return self.isOwnedByEvil
+end
+
+function Projectile:isReadyToDespawn()
+    return self.age > 7
+end
+
+function Projectile:getDamageDealtToPlayers()
+
+    local damage = 0
+    if self:isEvil() then
+        damage = 1
+    end
+    if self.grounded then
+        return 0
+    end
+    if self.isFlaming then
+        damage = damage * 3
+    end
+    return damage
+end
+
+function Projectile:getDamageDealtToEnemies()
+    local damage = 0
+    if not self:isEvil() then
+        damage = 1
+    end
+    if self.isFlaming then
+        damage = damage * 3
+    end
+    return damage
 end

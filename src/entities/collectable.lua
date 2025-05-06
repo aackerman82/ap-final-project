@@ -8,6 +8,7 @@ function Collectable:initialize(object)
     --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
     --I doubt we need it for removing objects but it works so it stays for now
     self.typeForRemoval = "collectable"
+    self.collected = false
 end
 
 function Collectable:update(dt)
@@ -19,6 +20,7 @@ function Collectable:draw()
 end
 
 function Collectable:onCollide(otherEntity)
+    self.collected = true
     if Entity.getType(otherEntity) == "knight" and otherEntity.isAlive then
         otherEntity.collect()
     end
@@ -26,4 +28,16 @@ end
 
 function Collectable:isEvil()
     return false -- Collectables aren't evil... OR ARE THEY
+end
+
+function Collectable:isReadyToDespawn()
+    return self.collected
+end
+
+function Collectable:getDamageDealtToPlayers()
+    return 0
+end
+
+function Collectable:getDamageDealtToEnemies()
+    return 0
 end

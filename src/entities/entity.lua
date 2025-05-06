@@ -18,7 +18,6 @@ function Entity:initialize(object)
     self.grounded = true
     self.gravityEffect = 0
     self.doesBounceOffWalls = false
-    self.isReadyToDespawn = false
     self.age = 0
     self.color = {
         red = 1,
@@ -151,4 +150,12 @@ end
 
 function Entity.isEvil()
     return false
+end
+
+function Entity:getDamageDealtToPlayers()
+    return 0
+end
+
+function Entity:getDamageDealtToEnemies()
+    return 0
 end

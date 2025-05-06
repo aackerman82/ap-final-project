@@ -25,14 +25,8 @@ function Enemy:draw()
 end
 
 function Enemy:onCollide(otherEntity)
-    if Entity.getType(otherEntity) == "projectile" and not otherEntity:isEvil() and not otherEntity.grounded and self.isAlive then
-        local damage
-        if otherEntity.isFlaming then
-                damage = 3
-            else
-                damage = 1
-        end
-        self:hurt(damage)
+    if Entity.getType(otherEntity) then
+        self:hurt(otherEntity:getDamageDealtToEnemies())
     end
 end
 
@@ -42,4 +36,12 @@ end
 
 function Enemy:isEvil()
     return true
+end
+
+function Enemy:getDamageDealtToPlayers()
+    return 1
+end
+
+function Enemy:getDamageDealtToEnemies()
+    return 0
 end

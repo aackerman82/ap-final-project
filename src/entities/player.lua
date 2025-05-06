@@ -46,9 +46,7 @@ end
 function Player:onCollide(otherEntity)
     local otherEntityType = Entity.getType(otherEntity)
     if otherEntityType then
-        if otherEntity:isEvil() then
-            self:hurt(1)
-        end
+        self:hurt(otherEntity:getDamageDealtToPlayers())
     end
     if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow" or otherEntityType == "theSword"  then
         --also sending the full otherEntity object to grab the arrow's is flaming property
@@ -92,4 +90,12 @@ end
 
 function Player:isEvil()
     return false
+end
+
+function Player:getDamageDealtToPlayers()
+    return 0
+end
+
+function Player:getDamageDealtToEnemies()
+    return 0
 end

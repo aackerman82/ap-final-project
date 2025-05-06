@@ -68,14 +68,6 @@ function GameWorld:update(dt)
             end
             if entity.y_vel > 0 then
                 entity.grounded = true
-                entity.isOwnedByEvil = false
-                if Entity.getType(entity) == "projectile" then
-                    entity.color = {
-                        red = 1,
-                        green = 1,
-                        blue = 1,
-                    }
-                end
                 entity.x_vel = entity.x_vel * (1 - dt * 3)
             end
             entity.y_vel = 0
@@ -197,13 +189,6 @@ function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAn
     
     local arrowEntity = summonProjectile({x = x, y = y, properties = {is_flaming = isFlaming}, height = 16, width = 16, type = "projectile"})
     arrowEntity.isOwnedByEvil = isEvil
-    if arrowEntity:isEvil() then
-        arrowEntity.color = {
-            red = 1,
-            green = 0.5,
-            blue = 0.5
-        }
-    end
     targetX = targetX - 8
     targetY = targetY + 8
     local arrowDirection = math.atan((targetY - y) / (targetX - x))

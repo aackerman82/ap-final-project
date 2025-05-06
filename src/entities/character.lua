@@ -56,7 +56,7 @@ function Character:fireArrow()
 end
 
 function Character:hurt(damage)
-    if self.hurtCooldown > 0 then
+    if self.hurtCooldown > 0 or damage <= 0 then
         return
     end
     self.hurtCooldown = self.invulnerabilityDuration
@@ -77,4 +77,8 @@ end
 
 function Character:isEvil()
     return false
+end
+
+function Character:isReadyToDespawn()
+    return self.health <= 0
 end
