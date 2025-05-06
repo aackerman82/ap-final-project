@@ -38,12 +38,14 @@ function collisionFilter(entity, otherEntity)
 end
 
 function GameWorld:initialize()
+
     --level file names for ez switching while testing
     --1: castle
     --2: Cave2-CaveHarder
     self.map = sti("assets/levels/castle.lua", {"bump"})
     self.customLayer = nil -- This is where the entities live
     self.player = nil
+    self.nextLevel = false
     self.collisionWorld = bump.newWorld()
     self.map:bump_init(self.collisionWorld)
     self.cameraPos = {
@@ -169,10 +171,25 @@ end
 
 function GameWorld:draw()
     self.map:draw(0 - self.cameraPos.x, 0 - self.cameraPos.y, DPI_SCALE, DPI_SCALE)
-    --prints just for testing - trying to get pickups to work properly
-    --adding these in case y'all wanna use em to test too
-    --love.graphics.print(self.player["health"], 700, 500)
-    --love.graphics.print(self.player["money"], 600, 500)
+    local health = self.player["health"]
+    local money = self.player["money"]
+    --bloated way to make the hud but it works
+    --health bar graphics
+    local full = love.graphics.newImage("assets/graphics/hud/full.png")
+    local twoHealth = love.graphics.newImage("assets/graphics/hud/2.png")
+    local oneHealth = love.graphics.newImage("assets/graphics/hud/1.png")
+    --health bar
+    if health == 3 then
+        love.graphics.draw(full, 10, 10, 0, 0.25, 0.25)
+    elseif health == 2 then
+        love.graphics.draw(twoHealth, 10, 10, 0, 0.25, 0.25)
+    elseif health == 1 then
+        love.graphics.draw(oneHealth, 10, 10, 0, 0.25, 0.25)
+    end
+    --font & money
+    local font = love.graphics.newFont("assets/graphics/hud/FreePixel.ttf")
+    local moneyTxt = love.graphics.newText(font, {{0, 0, 0}, money})
+    love.graphics.draw(moneyTxt, 72, 100, 0, 1.8, 1.8)
 end
 
 function GameWorld:getAllEntities()
