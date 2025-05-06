@@ -23,3 +23,7 @@ function Collectable:onCollide(otherEntity)
         otherEntity.collect()
     end
 end
+
+function Collectable:isEvil()
+    return false -- Collectables aren't evil... OR ARE THEY
+end

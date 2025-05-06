@@ -45,8 +45,10 @@ end
 
 function Player:onCollide(otherEntity)
     local otherEntityType = Entity.getType(otherEntity)
-    if otherEntityType == "enemy" and otherEntity.isAlive or otherEntityType == "slime" and otherEntity.isAlive then
-        self:hurt(1)
+    if otherEntityType then
+        if otherEntity:isEvil() then
+            self:hurt(1)
+        end
     end
     if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow" or otherEntityType == "theSword"  then
         --also sending the full otherEntity object to grab the arrow's is flaming property
@@ -86,4 +88,8 @@ function Player:die()
     Character.die(self)
     love.timer.sleep(1)
     os.exit()
+end
+
+function Player:isEvil()
+    return false
 end

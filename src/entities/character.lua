@@ -16,7 +16,11 @@ function Character:initialize(object)
         attackSpeed = 3,
         arrowSpeed = 300,
         regularArrowsRemaining = 20,
-        flamingArrowsRemaining = 0
+        flamingArrowsRemaining = 0,
+        target = {
+            x = 0,
+            y = 0
+        }
     }
     self.deathSound = nil
 end
@@ -69,4 +73,8 @@ end
 
 function Character:die()
     self.isAlive = false
+end
+
+function Character:isEvil()
+    return false
 end

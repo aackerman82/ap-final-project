@@ -10,6 +10,7 @@ function Enemy:initialize(object)
     self.typeForRemoval = "enemy"
     self.invulnerabilityDuration = 0.25
     self.deathSound = love.audio.newSource("assets/sound/arrow_hit.wav", "static")
+    self.bow.attackSpeed = 1
 end
 
 function Enemy:update(dt)
@@ -24,7 +25,7 @@ function Enemy:draw()
 end
 
 function Enemy:onCollide(otherEntity)
-    if Entity.getType(otherEntity) == "projectile" and self.isAlive then
+    if Entity.getType(otherEntity) == "projectile" and not otherEntity:isEvil() and not otherEntity.grounded and self.isAlive then
         local damage
         if otherEntity.isFlaming then
                 damage = 3
@@ -37,4 +38,8 @@ end
 
 function Enemy:die()
     Character.die(self)
+end
+
+function Enemy:isEvil()
+    return true
 end

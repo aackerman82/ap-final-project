@@ -18,6 +18,7 @@ function Entity:initialize(object)
     self.grounded = true
     self.gravityEffect = 0
     self.doesBounceOffWalls = false
+    self.isReadyToDespawn = false
     self.age = 0
     self.color = {
         red = 1,
@@ -147,3 +148,7 @@ end
 --function Entity:onCollide(otherEntity)
 --    
 --end
+
+function Entity.isEvil()
+    return false
+end

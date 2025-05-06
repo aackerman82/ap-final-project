@@ -68,6 +68,14 @@ function GameWorld:update(dt)
             end
             if entity.y_vel > 0 then
                 entity.grounded = true
+                entity.isOwnedByEvil = false
+                if Entity.getType(entity) == "projectile" then
+                    entity.color = {
+                        red = 1,
+                        green = 1,
+                        blue = 1,
+                    }
+                end
                 entity.x_vel = entity.x_vel * (1 - dt * 3)
             end
             entity.y_vel = 0
@@ -81,6 +89,14 @@ function GameWorld:update(dt)
         self.collisionWorld:update(entity, newHitboxX, newHitboxY)
         entity.x, entity.y = newHitboxX - hitbox.offsetX, newHitboxY - hitbox.offsetY
         if entity.bow then
+            if entity == self.player then
+                entity.bow.target.x, entity.bow.target.y = self:getMousePosition()
+            else
+                entity.bow.target.x, entity.bow.target.y = self.player.x, self.player.y
+                if (entity.x - self.player.x)^2 + (entity.y - self.player.y)^2 < 100000 and entity.bow.arrowCooldown <= 0 then
+                    Character.fireArrow(entity)
+                end
+            end
             if entity.bow.isFiring and (entity.bow.flamingArrowsRemaining + entity.bow.regularArrowsRemaining > 0) then
                 local isFlaming
                 if entity.bow.flamingArrowsRemaining > 0 then
@@ -90,12 +106,11 @@ function GameWorld:update(dt)
                     entity.bow.regularArrowsRemaining = entity.bow.regularArrowsRemaining - 1
                     isFlaming = false
                 end
-                local mouse_x, mouse_y = self:getMousePosition()
                 local arrowSpread = 0
                 if entity.isRambo then
                     arrowSpread = 1
                 end
-                self:SpawnArrow(entity.x, entity.y + entity.height, mouse_x, mouse_y, entity.bow.arrowSpeed, isFlaming, arrowSpread)
+                self:SpawnArrow(entity.x, entity.y + entity.height, entity.bow.target.x, entity.bow.target.y, entity.bow.arrowSpeed, isFlaming, arrowSpread, entity:isEvil())
                 entity.bow.isFiring = false
             end
         end
@@ -178,9 +193,17 @@ function GameWorld:getMousePosition()
     return self.camera.x + mouse_screen_x / 3, self.camera.y + mouse_secreen_y / 3
 end
 
-function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAngleRadians)
+function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAngleRadians, isEvil)
     
     local arrowEntity = summonProjectile({x = x, y = y, properties = {is_flaming = isFlaming}, height = 16, width = 16, type = "projectile"})
+    arrowEntity.isOwnedByEvil = isEvil
+    if arrowEntity:isEvil() then
+        arrowEntity.color = {
+            red = 1,
+            green = 0.5,
+            blue = 0.5
+        }
+    end
     targetX = targetX - 8
     targetY = targetY + 8
     local arrowDirection = math.atan((targetY - y) / (targetX - x))

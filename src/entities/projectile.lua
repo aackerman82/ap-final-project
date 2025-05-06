@@ -6,6 +6,7 @@ function Projectile:initialize(object)
     self.rotation = math.atan(self.y_vel / self.x_vel)
     self.isFlaming = false
     self.doesBounceOffWalls = true
+    self.isOwnedByEvil = false
 
     --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
     --I doubt we need it for removing objects but it works so it stays for now
@@ -33,6 +34,9 @@ function Projectile:update(dt)
         self.isFlaming = false
         playSound(arrowEx)
     end
+    if self.age > 7 then
+        self.isReadyToDespawn = true
+    end
     Entity.update(self, dt)
 end
 
@@ -42,4 +46,8 @@ end
 
 function Projectile:onCollide()
     
+end
+
+function Projectile:isEvil()
+    return self.isOwnedByEvil
 end
