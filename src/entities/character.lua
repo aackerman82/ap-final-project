@@ -15,8 +15,8 @@ function Character:initialize(object)
         arrowCooldown = 0,
         attackSpeed = 3,
         arrowSpeed = 300,
-        regularArrowsRemaining = 10,
-        flamingArrowsRemaining = 10
+        regularArrowsRemaining = 20,
+        flamingArrowsRemaining = 0
     }
     self.deathSound = nil
 end

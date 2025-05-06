@@ -7,6 +7,7 @@ heartPickup = love.audio.newSource('assets/sound/heart.wav', 'static')
 arrowPickup = love.audio.newSource('assets/sound/arrow_hit.wav', 'static')
 arrowHit = love.audio.newSource('assets/sound/arrow_hit.wav', 'static')
 arrowEx = love.audio.newSource('assets/sound/arrow_extinguish.wav', 'static')
+arrowBounce = love.audio.newSource('assets/sound/arrow_bounce.wav', 'static')
 
 backgroundMusicVolume = .01 --Creating Default Volume for backgroundMusic
 effectVolume = .1 --Creating Default Volume for effects
@@ -21,6 +22,7 @@ heartPickup:setVolume(effectVolume)
 arrowPickup:setVolume(effectVolume)
 arrowHit:setVolume(effectVolume)
 arrowEx:setVolume(effectVolume)
+arrowBounce:setVolume(effectVolume)
 
 bgm:setLooping(true)
 love.audio.play(bgm)

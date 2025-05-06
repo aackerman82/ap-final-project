@@ -38,64 +38,18 @@ function collisionFilter(entity, otherEntity)
 end
 
 function GameWorld:initialize()
-    --level file names for ez switching while testing
-    --1: castle
-    --2: Cave2-CaveHarder
-    self.map = sti("assets/levels/castle.lua", {"bump"})
+    
+    self.levelNames = {"castle", "Cave2-CaveHarder"}
+    self.map = nil
     self.customLayer = nil -- This is where the entities live
     self.player = nil
-    self.collisionWorld = bump.newWorld()
-    self.map:bump_init(self.collisionWorld)
-    self.cameraPos = {
-        x = 0,
-        y = 0
-    }
-    
-    for _, layer in pairs(self.map["layers"]) do
-        -- Force all image layers to repeat on x axis (they should be repeating anyways, STI bug?)
-        if(layer["type"]) == "imagelayer" then
-            layer["repeatx"] = true
-        end
-        -- Hide the original objects, we are done with them
-        if(layer["type"]) == "objectgroup" then
-            layer["visible"] = false
-        end
-    end
-
-    -- Create a custom layer for our entities to go into
-    self.customLayer = self.map:addCustomLayer("entities", # self.map["layers"])
-    self.customLayer["entities"] = {}
-
-    -- Loading the entities from the map into the custom layer:
-    -- Go through all of the objects in the map and create corrsponding entity objects in the custom layer
-    for _, object in pairs(self.map["objects"]) do
-        if object["type"] == "enemy" then
-            entity = summonArcher(object)
-        elseif object["type"] == "slime" then
-            entity = summonSlime(object)
-        elseif object["type"] == "theSword" then
-            entity = summonSword(object)
-        elseif object["type"] == "coin" then
-            entity = summonCoin(object)
-        elseif object["type"] == "small_coin" then
-            entity = summonSmallCoin(object)
-        elseif object["type"] == "arrow" then
-            entity = summonArrow(object)
-        elseif object["type"] == "knight" then
-            entity = summonKnight(object)
-            self.player = entity
-	    elseif object["type"] == "heart" then
-	        entity = summonHeart(object)
-        else
-            entity = summonCoin(object)
-        end
-        self:addEntity(entity)
-        
-    end
-    
-    -- Set the callback functions for the custom layer
-    self.customLayer.draw = drawCustomLayer
-    self.customLayer.update = updateCustomLayer
+    self.collisionWorld = nil
+    self.levelNumber = 1
+    self:loadLevel(self.levelNumber)
+    local maxCameraX = math.floor(self:getWidth() * TILE_SIZE - love.graphics.getWidth() / DPI_SCALE)
+    local maxCameraY = math.floor(self:getHeight() * TILE_SIZE - love.graphics.getHeight() / DPI_SCALE)
+    self.camera = Camera:new(0, maxCameraX, 0, maxCameraY, -200, -70, 0, 50)
+   
 end
 
 function GameWorld:update(dt)
@@ -109,6 +63,9 @@ function GameWorld:update(dt)
             self:remove(entity, collision.other)
         end
         if newHitboxY ~= Entity.getHitbox(entity).y then
+            if entity.grounded == false and entity.doesBounceOffWalls then
+                playSound(arrowBounce)
+            end
             if entity.y_vel > 0 then
                 entity.grounded = true
                 entity.x_vel = entity.x_vel * (1 - dt * 3)
@@ -117,8 +74,9 @@ function GameWorld:update(dt)
          else
             entity.grounded = false
         end
-        if newHitboxX ~= Entity.getHitbox(entity).x then
+        if newHitboxX ~= Entity.getHitbox(entity).x and entity.doesBounceOffWalls then
             entity.x_vel = entity.x_vel * -0.3
+            playSound(arrowBounce)
         end
         self.collisionWorld:update(entity, newHitboxX, newHitboxY)
         entity.x, entity.y = newHitboxX - hitbox.offsetX, newHitboxY - hitbox.offsetY
@@ -142,33 +100,16 @@ function GameWorld:update(dt)
             end
         end
     end
-    self.cameraPos["x"] = math.min(math.max(self.player.x - 200, 0), self:getWidth() * 16)
-
-    -- FIXME: this code does not account for different zoom levels
-    -- Not as good as Doolin's cameras but it is ok I guess
-    local cameraYRangePixels = 50 -- Smaller values cause the camera to track more closely
-    local cameraYOffset = -70
-    highestPermittedCameraPosition = self.player.y - cameraYRangePixels + cameraYOffset
-    lowestPermittedCameraPosition = self.player.y + cameraYRangePixels + cameraYOffset
-    -- "high" and "low" refer to up/down, not positive/negative (because the the Y axis is positive facing down)
-    if self.cameraPos.y < highestPermittedCameraPosition then
-        self.cameraPos.y = highestPermittedCameraPosition
+    if self.player.money > 40 or self.player.hasSword then
+        self:progressToNextLevel()
+        return
     end
-    if self.cameraPos.y > lowestPermittedCameraPosition then
-        self.cameraPos.y = lowestPermittedCameraPosition
-    end
-    
-    if self.cameraPos["y"] < 0 then
-        self.cameraPos["y"] = 0
-    end
-    if self.cameraPos["y"] > 100 then
-        self.cameraPos["y"] = 100
-    end
+    self.camera:updatePosition(self.player.x, self.player.y)
 
 end
 
 function GameWorld:draw()
-    self.map:draw(0 - self.cameraPos.x, 0 - self.cameraPos.y, DPI_SCALE, DPI_SCALE)
+    self.map:draw(0 - self.camera.x, 0 - self.camera.y, DPI_SCALE, DPI_SCALE)
     --prints just for testing - trying to get pickups to work properly
     --adding these in case y'all wanna use em to test too
     --love.graphics.print(self.player["health"], 700, 500)
@@ -217,7 +158,7 @@ function GameWorld:getMousePosition()
 
     local mouse_screen_x, mouse_secreen_y = love.mouse.getPosition()
 
-    return self.cameraPos.x + mouse_screen_x / 3, self.cameraPos.y + mouse_secreen_y / 3
+    return self.camera.x + mouse_screen_x / 3, self.camera.y + mouse_secreen_y / 3
 end
 
 function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAngleRadians)
@@ -238,4 +179,68 @@ function GameWorld:SpawnArrow(x, y, targetX, targetY, speed, isFlaming, spreadAn
     end
     playSound(arrowShot)
     self:addEntity(arrowEntity)
+end
+
+function GameWorld:loadLevel(levelNumber)
+
+    self.map = sti("assets/levels/" .. self.levelNames[levelNumber] .. ".lua", {"bump"})
+    self.collisionWorld = bump.newWorld()
+    self.map:bump_init(self.collisionWorld)
+    self.customLayer = nil
+    self.map:bump_init(self.collisionWorld)
+    self.player = nil
+
+    for _, layer in pairs(self.map["layers"]) do
+        -- Force all image layers to repeat on x axis (they should be repeating anyways, STI bug?)
+        if(layer["type"]) == "imagelayer" then
+            layer["repeatx"] = true
+        end
+        -- Hide the original objects, we are done with them
+        if(layer["type"]) == "objectgroup" then
+            layer["visible"] = false
+        end
+    end
+
+    -- Create a custom layer for our entities to go into
+    self.customLayer = self.map:addCustomLayer("entities", # self.map["layers"])
+    self.customLayer["entities"] = {}
+
+    -- Loading the entities from the map into the custom layer:
+    -- Go through all of the objects in the map and create corrsponding entity objects in the custom layer
+    local entity
+    for _, object in pairs(self.map["objects"]) do
+        if object["type"] == "enemy" then
+            entity = summonArcher(object)
+        elseif object["type"] == "slime" then
+            entity = summonSlime(object)
+        elseif object["type"] == "theSword" then
+            entity = summonSword(object)
+        elseif object["type"] == "coin" then
+            entity = summonCoin(object)
+        elseif object["type"] == "small_coin" then
+            entity = summonSmallCoin(object)
+        elseif object["type"] == "arrow" then
+            entity = summonArrow(object)
+        elseif object["type"] == "knight" then
+            entity = summonKnight(object)
+            self.player = entity
+	    elseif object["type"] == "heart" then
+	        entity = summonHeart(object)
+        else
+            entity = summonCoin(object)
+        end
+        self:addEntity(entity)
+    end
+    self.customLayer.draw = drawCustomLayer
+    self.customLayer.update = updateCustomLayer
+end
+
+function GameWorld:progressToNextLevel()
+    self.levelNumber = self.levelNumber + 1
+    if self.levelNumber > #self.levelNames then
+        love.timer.sleep(1)
+        os.exit()
+    else
+        self:loadLevel(self.levelNumber)
+    end
 end

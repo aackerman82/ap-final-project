@@ -17,6 +17,7 @@ function Entity:initialize(object)
     self.object = object
     self.grounded = true
     self.gravityEffect = 0
+    self.doesBounceOffWalls = false
     self.age = 0
     self.color = {
         red = 1,

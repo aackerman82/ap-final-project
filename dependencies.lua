@@ -16,4 +16,5 @@ require 'src/data/dumpy'
 require 'src/data/gamedata'
 require 'src/data/gameworld'
 require 'src/data/audioConfig'
+require 'src/data/camera'
 
