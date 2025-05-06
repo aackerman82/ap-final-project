@@ -5,6 +5,7 @@ function Projectile:initialize(object)
     Entity.initialize(self, object)
     self.rotation = math.atan(self.y_vel / self.x_vel)
     self.isFlaming = false
+    self.doesBounceOffWalls = true
 
     --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
     --I doubt we need it for removing objects but it works so it stays for now

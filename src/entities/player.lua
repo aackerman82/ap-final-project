@@ -9,6 +9,7 @@ function Player:initialize(object)
     --I doubt we need it for removing objects but it works so it stays for now
     self.typeForRemoval = "knight"
     self.gravityEffect = 750
+    self.hasSword = false
     self.deathSound = love.audio.newSource("assets/sound/death.wav", "static")
 end
 
@@ -65,24 +66,19 @@ function Player:collect(collectable, entity)
     end
     if collectable == "heart" then
         playSound(heartPickup)
-        if self.health ~= 3 then
-            self.health = self.health + 1
-        else
-            self.health = 3
-        end
+        self.health = self.health + 1
     end
     if collectable == "arrow" then
         playSound(arrowPickup)
         local isFlaming = entity.object["properties"]["is_flaming"]
         if isFlaming then
-            self.bow["flamingArrowsRemaining"] = self.bow["flamingArrowsRemaining"] + 1
+            self.bow["flamingArrowsRemaining"] = self.bow["flamingArrowsRemaining"] + 2
         else
-            self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 1
+            self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 5
         end
     end
     if collectable == "theSword" then
-        love.timer.sleep(1)
-        os.exit()
+        self.hasSword = true
     end
 end
 
