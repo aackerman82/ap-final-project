@@ -84,7 +84,18 @@ function GameWorld:update(dt)
             if entity == self.player then
                 entity.bow.target.x, entity.bow.target.y = self:getMousePosition()
             else
-                entity.bow.target.x, entity.bow.target.y = self.player.x, self.player.y
+                local x = (self.player.x - entity.x)
+                local y = -(self.player.y - entity.y)
+                local g = 250
+                local v = 300
+                -- Don't ask it's all smoke and mirrors
+                local p = v*v*v*v - g*(g*x*x + 2*y*v*v)
+                local a = 0
+                if p > 0 then
+                    a = v*v - math.sqrt(p)
+                end
+                local b = g*x
+                entity.bow.target.x, entity.bow.target.y = entity.x + b, entity.y - a
                 if (entity.x - self.player.x)^2 + (entity.y - self.player.y)^2 < 100000 and entity.bow.arrowCooldown <= 0 then
                     Character.fireArrow(entity)
                 end

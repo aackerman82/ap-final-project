@@ -10,7 +10,8 @@ function Enemy:initialize(object)
     self.typeForRemoval = "enemy"
     self.invulnerabilityDuration = 0.25
     self.deathSound = love.audio.newSource("assets/sound/arrow_hit.wav", "static")
-    self.bow.attackSpeed = 1
+    self.bow.attackSpeed = 0.5
+    self.bow.regularArrowsRemaining = 1000
 end
 
 function Enemy:update(dt)
