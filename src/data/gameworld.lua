@@ -95,7 +95,7 @@ function GameWorld:update(dt)
                 end
                 local b = g*x
                 entity.bow.target.x, entity.bow.target.y = entity.x + b, entity.y - a
-                if (entity.x - self.player.x)^2 + (entity.y - self.player.y)^2 < 100000 and entity.bow.arrowCooldown <= 0 then
+                if p > 0 and entity.bow.arrowCooldown <= 0 then
                     Character.fireArrow(entity)
                 end
             end
