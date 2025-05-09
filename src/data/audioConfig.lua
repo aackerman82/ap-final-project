@@ -1,30 +1,42 @@
-bgm = love.audio.newSource('assets/sound/bgEpic.mp3', 'stream')
-arrowShot = love.audio.newSource('assets/sound/bow_shot.wav', 'static')
-jump = love.audio.newSource('assets/sound/jump.wav', 'static') 
---TODO step = love.audio.newSource('assets/sound/Step.wav', 'static') Need to fix step sound speed
-coinPickup = love.audio.newSource('assets/sound/pickup_coin.wav', 'static')
-heartPickup = love.audio.newSource('assets/sound/heart.wav', 'static')
-arrowPickup = love.audio.newSource('assets/sound/arrow_hit.wav', 'static')
-arrowHit = love.audio.newSource('assets/sound/arrow_hit.wav', 'static')
-arrowEx = love.audio.newSource('assets/sound/arrow_extinguish.wav', 'static')
-arrowBounce = love.audio.newSource('assets/sound/arrow_bounce.wav', 'static')
-nextLevel = love.audio.newSource('assets/sound/next_level.wav', 'static')
-
-backgroundMusicVolume = .01 --Creating Default Volume for backgroundMusic
+backgroundMusicVolume = .01 --Creating Default Volume for backgroundMusic --Please.. I beg.. do not raise the volume
 effectVolume = .1 --Creating Default Volume for effects
 soundVariation = 0.1 -- Amount of pitch variation for sounds
 
-bgm:setVolume(backgroundMusicVolume) --Please.. I beg.. do not raise the volume
-jump:setVolume(effectVolume)
---TODO Uncomment Once the step playback speed is fixed step:setVolume(effectVolume)
-coinPickup:setVolume(effectVolume)
-arrowShot:setVolume(effectVolume)
-heartPickup:setVolume(effectVolume)
-arrowPickup:setVolume(effectVolume)
-arrowHit:setVolume(effectVolume)
-arrowEx:setVolume(effectVolume)
-arrowBounce:setVolume(effectVolume)
-nextLevel:setVolume(effectVolume)
+function createSoundEffect(filePath, isBackgroundMusic, volume)
+    local loadMethod
+    if isBackgroundMusic then
+        loadMethod = "stream"
+    else
+         loadMethod = "static"
+    end
+    local sound = love.audio.newSource(filePath, loadMethod)
+    local vol
+    if isBackgroundMusic then
+            vol = backgroundMusicVolume
+            sound:setLooping(true)
+        else
+            vol = effectVolume
+    end
+    if volume ~= nil then
+        vol = volume
+    end
+    sound:setVolume(vol)
+
+    return sound
+end
+
+bgm = createSoundEffect('assets/sound/bgEpic.mp3', true)
+arrowShot = createSoundEffect('assets/sound/bow_shot.wav')
+jump = createSoundEffect('assets/sound/jump.wav') 
+--TODO step = createSoundEffect('assets/sound/Step.wav') Need to fix step sound speed
+playerHurt = createSoundEffect("assets/sound/death.wav")
+coinPickup = createSoundEffect('assets/sound/pickup_coin.wav')
+heartPickup = createSoundEffect('assets/sound/heart.wav')
+arrowPickup = createSoundEffect('assets/sound/arrow_hit.wav')
+arrowHit = createSoundEffect('assets/sound/arrow_hit.wav')
+arrowEx = createSoundEffect('assets/sound/arrow_extinguish.wav')
+arrowBounce = createSoundEffect('assets/sound/arrow_bounce.wav')
+nextLevel = createSoundEffect('assets/sound/next_level.wav')
 
 bgm:setLooping(true)
 love.audio.play(bgm)

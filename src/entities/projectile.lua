@@ -7,10 +7,6 @@ function Projectile:initialize(object)
     self.isFlaming = false
     self.doesBounceOffWalls = true
     self.isOwnedByEvil = false
-
-    --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
-    --I doubt we need it for removing objects but it works so it stays for now
-    self.typeForRemoval = "projectile"
     self.gravityEffect = 250
 end
 
@@ -57,10 +53,6 @@ function Projectile:onCollide()
     
 end
 
-function Projectile:isEvil()
-    return self.isOwnedByEvil
-end
-
 function Projectile:isReadyToDespawn()
     return self.age > 7
 end
@@ -68,7 +60,7 @@ end
 function Projectile:getDamageDealtToPlayers()
 
     local damage = 0
-    if self:isEvil() then
+    if self.isOwnedByEvil then
         damage = 1
     end
     if self.grounded then
@@ -82,7 +74,7 @@ end
 
 function Projectile:getDamageDealtToEnemies()
     local damage = 0
-    if not self:isEvil() then
+    if not self.isOwnedByEvil then
         damage = 1
     end
     if self.isFlaming then

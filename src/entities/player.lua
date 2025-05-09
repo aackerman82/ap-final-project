@@ -5,12 +5,9 @@ function Player:initialize(object)
     Character.initialize(self, object)
     self.health = 3
     self.money = 0
-    --made another variable type so I had to type less while testing, and now I'm scared to remove them and change it
-    --I doubt we need it for removing objects but it works so it stays for now
-    self.typeForRemoval = "knight"
     self.gravityEffect = 750
     self.hasSword = false
-    self.deathSound = love.audio.newSource("assets/sound/death.wav", "static")
+    self.hurtSound = playerHurt
 end
 
 function Player:update(dt)
@@ -50,46 +47,46 @@ function Player:onCollide(otherEntity)
     end
     if otherEntityType == "coin" or otherEntityType == "small_coin" or otherEntityType == "heart" or otherEntityType == "arrow" or otherEntityType == "theSword"  then
         --also sending the full otherEntity object to grab the arrow's is flaming property
-        self:collect(otherEntityType, otherEntity)
+        self:collect(otherEntity)
     end
 end
 
-function Player:collect(collectable, entity)
-    if collectable == "coin" or collectable == "small_coin" then
-        if collectable == "coin" then
-            self.money = self.money + 5
-            playSound(coinPickup)
-        else
-            self.money = self.money + 1
-            playSound(coinPickup)
-        end
-    end
-    if collectable == "heart" then
-        playSound(heartPickup)
+function Player:collect(collectable)
+
+    local collectableType = Entity.getType(collectable)
+    local monetaryValue = 0
+    local sound = nil
+
+    if collectableType == "coin" then
+        monetaryValue = 5
+    elseif collectableType == "small_coin" then
+        monetaryValue = 1
+    elseif collectableType == "heart" then
+        sound = heartPickup
         self.health = self.health + 1
-    end
-    if collectable == "arrow" then
-        playSound(arrowPickup)
-        local isFlaming = entity.object["properties"]["is_flaming"]
+    elseif collectableType == "arrow" then
+        sound = arrowPickup
+        local isFlaming = collectable:isFlaming()
         if isFlaming then
             self.bow["flamingArrowsRemaining"] = self.bow["flamingArrowsRemaining"] + 2
         else
             self.bow["regularArrowsRemaining"] = self.bow["regularArrowsRemaining"] + 5
         end
-    end
-    if collectable == "theSword" then
+    elseif collectableType == "theSword" then
         self.hasSword = true
     end
+    if monetaryValue > 0 then
+        sound = coinPickup
+        self.money = self.money + monetaryValue
+    end
+    if sound then
+        playSound(sound)
+    end
 end
 
-function Player:die()
-    Character.die(self)
+function Player:onDeath()
     love.timer.sleep(1)
     os.exit()
-end
-
-function Player:isEvil()
-    return false
 end
 
 function Player:getDamageDealtToPlayers()

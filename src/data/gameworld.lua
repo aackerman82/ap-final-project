@@ -1,6 +1,6 @@
 
 GameWorld = class("GameWorld")
-
+KNIGHT_HUD_FONT = love.graphics.newFont("assets/graphics/hud/FreePixel.ttf", 16)
 function updateCustomLayer(layer, dt)
     -- Every time the cusom layer is updated it updates its entities
     for _, entity in pairs(layer["entities"]) do
@@ -60,7 +60,6 @@ function GameWorld:update(dt)
         local newHitboxX, newHitboxY, collisions = self.collisionWorld:check(entity, hitbox.x, hitbox.y, collisionFilter)
         for _, collision in pairs(collisions) do
             entity:onCollide(collision.other)
-            self:remove(entity, collision.other)
         end
         if newHitboxY ~= Entity.getHitbox(entity).y then
             if entity.grounded == false and entity.doesBounceOffWalls then
@@ -113,12 +112,15 @@ function GameWorld:update(dt)
                 if entity.isRambo then
                     arrowSpread = 1
                 end
-                self:SpawnArrow(entity.x, entity.y + entity.height, entity.bow.target.x, entity.bow.target.y, entity.bow.arrowSpeed, isFlaming, arrowSpread, entity:isEvil())
+                self:SpawnArrow(entity.x, entity.y + entity.height, entity.bow.target.x, entity.bow.target.y, entity.bow.arrowSpeed, isFlaming, arrowSpread, entity:getDamageDealtToPlayers() > 0)
                 entity.bow.isFiring = false
             end
         end
+        if entity:isReadyToDespawn() then
+            self:remove(entity)
+        end
     end
-    if self.player.money > 40 or self.player.hasSword then
+    if self.player.money >= 40 or self.player.hasSword then
         self:progressToNextLevel()
         return
     end
@@ -131,23 +133,15 @@ function GameWorld:draw()
     self.map:draw(0 - self.camera.x, 0 - self.camera.y, DPI_SCALE, DPI_SCALE)
     local health = self.player["health"]
     local money = self.player["money"]
-    --bloated way to make the hud but it works
-    --health bar graphics
-    local full = love.graphics.newImage("assets/graphics/hud/full.png")
-    local twoHealth = love.graphics.newImage("assets/graphics/hud/2.png")
-    local oneHealth = love.graphics.newImage("assets/graphics/hud/1.png")
     --health bar
+    local graphicFile = health
     if health >= 3 then
-        love.graphics.draw(full, 10, 10, 0, 0.25, 0.25)
-    elseif health == 2 then
-        love.graphics.draw(twoHealth, 10, 10, 0, 0.25, 0.25)
-    elseif health == 1 then
-        love.graphics.draw(oneHealth, 10, 10, 0, 0.25, 0.25)
+        graphicFile = "3"
     end
+    love.graphics.draw(love.graphics.newImage("assets/graphics/hud/" .. graphicFile .. "_alt.png"), 10, 10, 0, 7, 7)
     --font & money
-    local font = love.graphics.newFont("assets/graphics/hud/FreePixel.ttf")
-    local moneyTxt = love.graphics.newText(font, {{0, 0, 0}, money})
-    love.graphics.draw(moneyTxt, 72, 100, 0, 1.8, 1.8)
+    local moneyTxt = love.graphics.newText(KNIGHT_HUD_FONT, {{0, 0, 0}, money})
+    love.graphics.draw(moneyTxt, 72, 102, 0, 2, 2)
 
 end
 
@@ -155,22 +149,11 @@ function GameWorld:getAllEntities()
     return self.customLayer["entities"]
 end
 
---loops through the custom layer objects
---removes the according object depending on all those conditions
-function GameWorld:remove(entity, removedEntity)
-    for i, object in pairs(self:getAllEntities()) do
-        --entity types are for the objects NOT being removed. yes I know their type variable still being "for removal" makes so much sense
-        --otherwise arrows can remove objects
-        if object == removedEntity and object.typeForRemoval == "collectable" and entity.typeForRemoval == "knight" then
+function GameWorld:remove(entity)
+    for i, ent in pairs(self:getAllEntities()) do
+        if ent == entity then
             table.remove(self.customLayer["entities"], i)
-            self.collisionWorld:remove(object)
-        --soooo this makes it so the enemies death animations no longer work, I've been trying to fix it
-        --for now, death anim & sfx gone but not forgotten
-        elseif object == removedEntity and object.typeForRemoval == "enemy" and entity.typeForRemoval == "projectile" then
-            if object.isAlive == false then
-                table.remove(self.customLayer["entities"], i)
-                self.collisionWorld:remove(object)
-            end
+            self.collisionWorld:remove(entity)
         end
     end
 end
@@ -245,25 +228,20 @@ function GameWorld:loadLevel(levelNumber)
     -- Go through all of the objects in the map and create corrsponding entity objects in the custom layer
     local entity
     for _, object in pairs(self.map["objects"]) do
-        if object["type"] == "enemy" then
-            entity = summonArcher(object)
-        elseif object["type"] == "slime" then
-            entity = summonSlime(object)
-        elseif object["type"] == "theSword" then
-            entity = summonSword(object)
-        elseif object["type"] == "coin" then
-            entity = summonCoin(object)
-        elseif object["type"] == "small_coin" then
-            entity = summonSmallCoin(object)
-        elseif object["type"] == "arrow" then
-            entity = summonArrow(object)
-        elseif object["type"] == "knight" then
-            entity = summonKnight(object)
+        local objectType = object["type"]
+        local summoners = {
+            enemy = summonArcher,
+            slime = summonSlime,
+            theSword = summonSword,
+            coin = summonCoin,
+            small_coin = summonSmallCoin,
+            arrow = summonArrow,
+            knight = summonKnight,
+            heart = summonHeart
+        }
+        entity = summoners[objectType](object)
+        if objectType == "knight" then
             self.player = entity
-	    elseif object["type"] == "heart" then
-	        entity = summonHeart(object)
-        else
-            entity = summonCoin(object)
         end
         self:addEntity(entity)
     end

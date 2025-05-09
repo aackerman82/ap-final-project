@@ -6,7 +6,6 @@ Character = class("Character", Entity)
 function Character:initialize(object)
     Entity.initialize(self, object)
     self.isRambo = false
-    self.isAlive = true
     self.health = 3
     self.hurtCooldown = 0
     self.invulnerabilityDuration = 0.7
@@ -22,7 +21,7 @@ function Character:initialize(object)
             y = 0
         }
     }
-    self.deathSound = nil
+    self.hurtSound = nil
 end
 
 function Character:update(dt)
@@ -31,9 +30,6 @@ function Character:update(dt)
         Entity.setAnimation(self, "idle")
     else
         Entity.setAnimation(self, "walk")
-    end
-    if not self.isAlive then
-        Entity.setAnimation(self, "die")
     end
 
     if self.bow then
@@ -61,24 +57,22 @@ function Character:hurt(damage)
     end
     self.hurtCooldown = self.invulnerabilityDuration
     self.health = self.health - damage
-    if self.deathSound then
-        self.deathSound:setPitch(1 + math.random() / 6)
-        self.deathSound:setVolume(0.1)
-        playSound(self.deathSound)
+    if self.hurtSound then
+        playSound(self.hurtSound)
     end
-    if self.health <= 0 then
-        self:die()
+    if not self:isAlive() then
+        self:onDeath()
     end
 end
 
-function Character:die()
-    self.isAlive = false
-end
-
-function Character:isEvil()
-    return false
+function Character:isAlive()
+    return self.health > 0
 end
 
 function Character:isReadyToDespawn()
-    return self.health <= 0
+    return not self:isAlive()
+end
+
+function Character:onDeath()
+    return
 end

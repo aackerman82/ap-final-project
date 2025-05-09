@@ -143,15 +143,6 @@ function Entity:getHitbox()
     }
 end
 
-
---function Entity:onCollide(otherEntity)
---    
---end
-
-function Entity.isEvil()
-    return false
-end
-
 function Entity:getDamageDealtToPlayers()
     return 0
 end
